@@ -25,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
         children: [
           Center(
             child: Image(
-              width: MediaQuery.of(context).size.width / 4,
+              width: MediaQuery.of(context).size.width / 3,
               image: const AssetImage("assets/logo.png"),
             ),
           ),

@@ -20,17 +20,21 @@ class TextInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width / 9, vertical: 5),
+      padding: EdgeInsets.symmetric(
+          horizontal: MediaQuery.of(context).size.width / 9, vertical: 5),
       // padding: EdgeInsets.symmetric(MediaQuery.of(context).size.width / 9),
       child: Column(
         // mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            inputLabelText,
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              color: Theme.of(context).colorScheme.secondary,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+            child: Text(
+              inputLabelText,
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
             ),
           ),
           TextField(
@@ -38,7 +42,13 @@ class TextInputField extends StatelessWidget {
             decoration: InputDecoration(
               hintText: hintText,
               filled: true,
-              border: InputBorder.none,
+
+              border: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  )),
+              // border: InputBorder.none,
               suffixIcon: Icon(Icons.read_more),
               fillColor: Theme.of(context).colorScheme.secondaryContainer,
               hintStyle: const TextStyle(fontSize: 13),

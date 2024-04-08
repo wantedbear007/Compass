@@ -1,3 +1,4 @@
+import 'package:compass/screens/home/home_screen.dart';
 import 'package:compass/screens/login/login_screen.dart';
 import 'package:compass/screens/register/register_screen.dart';
 import 'package:compass/utils/color_scheme.dart';
@@ -17,7 +18,7 @@ class Home extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
       darkTheme: ThemeData(colorScheme: darkColorScheme),
-      home: RegisterScreen(),
+      home: HomeScreen(),
     );
   }
 }

@@ -13,8 +13,8 @@ class UserButton extends StatelessWidget {
         print("hello");
       },
       child: Container(
-        width: 350,
-        padding: const EdgeInsets.all(appBorderRadius),
+        // width: 350,
+        padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.primary,
             borderRadius:

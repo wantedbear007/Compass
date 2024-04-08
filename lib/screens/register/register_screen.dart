@@ -18,6 +18,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool isChecked = false;
+
     return Scaffold(
       body: ListView(
         padding: const EdgeInsets.only(top: 100),
@@ -26,7 +28,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: Column(
               children: [
                 Image(
-                  width: MediaQuery.of(context).size.width / 4,
+                  width: MediaQuery.of(context).size.width / 5,
                   image: const AssetImage("assets/logo.png"),
                 ),
                 const Text(
@@ -36,7 +38,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           TextInputField(
@@ -72,12 +74,61 @@ class _RegisterScreenState extends State<RegisterScreen> {
             inputLabelText: "Contact number",
             textInputType: TextInputType.phone,
           ),
+          // Padding(
+          //   padding: EdgeInsets.symmetric(
+          //       horizontal: MediaQuery.of(context).size.width / 9,
+          //       vertical: 10),
+          //   child: Column(
+          //     children: [
+          //       Row(
+          //         children: [
+          //           Checkbox(value: isChecked, onChanged: (bool) {}),
+          //           Container(
+          //             padding: EdgeInsets.all(10),
+          //             child: Text(
+          //               // softWrap: true,
+          //               // overflow: TextOverflow.ellipsis,
+          //               "I accept the terms and conditions laid by Compass and team.",
+          //                 overflow: TextOverflow.ellipsis,
+          //               softWrap: true,
+          //             ),
+          //           )
+          //         ],
+          //       ),
+          //       const UserButton(
+          //         buttonText: "Register",
+          //       ),
+          //     ],
+          //   ),
+          // )
           Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.width / 9,
-                vertical: 10),
-            child: const UserButton(
-              buttonText: "Register",
+              horizontal: MediaQuery.of(context).size.width / 9,
+              vertical: 10,
+            ),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Checkbox(value: isChecked, onChanged: (bool) {}),
+                    Expanded(
+                      child: Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 3, vertical: 5),
+                        child: Text(
+                          "I accept the terms and conditions laid by Compass and team.",
+                          softWrap: true, // Use softWrap here
+                          overflow:
+                              TextOverflow.clip, // Apply overflow property
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                const UserButton(
+                  buttonText: "Register",
+                ),
+              ],
             ),
           )
         ],
