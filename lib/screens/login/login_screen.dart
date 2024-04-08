@@ -29,36 +29,37 @@ class _LoginScreenState extends State<LoginScreen> {
               image: const AssetImage("assets/logo.png"),
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Welcome to Compass",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
-                    color: Theme.of(context).colorScheme.onSecondaryContainer),
-              ),
-              Text(
-                "Order in every detail",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).disabledColor,
-                ),
-              )
-            ],
-          ),
+
 
           const SizedBox(
             height: 50,
           ),
 
           SizedBox(
-            width: 350,
+            // width: 350,
+            width: MediaQuery.of(context).size.width / 1.5,
             child: Column(
               // mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Text(
+                  "Welcome to Compass",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                      color:
+                          Theme.of(context).colorScheme.onSecondaryContainer),
+                ),
+                Text(
+                  "Order in every detail.",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).disabledColor,
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
                 Text(
                   "Username",
                   style: TextStyle(
@@ -67,12 +68,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 TextInputField(
+                  inputLabelText: "Username",
                   textController: _usernameController,
                   hintText: "Enter your username",
                   textInputType: TextInputType.text,
                   // icon: Icons.account_circle_sharp,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 Text(
@@ -83,15 +85,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 TextInputField(
+                  inputLabelText: "Password",
                   textController: _passwordController,
                   hintText: "Enter your Password",
-                  textInputType: TextInputType.text,
+                  textInputType: TextInputType.visiblePassword,
                   // icon: Icons.account_circle_sharp,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
-                UserButton(buttonText: "Login")
+                const UserButton(buttonText: "Login")
               ],
             ),
           ),
