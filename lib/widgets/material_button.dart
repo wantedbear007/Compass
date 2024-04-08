@@ -20,9 +20,13 @@ class UserMaterialButton extends StatelessWidget {
         // hoverColor: Colors.white,
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-          child: Text(
-            buttonText,
-            style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+          child: Center(
+            child: Text(
+              buttonText,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.onPrimary),
+            ),
           ),
         ),
       ),
