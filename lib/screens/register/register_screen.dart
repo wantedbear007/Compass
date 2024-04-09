@@ -115,7 +115,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       child: Container(
                         padding:
                             EdgeInsets.symmetric(horizontal: 3, vertical: 5),
-                        child: Text(
+                        child: const Text(
                           "I accept the terms and conditions laid by Compass and team.",
                           softWrap: true,
                           overflow:

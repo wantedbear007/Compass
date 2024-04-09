@@ -21,7 +21,7 @@ class TextInputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-          horizontal: MediaQuery.of(context).size.width / 9, vertical: 5),
+          horizontal: MediaQuery.of(context).size.width / 22, vertical: 5),
       // padding: EdgeInsets.symmetric(MediaQuery.of(context).size.width / 9),
       child: Column(
         // mainAxisAlignment: MainAxisAlignment.start,
@@ -43,7 +43,7 @@ class TextInputField extends StatelessWidget {
               hintText: hintText,
               filled: true,
 
-              border: OutlineInputBorder(
+              border: const OutlineInputBorder(
                   borderSide: BorderSide.none,
                   borderRadius: BorderRadius.all(
                     Radius.circular(10),

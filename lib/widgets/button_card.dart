@@ -6,13 +6,14 @@ class HomeScreenCard extends StatelessWidget {
   final String buttonText;
   final String caption;
   final String image;
+  final IconData icon;
 
   const HomeScreenCard(
       {super.key,
       required this.tapAction,
       required this.buttonText,
       required this.caption,
-      required this.image});
+      required this.image, required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -43,17 +44,20 @@ class HomeScreenCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Add Product",
+                        buttonText,
                         style: TextStyle(fontSize: 20),
                       ),
-                      Text(
-                        "Select the right button to add new products",
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.outline,
-                            fontWeight: FontWeight.normal),
-                        softWrap: true,
-                        overflow:
-                            TextOverflow.clip, // Use ellipsis for truncation
+                      Padding(
+                        padding: const EdgeInsets.only(right: 5),
+                        child: Text(
+                          caption,
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.outline,
+                              fontWeight: FontWeight.normal),
+                          softWrap: true,
+                          overflow:
+                              TextOverflow.clip, // Use ellipsis for truncation
+                        ),
                       ),
                     ],
                   ),
@@ -73,7 +77,7 @@ class HomeScreenCard extends StatelessWidget {
                       // borderRadius: BorderRadius.circular(10)),
                       // color: Colors.red,
                       child: Icon(
-                        Icons.add,
+                        icon,
                         size: 30,
                       ),
                     ),

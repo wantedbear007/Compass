@@ -1,4 +1,6 @@
+import 'package:compass/screens/RegisterProduct/register_product.dart';
 import 'package:compass/screens/home/home_screen.dart';
+import 'package:compass/screens/register/register_screen.dart';
 import 'package:compass/utils/color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,7 +33,7 @@ class Home extends StatelessWidget {
           ),
         ),
       ),
-      home: const HomeScreen(),
+      home: const RegisterProduct(),
     );
   }
 }

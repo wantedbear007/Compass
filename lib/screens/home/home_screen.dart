@@ -26,6 +26,10 @@ class HomeScreen extends StatelessWidget {
                       image: const AssetImage("assets/logo.png"),
                       width: MediaQuery.of(context).size.width * 0.15,
                     ),
+                    Text(
+                      "Compass",
+                      style: TextStyle(fontSize: 20, letterSpacing: 1.5),
+                    ),
                     UserMaterialButton(
                       buttonAction: () {},
                       buttonText: "Logout",
@@ -63,6 +67,27 @@ class HomeScreen extends StatelessWidget {
                   buttonText: "Add Products",
                   caption: "Add new products, something something",
                   image: "assets/addnew.svg",
+                  icon: Icons.add,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                HomeScreenCard(
+                  tapAction: () {},
+                  buttonText: "Registered Products",
+                  caption: "See the list of the registered products, there details.",
+                  image: "assets/addnew.svg",
+                  icon: Icons.list,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                HomeScreenCard(
+                  tapAction: () {},
+                  buttonText: "Expiring Products",
+                  caption: "Lists out the product that are expiring in a month or two.",
+                  image: "assets/addnew.svg",
+                  icon: Icons.date_range,
                 ),
                 SizedBox(
                   height: 20,
@@ -72,24 +97,7 @@ class HomeScreen extends StatelessWidget {
                   buttonText: "Add Products",
                   caption: "Add new products, something something",
                   image: "assets/addnew.svg",
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                HomeScreenCard(
-                  tapAction: () {},
-                  buttonText: "Add Products",
-                  caption: "Add new products, something something",
-                  image: "assets/addnew.svg",
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                HomeScreenCard(
-                  tapAction: () {},
-                  buttonText: "Add Products",
-                  caption: "Add new products, something something",
-                  image: "assets/addnew.svg",
+                  icon: Icons.account_circle_sharp,
                 )
                 // ButtonCard(),
                 // ButtonCard(),
