@@ -52,7 +52,7 @@ class _HomeState extends State<Home> {
         ),
       ),
       initialBinding: ParentBinding(),
-      home: LandingScreen(),
+      home: RegisteredProducts(),
       // home: const ExpiringProductScreen(),
     );
   }
