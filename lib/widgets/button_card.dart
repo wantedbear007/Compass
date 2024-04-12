@@ -18,7 +18,7 @@ class HomeScreenCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Theme.of(context).colorScheme.onSecondary,
+      color: Theme.of(context).colorScheme.primaryContainer,
       borderRadius: BorderRadius.circular(10),
       child: InkWell(
         borderRadius: BorderRadius.circular(10),
@@ -45,7 +45,7 @@ class HomeScreenCard extends StatelessWidget {
                     children: [
                       Text(
                         buttonText,
-                        style: TextStyle(fontSize: 20),
+                        style: const TextStyle(fontSize: 20),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(right: 5),
@@ -64,19 +64,18 @@ class HomeScreenCard extends StatelessWidget {
                 ),
                 Material(
                   borderRadius: BorderRadius.circular(100),
-                  color: Theme.of(context).colorScheme.primaryContainer,
+                  color: Theme.of(context).colorScheme.primary,
                   child: InkWell(
-                    onTap: () {
-                      print("hgelllolo");
-                    },
-                    splashColor: Colors.black38,
+                    onTap: tapAction,
+                    splashColor: Colors.white,
                     borderRadius: BorderRadius.circular(100),
-                    child: Container(
+                    child: SizedBox(
                       height: 70,
                       width: 70,
                       // borderRadius: BorderRadius.circular(10)),
                       // color: Colors.red,
                       child: Icon(
+                        color: Colors.white,
                         icon,
                         size: 30,
                       ),

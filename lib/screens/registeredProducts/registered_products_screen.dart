@@ -14,7 +14,9 @@ class RegisteredProducts extends StatelessWidget {
         ),
         actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search))],
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
           icon: Icon(Icons.arrow_back),
         ),
       ),

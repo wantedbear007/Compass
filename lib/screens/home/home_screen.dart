@@ -1,6 +1,9 @@
+import 'package:compass/screens/RegisterProduct/register_product.dart';
+import 'package:compass/utils/constants.dart';
 import 'package:compass/widgets/button_card.dart';
 import 'package:compass/widgets/material_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -13,8 +16,8 @@ class HomeScreen extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width * 0.04,
-              vertical: MediaQuery.of(context).size.height * 0.07,
+              horizontal: MediaQuery.of(context).size.width * 0.05,
+              vertical: MediaQuery.of(context).size.height * 0.04,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,14 +25,33 @@ class HomeScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Image(
-                      image: const AssetImage("assets/logo.png"),
-                      width: MediaQuery.of(context).size.width * 0.15,
+                    Row(
+                      children: [
+                        Image(
+                          image: const AssetImage("assets/logo.png"),
+                          width: MediaQuery.of(context).size.width * 0.12,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                appName,
+                                style: TextStyle(fontSize: 15),
+                              ),
+                              Text(
+                                subTitle,
+                                style: TextStyle(
+                                  color: Theme.of(context).colorScheme.outline,
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
                     ),
-                    Text(
-                      "Compass",
-                      style: TextStyle(fontSize: 20, letterSpacing: 1.5),
-                    ),
+
                     UserMaterialButton(
                       buttonAction: () {},
                       buttonText: "Logout",
@@ -37,6 +59,7 @@ class HomeScreen extends StatelessWidget {
                     // add options
                   ],
                 ),
+
                 const SizedBox(
                   height: 30,
                 ),
@@ -60,37 +83,45 @@ class HomeScreen extends StatelessWidget {
                       TextStyle(color: Theme.of(context).colorScheme.outline),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 HomeScreenCard(
-                  tapAction: () {},
+                  tapAction: () {
+                    Get.toNamed("/register");
+                  },
                   buttonText: "Add Products",
                   caption: "Add new products, something something",
                   image: "assets/addnew.svg",
                   icon: Icons.add,
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 HomeScreenCard(
-                  tapAction: () {},
+                  tapAction: () {
+                    Get.toNamed("registeredProducts");
+                  },
                   buttonText: "Registered Products",
-                  caption: "See the list of the registered products, there details.",
+                  caption:
+                      "See the list of the registered products, there details.",
                   image: "assets/addnew.svg",
                   icon: Icons.list,
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 HomeScreenCard(
-                  tapAction: () {},
+                  tapAction: () {
+                    Get.toNamed("expiringProducts");
+                  },
                   buttonText: "Expiring Products",
-                  caption: "Lists out the product that are expiring in a month or two.",
+                  caption:
+                      "Lists out the product that are expiring in a month or two.",
                   image: "assets/addnew.svg",
                   icon: Icons.date_range,
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 HomeScreenCard(
                   tapAction: () {},

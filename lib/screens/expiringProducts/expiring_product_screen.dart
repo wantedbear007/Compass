@@ -13,7 +13,9 @@ class ExpiringProductScreen extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
           icon: Icon(Icons.arrow_back),
         ),
       ),

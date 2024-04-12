@@ -24,15 +24,17 @@ class RegisterProduct extends StatelessWidget {
       ),
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back),
         ),
         actions: [
           Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextButton(
                 onPressed: () {},
-                child: Text("Register"),
+                child: const Text("Register"),
               ))
         ],
         title: const Text(

@@ -1,4 +1,5 @@
 import 'package:compass/screens/login/login_screen_controller.dart';
+import 'package:compass/utils/constants.dart';
 import 'package:compass/widgets/text_input.dart';
 import 'package:compass/widgets/user_button.dart';
 import 'package:flutter/cupertino.dart';
@@ -43,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Welcome to Compass",
+                  "Welcome to $appName",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 24,
@@ -51,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Theme.of(context).colorScheme.onSecondaryContainer),
                 ),
                 Text(
-                  "Order in every detail.",
+                  subTitle,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).disabledColor,
