@@ -23,10 +23,10 @@ class ExpiringProductScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 5, vertical: 8),
         child: ListView(
           children: [
-            ProductContainer(),
-            ProductContainer(),
-            ProductContainer(),
-            ProductContainer(),
+            // ProductContainer(),
+            // ProductContainer(),
+            // ProductContainer(),
+            // ProductContainer(),
           ],
         ),
       ),

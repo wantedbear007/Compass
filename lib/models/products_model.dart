@@ -1,26 +1,26 @@
 import 'dart:convert';
 
 class ProductModel {
-  final String uniqueId;
-  final String name;
-  final DateTime createdDate;
-  final int qty;
-  final DateTime expireDate;
-  final String imageUrl;
-  final String barcodeId;
-  final String category;
-  final String manufacturer;
+  final String? uniqueId;
+  final String? name;
+  final DateTime? createdDate;
+  final int? qty;
+  final DateTime? expireDate;
+  final String? imageUrl;
+  final String? barcodeId;
+  final String? category;
+  final String? manufacturer;
 
   ProductModel({
-    required this.uniqueId,
-    required this.name,
-    required this.createdDate,
-    required this.qty,
-    required this.expireDate,
-    required this.imageUrl,
-    required this.barcodeId,
-    required this.category,
-    required this.manufacturer,
+    this.uniqueId,
+    this.name,
+    this.createdDate,
+    this.qty,
+    this.expireDate,
+    this.imageUrl,
+    this.barcodeId,
+    this.category,
+    this.manufacturer,
   });
 
   ProductModel copyWith({
@@ -53,9 +53,9 @@ class ProductModel {
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
     uniqueId: json["UniqueID"],
     name: json["Name"],
-    createdDate: DateTime.parse(json["CreatedDate"]),
+    createdDate: json["CreatedDate"] == null ? null : DateTime.parse(json["CreatedDate"]),
     qty: json["Qty"],
-    expireDate: DateTime.parse(json["ExpireDate"]),
+    expireDate: json["ExpireDate"] == null ? null : DateTime.parse(json["ExpireDate"]),
     imageUrl: json["ImageURL"],
     barcodeId: json["BarcodeID"],
     category: json["Category"],
@@ -65,9 +65,9 @@ class ProductModel {
   Map<String, dynamic> toJson() => {
     "UniqueID": uniqueId,
     "Name": name,
-    "CreatedDate": createdDate.toIso8601String(),
+    "CreatedDate": createdDate?.toIso8601String(),
     "Qty": qty,
-    "ExpireDate": "${expireDate.year.toString().padLeft(4, '0')}-${expireDate.month.toString().padLeft(2, '0')}-${expireDate.day.toString().padLeft(2, '0')}",
+    "ExpireDate": "${expireDate!.year.toString().padLeft(4, '0')}-${expireDate!.month.toString().padLeft(2, '0')}-${expireDate!.day.toString().padLeft(2, '0')}",
     "ImageURL": imageUrl,
     "BarcodeID": barcodeId,
     "Category": category,

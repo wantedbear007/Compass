@@ -1,77 +1,141 @@
-// import 'package:flutter/cupertino.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:compass/models/products_model.dart';
 import 'package:compass/utils/constants.dart';
-import 'package:compass/widgets/user_button.dart';
 import 'package:flutter/material.dart';
 
 class ProductContainer extends StatelessWidget {
-  const ProductContainer({super.key});
+  final ProductModel productData;
+
+  const ProductContainer({super.key, required this.productData});
 
   @override
   Widget build(BuildContext context) {
-    String img =
-        "https://images.newscientist.com/wp-content/uploads/2019/06/18153152/medicineshutterstock_1421041688.jpg";
+    DateTime dateTime = DateTime.parse(productData.expireDate.toString());
+    final String date = "${dateTime.month} / ${dateTime.year}";
 
     return Container(
-      margin: const EdgeInsets.only(top: 10),
+      margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.onSecondary,
-          borderRadius: BorderRadius.circular(10)),
-      padding: const EdgeInsets.only(left: 0, right: 4, top: 5, bottom: 5),
+        borderRadius: BorderRadius.circular(appBorderRadius),
+        color: Theme.of(context).colorScheme.onSecondary,
+      ),
+      height: 305,
       child: LayoutBuilder(
-          builder: (BuildContext ctx, BoxConstraints constraints) {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          // crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(100),
-              child: Image.network(
-                img,
-                width: 130,
-                height: 130,
-                fit: BoxFit.cover,
-              ),
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Some medicine title",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      // fontSize: 10
-                      fontSize: constraints.maxWidth * 0.05),
+        builder: (BuildContext ctx, BoxConstraints constraints) {
+          return Column(
+            children: [
+              ClipRRect(
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(appBorderRadius),
+                    topRight: Radius.circular(appBorderRadius)),
+                child: CachedNetworkImage(
+                  imageUrl: productData.imageUrl!,
+                  width: constraints.maxWidth,
+                  height: constraints.maxHeight / 2,
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  progressIndicatorBuilder: (context, url, progress) =>
+                      CircularProgressIndicator(
+                    value: progress.progress,
+                  ),
+                  fit: BoxFit.cover,
+                  // progressIndicatorBuilder: ,
                 ),
-                Text("Category: Medicines"),
-                Text("Category: Medicines"),
-                Text("Category: Medicines"),
-                MaterialButton(
-                  minWidth: constraints.maxWidth / 2,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(appBorderRadius)),
-                  textColor: Colors.white,
-                  color: Theme.of(context).colorScheme.primary,
-                  onPressed: () {},
-                  child: Text("Delete Product"),
-                )
-                // MaterialButton(
-                //   // padding: EdgeInsetsGeometry(w),
-                //   // highlightColor: Colors.cyan,
-                //   onPressed: () {},
-                //   child: Text("Delete"),
-                //   color: Colors.black38,
-                //   textColor: Colors.white,
-                //   shape: RoundedRectangleBorder(
-                //     borderRadius: BorderRadius.circular(10),
-                //   ),
-                //   // height: 7/,
-                // ),
-              ],
-            )
-          ],
-        );
-      }),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 5, right: 6, left: 6),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Center(
+                        child: Text(
+                          "Medicine: ${productData.name!} ",
+                          style: const TextStyle(
+                            fontSize: 18,
+                          ),
+                          overflow: TextOverflow.visible,
+
+                          // softWrap: true,
+                          // maxLines: 1,
+                        ),
+                      ),
+                    ),
+                    // Expanded(
+                    //   child: Text(
+                    //     "BarCode ID: ${productData.barcodeId!} ",
+                    //     overflow: TextOverflow.ellipsis,
+                    //     // softWrap: true,
+                    //     style:
+                    //         TextStyle(color: Theme.of(context).disabledColor),
+                    //   ),
+                    // )
+                  ],
+                ),
+              ),
+              Divider(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 5, right: 6, left: 6),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                        child: Text("Category: ${productData.category!} ")),
+
+                    Expanded(child: Text("By: ${productData.manufacturer!}")),
+
+                    // Expanded(child: Text("Category: ${productData.category!} • ")),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 5, right: 6, left: 6),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        "ID: ${productData.barcodeId!} ",
+                        overflow: TextOverflow.ellipsis,
+                        // softWrap: true,
+                        style:
+                            TextStyle(color: Theme.of(context).disabledColor),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        "Quantity: ${productData.qty!} ",
+                        overflow: TextOverflow.ellipsis,
+                        // softWrap: true,
+                        style:
+                            TextStyle(color: Theme.of(context).disabledColor),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 5, right: 6, left: 6),
+                child: Text(
+                  "Expiring Date: $date ",
+                  overflow: TextOverflow.ellipsis,
+                  // softWrap: true,
+                  style: const TextStyle(color: Colors.red),
+                ),
+              ),
+              MaterialButton(
+                height: 40,
+                minWidth: constraints.maxWidth - 6,
+                color: Theme.of(context).colorScheme.inversePrimary,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(appBorderRadius)),
+                onPressed: () {},
+                child: const Text("Mark as Out of Stock"),
+              )
+            ],
+          );
+        },
+      ),
     );
   }
 }
