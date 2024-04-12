@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:compass/models/products_model.dart';
 import 'package:compass/utils/constants.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ProductContainer extends StatelessWidget {
@@ -12,6 +13,10 @@ class ProductContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     DateTime dateTime = DateTime.parse(productData.expireDate.toString());
     final String date = "${dateTime.month} / ${dateTime.year}";
+
+    if (kDebugMode) {
+      print(productData.createdDate);
+    }
 
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
@@ -29,17 +34,18 @@ class ProductContainer extends StatelessWidget {
                     topLeft: Radius.circular(appBorderRadius),
                     topRight: Radius.circular(appBorderRadius)),
                 child: CachedNetworkImage(
-                  imageUrl: productData.imageUrl!,
-                  width: constraints.maxWidth,
-                  height: constraints.maxHeight / 2,
-                  errorWidget: (context, url, error) => Icon(Icons.error),
-                  progressIndicatorBuilder: (context, url, progress) =>
-                      CircularProgressIndicator(
-                    value: progress.progress,
-                  ),
-                  fit: BoxFit.cover,
-                  // progressIndicatorBuilder: ,
-                ),
+                    fit: BoxFit.cover,
+                    imageUrl: productData.imageUrl!,
+                    width: constraints.maxWidth,
+                    height: constraints.maxHeight / 2,
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                    progressIndicatorBuilder: (context, url, progress) =>
+                        LinearProgressIndicator(
+                          value: progress.progress,
+                        )
+                    // progressIndicatorBuilder: ,
+                    ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 5, right: 6, left: 6),
@@ -60,19 +66,10 @@ class ProductContainer extends StatelessWidget {
                         ),
                       ),
                     ),
-                    // Expanded(
-                    //   child: Text(
-                    //     "BarCode ID: ${productData.barcodeId!} ",
-                    //     overflow: TextOverflow.ellipsis,
-                    //     // softWrap: true,
-                    //     style:
-                    //         TextStyle(color: Theme.of(context).disabledColor),
-                    //   ),
-                    // )
                   ],
                 ),
               ),
-              Divider(
+              const Divider(
                 height: 10,
               ),
               Padding(

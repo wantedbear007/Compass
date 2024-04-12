@@ -4,25 +4,26 @@ import 'package:compass/widgets/products_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class RegisteredProducts extends GetView<RegisteredProductsController> {
+class RegisteredProducts extends StatelessWidget {
   @override
   const RegisteredProducts({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // controller.getProducts();
-    // final Controller controller = Get.put(RegisteredProductsController());
+    final RegisteredProductsController controller =
+        Get.put(RegisteredProductsController());
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Registered Products",
+        centerTitle: true,
+        title: const Text(
+          "Registered Medicines",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         actions: [
           IconButton(
               onPressed: () {
-                print("hello");
+                Navigator.pop(context);
               },
               icon: Icon(Icons.search))
         ],
