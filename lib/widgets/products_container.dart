@@ -11,11 +11,11 @@ class ProductContainer extends StatelessWidget {
         "https://images.newscientist.com/wp-content/uploads/2019/06/18153152/medicineshutterstock_1421041688.jpg";
 
     return Container(
-      margin: EdgeInsets.only(top: 10),
+      margin: const EdgeInsets.only(top: 10),
       decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.secondaryContainer,
           borderRadius: BorderRadius.circular(10)),
-      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 0),
+      padding: const EdgeInsets.only(left: 0, right: 4, top: 5, bottom: 5),
       child: LayoutBuilder(
           builder: (BuildContext ctx, BoxConstraints constraints) {
         return Row(
@@ -42,7 +42,6 @@ class ProductContainer extends StatelessWidget {
                       // fontSize: 10
                       fontSize: constraints.maxWidth * 0.05),
                 ),
-                Text("Category: Medicines"),
                 Text("Category: Medicines"),
                 Text("Category: Medicines"),
                 Text("Category: Medicines"),
