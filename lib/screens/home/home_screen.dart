@@ -38,7 +38,7 @@ class HomeScreen extends StatelessWidget {
                             children: [
                               const Text(
                                 appName,
-                                style: TextStyle(fontSize: 15),
+                                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                               ),
                               Text(
                                 subTitle,

@@ -3,6 +3,8 @@ import 'package:compass/screens/RegisterProduct/register_product.dart';
 import 'package:compass/screens/expiringProducts/expiring_product_screen.dart';
 import 'package:compass/screens/home/home_screen.dart';
 import 'package:compass/screens/landing/landing_page.dart';
+import 'package:compass/screens/login/login_screen.dart';
+import 'package:compass/screens/register/register_screen.dart';
 import 'package:compass/screens/registeredProducts/registered_products_screen.dart';
 import 'package:compass/utils/color_scheme.dart';
 import 'package:flutter/material.dart';
@@ -26,10 +28,10 @@ class _HomeState extends State<Home> {
       // routes: routes,
       initialRoute: "/",
       getPages: [
-        GetPage(name: "/", page: () => LandingScreen()),
-        GetPage(name: "/register", page: () => RegisterProduct()),
-        GetPage(name: "/registeredProducts", page: () => RegisteredProducts()),
-        GetPage(name: "/expiringProducts", page: () => ExpiringProductScreen())
+        GetPage(name: "/", page: () => const LandingScreen()),
+        GetPage(name: "/register", page: () =>const RegisterProduct()),
+        GetPage(name: "/registeredProducts", page: () =>const RegisteredProducts()),
+        GetPage(name: "/expiringProducts", page: () => const ExpiringProductScreen())
       ],
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

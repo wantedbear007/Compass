@@ -1,3 +1,4 @@
+import 'package:compass/utils/constants.dart';
 import 'package:compass/widgets/text_input.dart';
 import 'package:compass/widgets/user_button.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     return Scaffold(
       body: ListView(
-        padding: const EdgeInsets.only(top: 100),
+        padding: const EdgeInsets.only(top: 50),
         children: [
           Center(
             child: Column(
@@ -30,6 +31,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Image(
                   width: MediaQuery.of(context).size.width / 5,
                   image: const AssetImage("assets/logo.png"),
+                ),
+                const SizedBox(
+                  height: 20,
                 ),
                 const Text(
                   "Register on Compass",
@@ -74,36 +78,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
             inputLabelText: "Contact number",
             textInputType: TextInputType.phone,
           ),
-          // Padding(
-          //   padding: EdgeInsets.symmetric(
-          //       horizontal: MediaQuery.of(context).size.width / 9,
-          //       vertical: 10),
-          //   child: Column(
-          //     children: [
-          //       Row(
-          //         children: [
-          //           Checkbox(value: isChecked, onChanged: (bool) {}),
-          //           Container(
-          //             padding: EdgeInsets.all(10),
-          //             child: Text(
-          //               // softWrap: true,
-          //               // overflow: TextOverflow.ellipsis,
-          //               "I accept the terms and conditions laid by Compass and team.",
-          //                 overflow: TextOverflow.ellipsis,
-          //               softWrap: true,
-          //             ),
-          //           )
-          //         ],
-          //       ),
-          //       const UserButton(
-          //         buttonText: "Register",
-          //       ),
-          //     ],
-          //   ),
-          // )
+
           Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width / 9,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 17,
+              // horizontal: MediaQuery.of(context).size.width / 10,
               vertical: 10,
             ),
             child: Column(
@@ -114,20 +93,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Expanded(
                       child: Container(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 3, vertical: 5),
+                            EdgeInsets.symmetric(horizontal: 0, vertical: 10),
                         child: const Text(
                           "I accept the terms and conditions laid by Compass and team.",
                           softWrap: true,
-                          overflow:
-                              TextOverflow.clip,
+                          overflow: TextOverflow.clip,
                         ),
                       ),
                     )
                   ],
                 ),
-                const UserButton(
-                  buttonText: "Register",
+
+                MaterialButton(
+                  height: 60,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(appBorderRadius)),
+                  minWidth: MediaQuery.of(context).size.width,
+                  onPressed: () {},
+                  child: const Text(
+                    "Register",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  color: Theme.of(context).colorScheme.primary,
                 ),
+                // const UserButton(
+                //   buttonText: "Register",
+                // ),
               ],
             ),
           )

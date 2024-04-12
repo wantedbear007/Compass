@@ -20,87 +20,110 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Image(
-              width: MediaQuery.of(context).size.width / 3,
-              image: const AssetImage("assets/logo.png"),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+              child: Image(
+                width: MediaQuery.of(context).size.width / 4,
+                image: const AssetImage("assets/logo.png"),
+              ),
             ),
-          ),
 
-
-          const SizedBox(
-            height: 50,
-          ),
-
-          SizedBox(
-            // width: 350,
-            width: MediaQuery.of(context).size.width / 1.5,
-            child: Column(
-              // mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Welcome to $appName",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                      color:
-                          Theme.of(context).colorScheme.onSecondaryContainer),
-                ),
-                Text(
-                  subTitle,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).disabledColor,
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  "Username",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                ),
-                TextInputField(
-                  inputLabelText: "Username",
-                  textController: _usernameController,
-                  hintText: "Enter your username",
-                  textInputType: TextInputType.text,
-                  // icon: Icons.account_circle_sharp,
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Text(
-                  "Password",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                ),
-                TextInputField(
-                  inputLabelText: "Password",
-                  textController: _passwordController,
-                  hintText: "Enter your Password",
-                  textInputType: TextInputType.visiblePassword,
-                  // icon: Icons.account_circle_sharp,
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                const UserButton(buttonText: "Login")
-              ],
+            const SizedBox(
+              height: 50,
             ),
-          ),
-          //   text input
-        ],
+
+            SizedBox(
+              // width: 350,
+              // width: MediaQuery.of(context).size.width / 1.1,
+              child: Column(
+                // mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Text(
+                      "Welcome to $appName",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSecondaryContainer),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Text(
+                      subTitle,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).disabledColor,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  // Text(
+                  //   "Username",
+                  //   style: TextStyle(
+                  //     fontWeight: FontWeight.w500,
+                  //     color: Theme.of(context).colorScheme.secondary,
+                  //   ),
+                  // ),
+                  TextInputField(
+                    inputLabelText: "Username",
+                    textController: _usernameController,
+                    hintText: "Enter your username",
+                    textInputType: TextInputType.text,
+                    // icon: Icons.account_circle_sharp,
+                  ),
+                  const SizedBox(
+                      // height: 15,
+                      ),
+                  // Text(
+                  //   "Password",
+                  //   style: TextStyle(
+                  //     fontWeight: FontWeight.w500,
+                  //     color: Theme.of(context).colorScheme.secondary,
+                  //   ),
+                  // ),
+                  TextInputField(
+                    inputLabelText: "Password",
+                    textController: _passwordController,
+                    hintText: "Enter your Password",
+                    textInputType: TextInputType.visiblePassword,
+                    // icon: Icons.account_circle_sharp,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 17, right: 17),
+                    child: MaterialButton(
+                      height: 60,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(appBorderRadius)),
+                      minWidth: MediaQuery.of(context).size.width,
+                      onPressed: () {},
+                      child: Text(
+                        "Login",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  )
+                  // const UserButton(buttonText: "Login")
+                ],
+              ),
+            ),
+            //   text input
+          ],
+        ),
       ),
     );
   }

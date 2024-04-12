@@ -1,4 +1,5 @@
 // import 'package:flutter/cupertino.dart';
+import 'package:compass/utils/constants.dart';
 import 'package:compass/widgets/user_button.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class ProductContainer extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(top: 10),
       decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.secondaryContainer,
+          color: Theme.of(context).colorScheme.onSecondary,
           borderRadius: BorderRadius.circular(10)),
       padding: const EdgeInsets.only(left: 0, right: 4, top: 5, bottom: 5),
       child: LayoutBuilder(
@@ -48,7 +49,7 @@ class ProductContainer extends StatelessWidget {
                 MaterialButton(
                   minWidth: constraints.maxWidth / 2,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
+                      borderRadius: BorderRadius.circular(appBorderRadius)),
                   textColor: Colors.white,
                   color: Theme.of(context).colorScheme.primary,
                   onPressed: () {},
