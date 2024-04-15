@@ -1,7 +1,6 @@
 import 'package:compass/bindings/parent_binder.dart';
 import 'package:compass/screens/RegisterProduct/register_product.dart';
 import 'package:compass/screens/expiringProducts/expiring_product_screen.dart';
-import 'package:compass/screens/home/home_screen.dart';
 import 'package:compass/screens/landing/landing_page.dart';
 import 'package:compass/screens/login/login_screen.dart';
 import 'package:compass/screens/register/register_screen.dart';
@@ -22,6 +21,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -52,7 +53,7 @@ class _HomeState extends State<Home> {
         ),
       ),
       initialBinding: ParentBinding(),
-      home: LandingScreen(),
+      home: LoginScreen(),
       // home: const ExpiringProductScreen(),
     );
   }

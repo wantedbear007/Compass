@@ -24,7 +24,7 @@ class ProductContainer extends StatelessWidget {
         borderRadius: BorderRadius.circular(appBorderRadius),
         color: Theme.of(context).colorScheme.onSecondary,
       ),
-      height: 305,
+      height: 330,
       child: LayoutBuilder(
         builder: (BuildContext ctx, BoxConstraints constraints) {
           return Column(

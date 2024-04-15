@@ -1,3 +1,4 @@
+
 import 'package:compass/screens/login/login_screen_controller.dart';
 import 'package:compass/utils/constants.dart';
 import 'package:compass/widgets/text_input.dart';
@@ -7,17 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends GetView<LoginScreenController> {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
@@ -68,55 +62,96 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: 20,
                   ),
-                  // Text(
-                  //   "Username",
-                  //   style: TextStyle(
-                  //     fontWeight: FontWeight.w500,
-                  //     color: Theme.of(context).colorScheme.secondary,
-                  //   ),
-                  // ),
-                  TextInputField(
-                    inputLabelText: "Username",
-                    textController: _usernameController,
-                    hintText: "Enter your username",
-                    textInputType: TextInputType.text,
-                    // icon: Icons.account_circle_sharp,
-                  ),
-                  const SizedBox(
-                      // height: 15,
-                      ),
-                  // Text(
-                  //   "Password",
-                  //   style: TextStyle(
-                  //     fontWeight: FontWeight.w500,
-                  //     color: Theme.of(context).colorScheme.secondary,
-                  //   ),
-                  // ),
-                  TextInputField(
-                    inputLabelText: "Password",
-                    textController: _passwordController,
-                    hintText: "Enter your Password",
-                    textInputType: TextInputType.visiblePassword,
-                    // icon: Icons.account_circle_sharp,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 17, right: 17),
-                    child: MaterialButton(
-                      height: 60,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(appBorderRadius)),
-                      minWidth: MediaQuery.of(context).size.width,
-                      onPressed: () {},
-                      child: Text(
-                        "Login",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      color: Theme.of(context).colorScheme.primary,
+
+                  Form(
+                    child: Column(
+                      children: [
+                        TextInputField(
+                          inputLabelText: "Username",
+                          textController: controller.emailController,
+                          hintText: "Enter your username",
+                          textInputType: TextInputType.text,
+                          // icon: Icons.account_circle_sharp,
+                        ),
+                        TextInputField(
+                          inputLabelText: "Password",
+                          textController: controller.passwordController,
+                          hintText: "Enter your Password",
+                          textInputType: TextInputType.visiblePassword,
+                          // icon: Icons.account_circle_sharp,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 17, right: 17),
+                          child: MaterialButton(
+                            height: 60,
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(appBorderRadius)),
+                            minWidth: MediaQuery.of(context).size.width,
+                            onPressed: controller.checkUser,
+                            // child: Text(
+                            //   "Login",
+                            //   style: TextStyle(color: Colors.white),
+                            // ),
+                            color: Theme.of(context).colorScheme.primary,
+
+                            child: Obx(() {
+                              if (!controller.loading.value) {
+                                return const Text(
+                                  "Login",
+                                  style: TextStyle(color: Colors.white),
+                                );
+                              }
+                              return const Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: const CircularProgressIndicator(
+                                  color: Colors.white,
+                                ),
+                              );
+                            }),
+                          ),
+                        )
+                      ],
                     ),
-                  )
+                  ),
+
+                  // TextInputField(
+                  //   inputLabelText: "Username",
+                  //   textController: _usernameController,
+                  //   hintText: "Enter your username",
+                  //   textInputType: TextInputType.text,
+                  //   // icon: Icons.account_circle_sharp,
+                  // ),
+                  //
+                  //
+                  // TextInputField(
+                  //   inputLabelText: "Password",
+                  //   textController: _passwordController,
+                  //   hintText: "Enter your Password",
+                  //   textInputType: TextInputType.visiblePassword,
+                  //   // icon: Icons.account_circle_sharp,
+                  // ),
+                  // const SizedBox(
+                  //   height: 20,
+                  // ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(left: 17, right: 17),
+                  //   child: MaterialButton(
+                  //     height: 60,
+                  //     shape: RoundedRectangleBorder(
+                  //         borderRadius: BorderRadius.circular(appBorderRadius)),
+                  //     minWidth: MediaQuery.of(context).size.width,
+                  //     onPressed: () {},
+                  //     child: Text(
+                  //       "Login",
+                  //       style: TextStyle(color: Colors.white),
+                  //     ),
+                  //     color: Theme.of(context).colorScheme.primary,
+                  //   ),
+                  // )
                   // const UserButton(buttonText: "Login")
                 ],
               ),

@@ -39,7 +39,7 @@ class RegisteredProducts extends StatelessWidget {
         child: FutureBuilder<List<ProductModel>>(
           future: controller.getProducts(),
           builder: (context, snapshot) {
-            print(snapshot.data.toString());
+            // print(snapshot.data.toString());
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const CircularProgressIndicator();
             } else if (snapshot.hasError) {
