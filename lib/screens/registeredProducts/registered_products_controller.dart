@@ -6,7 +6,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class RegisteredProductsController extends GetxController {
-  RxInt filterMonths = 4.obs;
+  // RxInt filterMonths = 4.obs;
+  RxInt filterValue = 4.obs;
 
   // get all products
   Future<List<ProductModel>> getProducts() async {
@@ -32,14 +33,21 @@ class RegisteredProductsController extends GetxController {
 // get filtered products
   Future<List<ProductModel>> getFilteredProducts() async {
     try {
-      String url = "${api}products/expiringIn/${filterMonths.value.toString()}";
+      String url = "${api}products/expiringIn/${filterValue.value.toString()}";
+      print(url);
       final response = await http
           .get(Uri.parse(url), headers: {"Content-Type": "application/json"});
 
+      print(response.toString());
+
+
       if (response.statusCode != 200) {
         print("Server error");
+        // print(response.body.toString());
       }
+
       final List responseBody = jsonDecode(response.body);
+      Obx() {}
       return responseBody.map((e) => ProductModel.fromJson(e)).toList();
     } catch (err) {
       print("Error occurred");
