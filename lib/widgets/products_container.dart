@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:compass/models/products_model.dart';
+import 'package:compass/models/product_model.dart';
+import 'package:compass/models/products_model_old.dart';
 import 'package:compass/utils/constants.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ProductContainer extends StatelessWidget {
@@ -13,10 +13,9 @@ class ProductContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     DateTime dateTime = DateTime.parse(productData.expireDate.toString());
     final String date = "${dateTime.month} / ${dateTime.year}";
-
-    if (kDebugMode) {
-      print(productData.createdDate);
-    }
+    // if (kDebugMode) {
+    //   print(productData.createdDate);
+    // }
 
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
@@ -24,7 +23,7 @@ class ProductContainer extends StatelessWidget {
         borderRadius: BorderRadius.circular(appBorderRadius),
         color: Theme.of(context).colorScheme.onSecondary,
       ),
-      height: 330,
+      height: 500,
       child: LayoutBuilder(
         builder: (BuildContext ctx, BoxConstraints constraints) {
           return Column(
@@ -35,7 +34,7 @@ class ProductContainer extends StatelessWidget {
                     topRight: Radius.circular(appBorderRadius)),
                 child: CachedNetworkImage(
                     fit: BoxFit.cover,
-                    imageUrl: productData.imageUrl!,
+                    imageUrl: productData.imageUrl,
                     width: constraints.maxWidth,
                     height: constraints.maxHeight / 2,
                     errorWidget: (context, url, error) =>
@@ -55,7 +54,7 @@ class ProductContainer extends StatelessWidget {
                     Expanded(
                       child: Center(
                         child: Text(
-                          "Medicine: ${productData.name!} ",
+                          "${productData.name}",
                           style: const TextStyle(
                             fontSize: 18,
                           ),
@@ -77,10 +76,9 @@ class ProductContainer extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
-                        child: Text("Category: ${productData.category!} ")),
+                    Expanded(child: Text("Category: ${productData.category} ")),
 
-                    Expanded(child: Text("By: ${productData.manufacturer!}")),
+                    Expanded(child: Text("By: ${productData.brand}")),
 
                     // Expanded(child: Text("Category: ${productData.category!} • ")),
                   ],
@@ -92,7 +90,7 @@ class ProductContainer extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        "ID: ${productData.barcodeId!} ",
+                        "ID: ${productData.barCodeId} ",
                         overflow: TextOverflow.ellipsis,
                         // softWrap: true,
                         style:
@@ -101,7 +99,7 @@ class ProductContainer extends StatelessWidget {
                     ),
                     Expanded(
                       child: Text(
-                        "Quantity: ${productData.qty!} ",
+                        "Quantity: 0 ",
                         overflow: TextOverflow.ellipsis,
                         // softWrap: true,
                         style:
@@ -114,7 +112,7 @@ class ProductContainer extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 5, right: 6, left: 6),
                 child: Text(
-                  "Expiring Date: $date ",
+                  "Expiring Date: ${date}",
                   overflow: TextOverflow.ellipsis,
                   // softWrap: true,
                   style: const TextStyle(color: Colors.red),

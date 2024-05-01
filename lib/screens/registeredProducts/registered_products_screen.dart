@@ -1,4 +1,5 @@
-import 'package:compass/models/products_model.dart';
+import 'package:compass/models/product_model.dart';
+import 'package:compass/models/products_model_old.dart';
 import 'package:compass/screens/registeredProducts/registered_products_controller.dart';
 import 'package:compass/widgets/products_container.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +51,11 @@ class RegisteredProducts extends StatelessWidget {
               return ListView.builder(
                   itemCount: pro?.length,
                   itemBuilder: (context, index) {
+                    print(pro?[index]);
                     final products = pro?[index];
+                    print(products?.expireDate.toLocal().toString());
+                    // final products = pro?[index];
+                    // return Text("helloooo");
                     return Padding(
                       padding: EdgeInsets.symmetric(horizontal: 15),
                       child: ProductContainer(
