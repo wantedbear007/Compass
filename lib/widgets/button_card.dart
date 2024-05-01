@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class HomeScreenCard extends StatelessWidget {
   final VoidCallback tapAction;
@@ -18,8 +19,11 @@ class HomeScreenCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Theme.of(context).colorScheme.onSecondary,
+      // color: Theme.of(context).brightness != Brightness.dark ? Theme.of(context).primaryColor.withAlpha(10) : Theme.of(context).colorScheme.primary,
+      // color: Theme.of(context).primaryColor.withAlpha(20),
       borderRadius: BorderRadius.circular(10),
+      elevation: 0.7,
+      shadowColor: Theme.of(context).colorScheme.primary,
       child: InkWell(
         borderRadius: BorderRadius.circular(10),
         onTap: () {},
@@ -75,7 +79,7 @@ class HomeScreenCard extends StatelessWidget {
                       // borderRadius: BorderRadius.circular(10)),
                       // color: Colors.red,
                       child: Icon(
-                        color: Colors.white,
+                        // color: Colors.white,
                         icon,
                         size: 30,
                       ),

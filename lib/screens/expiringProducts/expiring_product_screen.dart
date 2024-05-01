@@ -88,12 +88,17 @@ class _ExpiringProductScreenState extends State<ExpiringProductScreen> {
         icon: Icon(Icons.filter_list_alt),
       ),
       appBar: AppBar(
-        centerTitle: true,
         title: const Text(
           "Expiring Medicines",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         actions: [
+          IconButton(onPressed: () {
+            controller.getFilteredProducts();
+            setState(() {
+
+            });
+          }, icon: Icon(Icons.refresh)),
           IconButton(
               onPressed: () {
                 Navigator.pop(context);
@@ -109,38 +114,6 @@ class _ExpiringProductScreenState extends State<ExpiringProductScreen> {
       ),
 
       body: Center(
-        //     child: Obx(
-        //   () => FutureBuilder<List<ProductModel>>(
-        //     future: controller.getFilteredProducts(),
-        //     builder: (context, snapshot) {
-        //       // print(snapshot.data.toString());
-        //       if (snapshot.connectionState == ConnectionState.waiting) {
-        //         return const CircularProgressIndicator();
-        //       } else if (snapshot.hasError) {
-        //         return Text("error");
-        //       } else {
-        //         final pro = snapshot.data;
-        //         // print(pro.)
-        //         return ListView.builder(
-        //             itemCount: pro?.length,
-        //             itemBuilder: (context, index) {
-        //               print(pro?[index]);
-        //               final products = pro?[index];
-        //               print(products?.expireDate.toLocal().toString());
-        //               // final products = pro?[index];
-        //               // return Text("helloooo");
-        //               return Padding(
-        //                 padding: EdgeInsets.symmetric(horizontal: 15),
-        //                 child: ProductContainer(
-        //                   productData: products!,
-        //                 ),
-        //               );
-        //             });
-        //       }
-        //     },
-        //   ),
-        // )
-
         child: FutureBuilder<List<ProductModel>>(
           future: controller.getFilteredProducts(),
           builder: (context, snapshot) {
@@ -161,7 +134,7 @@ class _ExpiringProductScreenState extends State<ExpiringProductScreen> {
                     // final products = pro?[index];
                     // return Text("helloooo");
                     return Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: ProductContainer(
                         productData: products!,
                       ),

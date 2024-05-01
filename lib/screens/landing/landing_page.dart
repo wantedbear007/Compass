@@ -1,3 +1,4 @@
+import 'package:compass/screens/expiringProducts/expiring_product_screen.dart';
 import 'package:compass/screens/home/home_screen.dart';
 import 'package:compass/screens/landing/landing_screen_controller.dart';
 import 'package:compass/screens/notifications/notification_screen.dart';
@@ -25,6 +26,7 @@ class LandingScreen extends GetView<LandingController> {
                         builder: (_) => const HomeScreen());
                   },
                 ),
+                const ExpiringProductScreen(),
                 const NotificationScreen(),
                 const SettingsScreen()
               ],
@@ -35,6 +37,8 @@ class LandingScreen extends GetView<LandingController> {
               destinations: const <NavigationDestination>[
                 NavigationDestination(
                     icon: Icon(Icons.home_filled), label: "Home"),
+                NavigationDestination(
+                    icon: Icon(Icons.medical_services_rounded), label: "Expiring"),
                 NavigationDestination(
                     icon: Icon(Icons.notifications), label: "Notifications"),
                 NavigationDestination(

@@ -54,4 +54,20 @@ class RegisteredProductsController extends GetxController {
       return [];
     }
   }
-}
+
+//  delete product
+  Future<void> deleteProduct(String id) async {
+    try {
+      String url = "${api}products/deleteBeta/${id}";
+      final res = await http.get(Uri.parse(url));
+      if (res.statusCode != 200 ) {
+        print("error");
+      }
+
+      print(res.body.toString());
+
+    } catch (err) {
+      print("Error occurred");
+    }
+  }
+ }
