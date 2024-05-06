@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 class LoginScreenController extends GetxController {
   RxString name = "bhanu".obs;
   RxBool isAble = false.obs;
-  RxBool loading  = false.obs;
+  RxBool loading = false.obs;
   final loginFromKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -28,38 +28,70 @@ class LoginScreenController extends GetxController {
     super.onClose();
   }
 
+  Future<void> login() async {
+    String username = emailController.text.trim();
+    String password = emailController.text.trim();
+
+    if ((username.isEmpty || password.isEmpty)) {
+      Get.snackbar(
+          "Authentication Failed", "Username / Password cannot be empty !");
+    } else {
+      print(username);
+      print(password);
+      bool isAuth = await checkUser(username, password);
+
+      print(isAuth);
+      if (isAuth == true) {
+        Get.snackbar("Auth", "sucess");
+      } else {
+        Get.snackbar("Authentication Failed", "Enter valid username or password");
+      }
+    }
+  }
+
+  //
   // validator
-  // String validateField(String value) {
-  //      if (value.isEmpty) {
-  //           return "Requires username email / password";
-  //      }
-  //           return null;
-  // }
+  bool validateField(String value) {
+    if (value.trim().isEmpty) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   // api call
 
-  Future<bool> checkUser() async {
+  Future<bool> checkUser(String username, String password) async {
     loading.value = true;
 
     print("entered !");
-    // add try catch
-    const String url = apiUrlService + "/login";
-    var uri = Uri.parse(url);
 
-    final response = await http.post(Uri.parse(url),
-        headers: <String, String>{'Content-Type': 'application/json'},
-        body: jsonEncode(<String, dynamic>{
-          "email": "bhanu@gmail.com",
-          "password": "9131987420"
-        }));
+    print(
+        "username is ${emailController.text} password id ${passwordController.text}");
+    const String url = api + "auth/login";
 
-    loading.value = false;
+    try {
+      final response = await http.post(Uri.parse(url),
+          headers: <String, String>{'Content-Type': 'application/json'},
+          body: jsonEncode(
+              <String, dynamic>{"username": username, "password": password}));
 
-    if (response.statusCode == 200) {
-      print(response.body);
-      return true;
+      loading.value = false;
+
+      if (response.statusCode != 200) {
+        print("error in loggin in");
+        return false;
+      } else {
+        print(response.body);
+
+        print(response.body.toString());
+        return true;
+      }
+    } catch (err) {
+      print("error occurred");
+      print(err.toString());
+      return false;
     }
-    return false;
   }
 
   void hello() {
@@ -67,18 +99,19 @@ class LoginScreenController extends GetxController {
     name.value = "done someting";
     print("hello");
   }
-  //
-  void login() {
-    if (loginFromKey.currentState!.validate()) {
-      checkUser().then((value) {
-        if (value) {
-          Get.snackbar('Login', 'Login successfully');
-          print("hello");
-        } else {
-          Get.snackbar('Login', 'Login failed');
-        }
-        passwordController.clear();
-      });
-    }
-  }
+
+//
+// void login() {
+//   if (loginFromKey.currentState!.validate()) {
+//     checkUser().then((value) {
+//       if (value) {
+//         Get.snackbar('Login', 'Login successfully');
+//         print("hello");
+//       } else {
+//         Get.snackbar('Login', 'Login failed');
+//       }
+//       passwordController.clear();
+//     });
+//   }
+// }
 }

@@ -91,7 +91,7 @@ class LoginScreen extends GetView<LoginScreenController> {
                                 borderRadius:
                                     BorderRadius.circular(appBorderRadius)),
                             minWidth: MediaQuery.of(context).size.width,
-                            onPressed: controller.checkUser,
+                            onPressed: controller.login,
                             // child: Text(
                             //   "Login",
                             //   style: TextStyle(color: Colors.white),

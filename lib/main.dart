@@ -99,7 +99,7 @@ class _HomeState extends State<Home> {
       //   ),
       // ),
       initialBinding: ParentBinding(),
-      home: LandingScreen(),
+      home: LoginScreen(),
       // home: const ExpiringProductScreen(),
     );
   }

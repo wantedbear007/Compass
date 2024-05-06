@@ -36,7 +36,7 @@ class _ExpiringProductScreenState extends State<ExpiringProductScreen> {
                       const Text(
                         "Select Months to Expire",
                         style: TextStyle(
-                          fontSize: 17,
+                           fontSize: 17,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
