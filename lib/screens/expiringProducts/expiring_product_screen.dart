@@ -128,9 +128,9 @@ class _ExpiringProductScreenState extends State<ExpiringProductScreen> {
               return ListView.builder(
                   itemCount: pro?.length,
                   itemBuilder: (context, index) {
-                    print(pro?[index]);
+                    // print(pro?[index]);
                     final products = pro?[index];
-                    print(products?.expireDate.toLocal().toString());
+                    // print(products?.expireDate.toLocal().toString());
                     // final products = pro?[index];
                     // return Text("helloooo");
                     return Padding(

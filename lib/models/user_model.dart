@@ -1,20 +1,30 @@
 // implement user model to cache and update user details
 
 class UserModel {
-  final int userId;
-  final String email;
-  final String username;
-  final String name;
-  final int totalProducts;
-  final String profile;
+  final int? userId;
+  final String? email;
+  final String? username;
+  final String? name;
+  final int? totalProducts;
+  final String? profile;
 
   UserModel({
-    required this.userId,
-    required this.email,
-    required this.username,
-    required this.name,
-    required this.totalProducts,
-    required this.profile,
+    this.userId,
+    this.email,
+    this.username,
+    this.name,
+    this.totalProducts,
+    this.profile,
   });
 
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+      userId: json['userId'],
+      email: json['email'],
+      username: json['username'],
+      name: json['name'],
+      totalProducts: json['totalProducts'],
+      profile: json['profile'],
+    );
+  }
 }

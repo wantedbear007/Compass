@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:compass/screens/home/home_screen_controller.dart';
 import 'package:compass/screens/landing/landing_page.dart';
 import 'package:compass/screens/landing/landing_screen_controller.dart';
 import 'package:compass/utils/api_services.dart';
@@ -20,7 +21,7 @@ class LoginScreenController extends GetxController {
   final LocalStorageServices localStorageServices = LocalStorageServices();
 
   @override
-  void onInit() async {
+  void onInit()  {
     emailController.text = "prataptechnologies";
     passwordController.text = "9907224577";
     super.onInit();
@@ -46,9 +47,8 @@ class LoginScreenController extends GetxController {
       if (isAuth == true) {
         // Get.snackbar("Compass", "Login Successful");
         Get.put(LandingController());
-        Get.offAll(
-          const LandingScreen(),
-        );
+        Get.put(HomeScreenController());
+        Get.offAll(const LandingScreen(), transition: Transition.fadeIn);
       } else {
         Get.snackbar(
             "Authentication Failed", "Enter valid username or password");
@@ -101,7 +101,8 @@ class LoginScreenController extends GetxController {
           print("token stored successfully");
         }
 
-        String? recToken = await localStorageServices.getFromLocal<String>("token");
+        String? recToken =
+            await localStorageServices.getFromLocal<String>("token");
         saveUserDetails(recToken!);
         return true;
       }

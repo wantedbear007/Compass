@@ -1,11 +1,7 @@
-
 import 'package:compass/screens/login/login_screen_controller.dart';
 import 'package:compass/utils/constants.dart';
 import 'package:compass/widgets/text_input.dart';
-import 'package:compass/widgets/user_button.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class LoginScreen extends GetView<LoginScreenController> {
@@ -42,11 +38,11 @@ class LoginScreen extends GetView<LoginScreenController> {
                     child: Text(
                       "Welcome to $appName",
                       style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onSecondaryContainer),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                        color:
+                            Theme.of(context).colorScheme.onSecondaryContainer,
+                      ),
                     ),
                   ),
                   Padding(
@@ -62,7 +58,6 @@ class LoginScreen extends GetView<LoginScreenController> {
                   const SizedBox(
                     height: 20,
                   ),
-
                   Form(
                     child: Column(
                       children: [
@@ -106,8 +101,8 @@ class LoginScreen extends GetView<LoginScreenController> {
                                 );
                               }
                               return const Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: const CircularProgressIndicator(
+                                padding: EdgeInsets.all(4.0),
+                                child: CircularProgressIndicator(
                                   color: Colors.white,
                                 ),
                               );
@@ -117,42 +112,6 @@ class LoginScreen extends GetView<LoginScreenController> {
                       ],
                     ),
                   ),
-
-                  // TextInputField(
-                  //   inputLabelText: "Username",
-                  //   textController: _usernameController,
-                  //   hintText: "Enter your username",
-                  //   textInputType: TextInputType.text,
-                  //   // icon: Icons.account_circle_sharp,
-                  // ),
-                  //
-                  //
-                  // TextInputField(
-                  //   inputLabelText: "Password",
-                  //   textController: _passwordController,
-                  //   hintText: "Enter your Password",
-                  //   textInputType: TextInputType.visiblePassword,
-                  //   // icon: Icons.account_circle_sharp,
-                  // ),
-                  // const SizedBox(
-                  //   height: 20,
-                  // ),
-                  // Padding(
-                  //   padding: const EdgeInsets.only(left: 17, right: 17),
-                  //   child: MaterialButton(
-                  //     height: 60,
-                  //     shape: RoundedRectangleBorder(
-                  //         borderRadius: BorderRadius.circular(appBorderRadius)),
-                  //     minWidth: MediaQuery.of(context).size.width,
-                  //     onPressed: () {},
-                  //     child: Text(
-                  //       "Login",
-                  //       style: TextStyle(color: Colors.white),
-                  //     ),
-                  //     color: Theme.of(context).colorScheme.primary,
-                  //   ),
-                  // )
-                  // const UserButton(buttonText: "Login")
                 ],
               ),
             ),
