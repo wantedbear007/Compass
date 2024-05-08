@@ -47,7 +47,9 @@ class LoginScreenController extends GetxController {
       if (isAuth == true) {
         // Get.snackbar("Compass", "Login Successful");
         Get.put(LandingController());
-        Get.put(HomeScreenController());
+        // Get.put(HomeScreenController());
+        HomeScreenController homeScreenController = Get.put(HomeScreenController());
+        homeScreenController.loadUserData();
         Get.offAll(const LandingScreen(), transition: Transition.fadeIn);
       } else {
         Get.snackbar(
