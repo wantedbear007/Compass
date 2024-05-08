@@ -5,6 +5,8 @@ import 'package:compass/utils/utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
+final LocalStorageServices localStorageServices = LocalStorageServices();
+
 Future<void> saveUserDetails(String token) async {
   String url = "${api}auth/getUserDetails?token=$token";
 
@@ -22,7 +24,7 @@ Future<void> saveUserDetails(String token) async {
         jsonDecode(response.body) as Map<String, dynamic>;
 
     data.forEach((key, value) async {
-      await saveToLocal(key.toString(), value.toString());
+      await localStorageServices.saveToLocal(key.toString(), value.toString());
     });
 
     // data.forEach((key, value) async {
@@ -30,7 +32,7 @@ Future<void> saveUserDetails(String token) async {
     //   print(dat);
     // });
 
-    print(response.body);
+    // print(response.body);
   } catch (err) {
     print(err.toString());
     print("error happ");

@@ -1,5 +1,9 @@
+import 'package:compass/main.dart';
 import 'package:compass/screens/RegisterProduct/register_product.dart';
+import 'package:compass/screens/landing/landing_page.dart';
+import 'package:compass/screens/login/login_screen.dart';
 import 'package:compass/utils/constants.dart';
+import 'package:compass/utils/utils.dart';
 import 'package:compass/widgets/button_card.dart';
 import 'package:compass/widgets/material_button.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +14,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LocalStorageServices localStorageServices = LocalStorageServices();
+
     return Scaffold(
       // backgroundColor: Theme.of(context).colorScheme.,
       body: ListView(
@@ -38,7 +44,8 @@ class HomeScreen extends StatelessWidget {
                             children: [
                               const Text(
                                 appName,
-                                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.bold),
                               ),
                               Text(
                                 subTitle,
@@ -53,7 +60,13 @@ class HomeScreen extends StatelessWidget {
                     ),
 
                     UserMaterialButton(
-                      buttonAction: () {},
+                      buttonAction: () async {
+                        await localStorageServices.removeFromLocal("token");
+                        print("deleted token");
+                        Get.offAll(LoginScreen(), transition: Transition.fade);
+                        Get.snackbar("Compass", "Logged out Successfully",
+                            animationDuration: Duration(milliseconds: 10));
+                      },
                       buttonText: "Logout",
                     )
                     // add options
