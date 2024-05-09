@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:compass/models/user_model.dart';
+import 'package:compass/screens/login/login_screen.dart';
 import 'package:compass/utils/constants.dart';
 import 'package:compass/utils/utils.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -13,7 +15,10 @@ Future<void> saveUserDetails(String token) async {
   String url = "${api}auth/getUserDetails?token=$token";
 
   try {
-    final response = await http.get(Uri.parse(url));
+    final response = await http.get(Uri.parse(url), headers: <String, String>{
+      'Content-Type': 'application/json',
+      "apiKey": apiKey
+    });
 
     if (response.statusCode != 200) {
       if (kDebugMode) {
@@ -28,16 +33,10 @@ Future<void> saveUserDetails(String token) async {
     data.forEach((key, value) async {
       await localStorageServices.saveToLocal(key.toString(), value.toString());
     });
-
-    // data.forEach((key, value) async {
-    //   var dat = await getFromLocal(key.toString());
-    //   print(dat);
-    // });
-
-    // print(response.body);
   } catch (err) {
-    print(err.toString());
-    print("error happ");
+    if (kDebugMode) {
+      print("error in saving details$err");
+    }
   }
 }
 
@@ -45,10 +44,24 @@ Future<UserModel?> getUserDetails(String token) async {
   String url = "${api}auth/getUserDetails?token=$token";
 
   try {
-    final response = await http.get(Uri.parse(url));
+    final response = await http.get(Uri.parse(url), headers: <String, String>{
+      'Content-Type': 'application/json',
+      "apiKey": apiKey
+    });
 
     if (response.statusCode != 200) {
-      Get.defaultDialog(title: "Compass", middleText: "Internal server error.");
+      Get.defaultDialog(
+        titleStyle: const TextStyle(fontWeight: FontWeight.bold),
+        title: "Compass",
+        middleText: "Internal server error.",
+        confirm: MaterialButton(
+          onPressed: () async {
+            await localStorageServices.removeFromLocal("token");
+            Get.offAll(const LoginScreen());
+          },
+          child: const Text("Login again"),
+        ),
+      );
     }
 
     Map<String, dynamic> userDetails =

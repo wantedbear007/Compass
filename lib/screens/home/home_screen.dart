@@ -148,27 +148,6 @@ class HomeScreen extends GetView<HomeScreenController> {
                           ],
                         ),
 
-                        // Text(
-                        //   "Welcome, ",
-                        //   style: TextStyle(
-                        //     fontSize: 40,
-                        //     color: Theme.of(context)
-                        //         .colorScheme
-                        //         .onPrimaryContainer,
-                        //   ),
-                        // ),
-                        // Text(
-                        //   userData.name ?? "User",
-                        //   style: TextStyle(
-                        //       color: Theme.of(context).colorScheme.primary,
-                        //       fontSize: 30,
-                        //       fontWeight: FontWeight.bold),
-                        // ),
-                        // Text(
-                        //   userData.email ?? "Not available",
-                        //   style: TextStyle(
-                        //       color: Theme.of(context).colorScheme.outline),
-                        // ),
                         Text(
                           "Total Registered Products: ${userData.totalProducts ?? 0}",
                         ),

@@ -6,6 +6,7 @@ import 'package:compass/screens/landing/landing_screen_controller.dart';
 import 'package:compass/utils/api_services.dart';
 import 'package:compass/utils/constants.dart';
 import 'package:compass/utils/utils.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,7 +22,7 @@ class LoginScreenController extends GetxController {
   final LocalStorageServices localStorageServices = LocalStorageServices();
 
   @override
-  void onInit()  {
+  void onInit() {
     emailController.text = "prataptechnologies";
     passwordController.text = "9907224577";
     super.onInit();
@@ -48,7 +49,8 @@ class LoginScreenController extends GetxController {
         // Get.snackbar("Compass", "Login Successful");
         Get.put(LandingController());
         // Get.put(HomeScreenController());
-        HomeScreenController homeScreenController = Get.put(HomeScreenController());
+        HomeScreenController homeScreenController =
+            Get.put(HomeScreenController());
         homeScreenController.loadUserData();
         Get.offAll(const LandingScreen(), transition: Transition.fadeIn);
       } else {
@@ -76,13 +78,19 @@ class LoginScreenController extends GetxController {
 
     try {
       final response = await http.post(Uri.parse(url),
-          headers: <String, String>{'Content-Type': 'application/json'},
+          headers: <String, String>{
+            'Content-Type': 'application/json',
+            "apiKey": apiKey
+          },
           body: jsonEncode(
               <String, dynamic>{"username": username, "password": password}));
 
       loading.value = false;
 
       if (response.statusCode != 200) {
+        if (kDebugMode) {
+          print(response.body.toString());
+        }
         return false;
       } else {
         // saving token in local storage
