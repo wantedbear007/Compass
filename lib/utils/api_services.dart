@@ -40,6 +40,7 @@ Future<void> saveUserDetails(String token) async {
   }
 }
 
+// to get user details i.e name, email, profile picture url, username
 Future<UserModel?> getUserDetails(String token) async {
   String url = "${api}auth/getUserDetails?token=$token";
 
@@ -50,6 +51,10 @@ Future<UserModel?> getUserDetails(String token) async {
     });
 
     if (response.statusCode != 200) {
+      if (kDebugMode) {
+        print(response.body);
+      }
+
       Get.defaultDialog(
         titleStyle: const TextStyle(fontWeight: FontWeight.bold),
         title: "Compass",
@@ -69,5 +74,35 @@ Future<UserModel?> getUserDetails(String token) async {
     return UserModel.fromJson(userDetails);
   } catch (err) {
     return null;
+  }
+}
+
+// to get details from barCode
+Future<void> getBarCodeData(String barcodeID) async {
+  String apiUrl = barCodeAPI + barcodeID;
+
+  try {
+    final response = await http.get(Uri.parse(apiUrl),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          "apiKey": apiKey
+        });
+
+    if (response.statusCode == 200) {
+      if (kDebugMode) {
+        print("Error in fetching ${response.body}");
+      }
+
+      Get.defaultDialog(
+        title: "Compass",
+        middleText: "Failed to fetch data, try again or enter manually",
+      );
+    }
+
+    print(response.body);
+  } catch (err) {
+    if (kDebugMode) {
+      print("error in $err");
+    }
   }
 }

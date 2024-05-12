@@ -1,9 +1,11 @@
+import 'package:compass/screens/register/register_product_controller.dart';
 import 'package:compass/widgets/material_button.dart';
 import 'package:compass/widgets/text_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:get/state_manager.dart';
 
-class RegisterProduct extends StatelessWidget {
+class RegisterProduct extends GetView<RegisterProductController> {
   const RegisterProduct({super.key});
 
   @override
@@ -18,7 +20,9 @@ class RegisterProduct extends StatelessWidget {
 
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          controller.printName(context);
+        },
         icon: const Icon(Icons.add),
         label: const Text("Scan BarCode"),
       ),

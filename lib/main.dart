@@ -29,9 +29,7 @@ class _HomeState extends State<Home> {
 
   void initAsync() async {
     isLoggedIn = await localStorageServices.checkLocalStorage("token");
-    setState(() {
-
-    });
+    setState(() {});
   }
 
   @override
@@ -46,7 +44,7 @@ class _HomeState extends State<Home> {
       // routes: routes,
       initialRoute: "/",
       getPages: [
-        GetPage(name: "/", page: () => LandingScreen()),
+        GetPage(name: "/", page: () => const LandingScreen()),
         GetPage(name: "/register", page: () => const RegisterProduct()),
         GetPage(name: "/login", page: () => const LoginScreen()),
         GetPage(
@@ -74,8 +72,8 @@ class _HomeState extends State<Home> {
       ),
 
       initialBinding: ParentBinding(),
-      home: isLoggedIn ? const LandingScreen() : const LoginScreen(),
-      // home: const ExpiringProductScreen(),
+      // home: isLoggedIn ? const LandingScreen() : const LoginScreen(),
+      home: const RegisterProduct(),
     );
   }
 }
