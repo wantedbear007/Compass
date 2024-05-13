@@ -5,16 +5,17 @@ import 'package:compass/screens/landing/landing_page.dart';
 import 'package:compass/screens/login/login_screen.dart';
 import 'package:compass/screens/register/register_screen.dart';
 import 'package:compass/screens/registeredProducts/registered_products_screen.dart';
+import 'package:compass/screens/verify/verify_product_screen.dart';
 import 'package:compass/utils/color_scheme.dart';
 import 'package:compass/utils/theme_material.dart';
 import 'package:compass/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 // todo
 // 1. add an  animated dialog box
 // 2. Remove unused dependencies
+// 3. save number of registered products in local storage
 
 void main() {
   runApp(const Home());
@@ -58,6 +59,7 @@ class _HomeState extends State<Home> {
         GetPage(
             name: "/expiringProducts",
             page: () => const ExpiringProductScreen()),
+        GetPage(name: "/verifyProduct", page: () => const VerifyProductScreen())
       ],
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -77,8 +79,8 @@ class _HomeState extends State<Home> {
       ),
 
       initialBinding: ParentBinding(),
-      // home: isLoggedIn ? const LandingScreen() : const LoginScreen(),
-      home: const RegisterProduct(),
+      home: isLoggedIn ? const LandingScreen() : const LoginScreen(),
+      // home: const RegisterProduct(),
     );
   }
 }

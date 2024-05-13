@@ -6,7 +6,6 @@ import 'package:compass/screens/login/login_screen.dart';
 import 'package:compass/utils/constants.dart';
 import 'package:compass/utils/utils.dart';
 import 'package:compass/widgets/dialog_box.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
