@@ -21,7 +21,7 @@ class RegisterProduct extends GetView<RegisterProductController> {
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          controller.printName(context);
+          controller.scanBarCode(context);
         },
         icon: const Icon(Icons.add),
         label: const Text("Scan BarCode"),
@@ -37,7 +37,9 @@ class RegisterProduct extends GetView<RegisterProductController> {
           Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  controller.getData();
+                },
                 child: const Text("Register"),
               ))
         ],
@@ -49,19 +51,21 @@ class RegisterProduct extends GetView<RegisterProductController> {
       body: ListView(
         children: [
           TextInputField(
-              textController: _productnameController,
-              hintText: "Enter your product name",
-              inputLabelText: "Product name",
-              textInputType: TextInputType.text),
-          TextInputField(
-              textController: _barcodeController,
+              textController: controller.barcodeController,
               hintText: "Enter your unique barCode",
               inputLabelText: "BarCode ID",
               textInputType: TextInputType.text),
+          TextInputField(
+              textController: controller.nameController,
+              hintText: "Enter your product name",
+              inputLabelText: "Product name",
+              textInputType: TextInputType.text),
+
           Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.width / 22,
-                vertical: 5),
+              horizontal: MediaQuery.of(context).size.width / 22,
+              vertical: 5,
+            ),
             child: Column(
               // mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,22 +107,33 @@ class RegisterProduct extends GetView<RegisterProductController> {
               ],
             ),
           ),
+          // Note: image cannot be taken from user
+          // TextInputField(
+          //   textController: _imageController,
+          //   hintText: "Enter your image URL",
+          //   inputLabelText: "Image URL",
+          //   textInputType: TextInputType.url,
+          // ),
           TextInputField(
-            textController: _imageController,
-            hintText: "Enter your image URL",
-            inputLabelText: "Image URL",
-            textInputType: TextInputType.url,
-          ),
-          TextInputField(
-            textController: _categoryController,
-            hintText: "Enter your Category",
-            inputLabelText: "Enter your Category",
+            textController: controller.brandController,
+            hintText: "Enter your product brand name",
+            inputLabelText: "Product Brand",
             textInputType: TextInputType.text,
           ),
           TextInputField(
-              textController: _manafacturerController,
-              hintText: "Name of Manafacturer",
-              inputLabelText: "Manafacturer",
+              textController: controller.descriptionController,
+              hintText: "Product description",
+              inputLabelText: "Description",
+              textInputType: TextInputType.text),
+          TextInputField(
+              textController: controller.regionController,
+              hintText: "Product Region",
+              inputLabelText: "Enter your product region",
+              textInputType: TextInputType.text),
+          TextInputField(
+              textController: controller.categoryController,
+              hintText: "Category",
+              inputLabelText: "Enter your product Category",
               textInputType: TextInputType.text)
         ],
       ),

@@ -1,4 +1,6 @@
+import 'package:compass/models/bar_code_response_model.dart';
 import 'package:compass/utils/api_services.dart';
+import 'package:compass/widgets/dialog_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -17,8 +19,11 @@ class RegisterProductController extends GetxController {
   TextEditingController regionController = TextEditingController();
   TextEditingController imageController = TextEditingController();
 
-//   testing out function
-  void printName(BuildContext context) async {
+//   void delete
+  Future<void> getData() async {}
+
+  // to open and get data from barcode
+  void scanBarCode(BuildContext context) async {
     String barCode = await Navigator.push(
         context,
         MaterialPageRoute(
@@ -36,13 +41,29 @@ class RegisterProductController extends GetxController {
               child: const Text("Understood"),
             )
           ]);
+
+      return;
     }
 
-    // if (barCode == "") {
-    //   Get.defaultDialog(title: "Compass" ,onConfirm: () => Text("hello"),);
-    // }
+    BarCodeProduct? barCodeProduct = await getBarCodeData(barCode);
 
-    await getBarCodeData(barCode);
-    // Get.put(SimpleBarcodeScannerPage());
+    if (barCodeProduct == null) {
+      compassDialog(
+          "BarCode Error",
+          "Barcode details not found, try again or enter manually.",
+          "Understood",
+          context);
+
+      return;
+    }
+
+    nameController.text = barCodeProduct.name ?? "NA";
+    barcodeController.text = barCode;
+    brandController.text = barCodeProduct.brand ?? "NA";
+    descriptionController.text = barCodeProduct.description ?? "NA";
+    regionController.text = barCodeProduct.region ?? "NA";
+    imageController.text = barCodeProduct.imageUrl ??
+        "https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvam9iNjgxLTAxNjYtdi1sMWxnZmRxYy5qcGc.jpg";
+    categoryController.text = barCodeProduct.category ?? "NA";
   }
 }

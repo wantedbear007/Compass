@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:compass/models/bar_code_response_model.dart';
 import 'package:compass/models/user_model.dart';
 import 'package:compass/screens/login/login_screen.dart';
 import 'package:compass/utils/constants.dart';
@@ -78,7 +79,7 @@ Future<UserModel?> getUserDetails(String token) async {
 }
 
 // to get details from barCode
-Future<void> getBarCodeData(String barcodeID) async {
+Future<BarCodeProduct?> getBarCodeData(String barcodeID) async {
   String apiUrl = barCodeAPI + barcodeID;
 
   try {
@@ -88,7 +89,7 @@ Future<void> getBarCodeData(String barcodeID) async {
           "apiKey": apiKey
         });
 
-    if (response.statusCode == 200) {
+    if (response.statusCode != 200) {
       if (kDebugMode) {
         print("Error in fetching ${response.body}");
       }
@@ -99,10 +100,20 @@ Future<void> getBarCodeData(String barcodeID) async {
       );
     }
 
-    print(response.body);
+    var val = jsonDecode(response.body);
+
+    var responseData = val["data"];
+    responseData = responseData["product"];
+
+    return BarCodeProduct.fromJson(responseData);
   } catch (err) {
     if (kDebugMode) {
       print("error in $err");
+
+      return null;
     }
+    Get.defaultDialog(title: "Internal Error", middleText: err.toString());
+
   }
+  return null;
 }
