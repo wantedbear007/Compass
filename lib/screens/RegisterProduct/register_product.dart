@@ -29,8 +29,8 @@ class RegisterProduct extends GetView<RegisterProductController> {
           Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextButton(
-                onPressed: () {
-                  controller.getData();
+                onPressed: () async {
+                  await controller.registerProduct();
                 },
                 child: const Text("Register"),
               ))
@@ -69,11 +69,8 @@ class RegisterProduct extends GetView<RegisterProductController> {
               // mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-
-                  // padding: const EdgeInsets.only(left: 7),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   child: Text(
                     "Expire Date",
                     style: TextStyle(

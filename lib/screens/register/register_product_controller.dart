@@ -1,6 +1,10 @@
 import 'package:compass/models/bar_code_response_model.dart';
+import 'package:compass/models/product_model.dart';
 import 'package:compass/utils/api_services.dart';
+import 'package:compass/utils/token_verification.dart';
+import 'package:compass/utils/utils.dart';
 import 'package:compass/widgets/dialog_box.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
@@ -25,8 +29,19 @@ class RegisterProductController extends GetxController {
     super.onInit();
   }
 
-//   void delete
-  Future<void> getData() async {}
+  @override
+  void onClose() {
+    barcodeController.dispose();
+    brandController.dispose();
+    categoryController.dispose();
+    descriptionController.dispose();
+    nameController.dispose();
+    nameController.dispose();
+    expireController.dispose();
+    regionController.dispose();
+    imageController.dispose();
+    super.onClose();
+  }
 
   // to select date
   Future<void> selectDate(BuildContext context) async {
@@ -39,8 +54,7 @@ class RegisterProductController extends GetxController {
     );
 
     if (_selectedDate == null) {
-      compassDialog(
-          "Date Selection", "No date selected, try again. ", "Okay", context);
+      compassDialog("Date Selection", "No date selected, try again. ", "Okay");
       return;
     }
 
@@ -74,10 +88,10 @@ class RegisterProductController extends GetxController {
 
     if (barCodeProduct == null) {
       compassDialog(
-          "BarCode Error",
-          "Barcode details not found, try again or enter manually.",
-          "Understood",
-          context);
+        "BarCode Error",
+        "Barcode details not found, try again or enter manually.",
+        "Understood",
+      );
 
       return;
     }
@@ -90,5 +104,43 @@ class RegisterProductController extends GetxController {
     imageController.text = barCodeProduct.imageUrl ??
         "https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvam9iNjgxLTAxNjYtdi1sMWxnZmRxYy5qcGc.jpg";
     categoryController.text = barCodeProduct.category ?? "NA";
+  }
+
+//   to register product
+  Future<void> registerProduct() async {
+    if (nameController.text.isEmpty ||
+        barcodeController.text.isEmpty ||
+        brandController.text.isEmpty ||
+        descriptionController.text.isEmpty ||
+        regionController.text.isEmpty ||
+        imageController.text.isEmpty ||
+        categoryController.text.isEmpty ||
+        expireController.text.isEmpty) {
+      compassDialog("Compass", "All fields required", "Okay");
+      return;
+    }
+    String? token = await LocalStorageServices().getFromLocal("token");
+
+    if (token == null) {
+      tokenDialog();
+      return;
+    }
+
+    try {
+      registerNewProduct(
+          nameController.text,
+          barcodeController.text,
+          brandController.text,
+          descriptionController.text,
+          regionController.text,
+          imageController.text,
+          categoryController.text,
+          expireController.text,
+          token);
+    } catch (err) {
+      if (kDebugMode) {
+        print("error occurred in register product $err");
+      }
+    }
   }
 }

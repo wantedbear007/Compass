@@ -14,7 +14,7 @@ import 'package:get/get.dart';
 
 // todo
 // 1. add an  animated dialog box
-// 2.
+// 2. Remove unused dependencies
 
 void main() {
   runApp(const Home());

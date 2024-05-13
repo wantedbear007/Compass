@@ -12,7 +12,7 @@ class RegisteredProductsController extends GetxController {
   // get all products
   Future<List<ProductModel>> getProducts() async {
     try {
-      const String url = api + "products/getAll";
+      const String url = "${api}products/getAll";
 
       var uri = Uri.parse(url);
 

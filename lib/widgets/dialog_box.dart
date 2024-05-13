@@ -5,14 +5,14 @@ Future compassDialog(
   String title,
   String subTitle,
   String buttonText,
-  BuildContext ctx,
+  // BuildContext ctx,
 ) {
   return Get.defaultDialog(
       title: title,
       middleText: subTitle,
       confirm: MaterialButton(
         onPressed: () {
-          Navigator.pop(ctx);
+          Get.back();
         },
         child: Text(buttonText),
       ));

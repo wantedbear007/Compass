@@ -5,6 +5,8 @@ import 'package:compass/models/user_model.dart';
 import 'package:compass/screens/login/login_screen.dart';
 import 'package:compass/utils/constants.dart';
 import 'package:compass/utils/utils.dart';
+import 'package:compass/widgets/dialog_box.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -113,7 +115,61 @@ Future<BarCodeProduct?> getBarCodeData(String barcodeID) async {
       return null;
     }
     Get.defaultDialog(title: "Internal Error", middleText: err.toString());
-
   }
   return null;
+}
+
+// to register products
+Future<void> registerNewProduct(
+    String name,
+    String barCode,
+    String brand,
+    String description,
+    String region,
+    String imageUrl,
+    String category,
+    String expire,
+    String token) async {
+  String apiUrl = "${api}products/register";
+  try {
+    var headers = {
+      'token': token,
+      'apiKey': apiKey,
+      'Content-Type': 'application/json'
+    };
+
+    final request = http.Request("POST", Uri.parse(apiUrl));
+    request.headers.addAll(headers);
+    request.body = jsonEncode({
+      "expireDate": expire,
+      "barCodeId": barCode,
+      "name": name,
+      "description": description,
+      "region": region,
+      "imageUrl": imageUrl,
+      "brand": brand,
+      "category": category
+    });
+
+    http.StreamedResponse response = await request.send();
+
+    print(response.statusCode);
+
+    if (response.statusCode == 201) {
+      if (kDebugMode) {
+        print(await response.stream.bytesToString());
+      }
+      compassDialog("Registration Success",
+          "Your product is successfully registered.", "Great");
+    } else {
+      compassDialog("Registration failed",
+          "Server connectivity failed. Try again.", "Okay");
+    }
+  } catch (err) {
+    compassDialog("Internal Error",
+        "Something went wrong from our side. Try again.", "Okay");
+    if (kDebugMode) {
+      print("error occurreddddd $err");
+    }
+  }
 }
