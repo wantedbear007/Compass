@@ -22,6 +22,17 @@ class RegisterProductController extends GetxController {
 //   void delete
   Future<void> getData() async {}
 
+
+  // to select date
+  Future<void> selectDate(BuildContext context) async {
+    await showDatePicker(context: context,
+        initialDate: DateTime.now(),
+        initialEntryMode: DatePickerEntryMode.calendarOnly,
+        firstDate: DateTime.now(),
+        lastDate: DateTime.now().add(const Duration(days: 10 * 365)),
+    );
+  }
+
   // to open and get data from barcode
   void scanBarCode(BuildContext context) async {
     String barCode = await Navigator.push(

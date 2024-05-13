@@ -33,7 +33,7 @@ class TextInputField extends StatelessWidget {
               inputLabelText,
               style: TextStyle(
                 fontWeight: FontWeight.w500,
-                color: Theme.of(context).colorScheme.secondary,
+                // color: Theme.of(context).colorScheme.secondary,
               ),
             ),
           ),
@@ -50,7 +50,7 @@ class TextInputField extends StatelessWidget {
                   )),
               // border: InputBorder.none,
               suffixIcon: Icon(Icons.read_more),
-              fillColor: Theme.of(context).colorScheme.secondaryContainer,
+              // fillColor: Theme.of(context).colorScheme.secondaryContainer,
               hintStyle: const TextStyle(fontSize: 13),
             ),
           ),

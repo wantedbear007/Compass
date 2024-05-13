@@ -1,8 +1,8 @@
 import 'package:compass/screens/register/register_product_controller.dart';
-import 'package:compass/widgets/material_button.dart';
 import 'package:compass/widgets/text_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 
 class RegisterProduct extends GetView<RegisterProductController> {
@@ -10,14 +10,6 @@ class RegisterProduct extends GetView<RegisterProductController> {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _barcodeController = TextEditingController();
-    TextEditingController _productnameController = TextEditingController();
-    TextEditingController _quantityController = TextEditingController();
-    TextEditingController _expireController = TextEditingController();
-    TextEditingController _categoryController = TextEditingController();
-    TextEditingController _manafacturerController = TextEditingController();
-    TextEditingController _imageController = TextEditingController();
-
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
@@ -44,7 +36,7 @@ class RegisterProduct extends GetView<RegisterProductController> {
               ))
         ],
         title: const Text(
-          "Add Entry",
+          "Register new Product",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
@@ -61,6 +53,13 @@ class RegisterProduct extends GetView<RegisterProductController> {
               inputLabelText: "Product name",
               textInputType: TextInputType.text),
 
+          // DatePickerDialog(
+          //   initialDate: DateTime.now(),
+          //   initialEntryMode: DatePickerEntryMode.calendarOnly,
+          //   // firstDate: DateTime(2024),
+          //   firstDate: DateTime.now(),
+          //   lastDate: DateTime.now().add(const Duration(days: 10 * 365)),
+          // ),
           Padding(
             padding: EdgeInsets.symmetric(
               horizontal: MediaQuery.of(context).size.width / 22,
@@ -71,49 +70,63 @@ class RegisterProduct extends GetView<RegisterProductController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 7),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+
+                  // padding: const EdgeInsets.only(left: 7),
                   child: Text(
                     "Expire Date",
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
-                      color: Theme.of(context).colorScheme.secondary,
+                      // color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
                 ),
-                Container(
-                  // margin: EdgeInsets.all(18),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.secondaryContainer,
-                    borderRadius: BorderRadius.circular(10),
+                TextField(
+                  onTap: () {
+                    controller.selectDate(context);
+                  },
+                  readOnly: true,
+                  decoration: const InputDecoration(
+                    hintText: "Select Date",
+                    hintStyle: TextStyle(fontSize: 13),
+                    filled: true,
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide.none),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
                   ),
-                  // padding: EdgeInsets.symmetric(
-                  //     horizontal: MediaQuery.of(context).size.width / 22,
-                  //     vertical: 5),
-
-                  child: FormBuilderDateTimePicker(
-                    firstDate: DateTime.now(),
-                    fieldHintText: "hello",
-                    textAlign: TextAlign.center,
-                    initialDate: DateTime.now(),
-                    name: "hello",
-                    inputType: InputType.date,
-                    helpText: "Select date",
-                    onChanged: (val) {
-                      print(val);
-                    },
-                    resetIcon: Icon(Icons.cabin),
-                  ),
-                ),
+                )
+                // Container(
+                //   // margin: EdgeInsets.all(18),
+                //   decoration: BoxDecoration(
+                //     color: Theme.of(context).colorScheme.secondaryContainer,
+                //     borderRadius: BorderRadius.circular(10),
+                //   ),
+                //   // padding: EdgeInsets.symmetric(
+                //   //     horizontal: MediaQuery.of(context).size.width / 22,
+                //   //     vertical: 5),
+                //
+                //   child: FormBuilderDateTimePicker(
+                //     firstDate: DateTime.now(),
+                //     fieldHintText: "hello",
+                //     textAlign: TextAlign.center,
+                //     initialDate: DateTime.now(),
+                //     name: "hello",
+                //     inputType: InputType.date,
+                //     helpText: "Select date",
+                //     onChanged: (val) {
+                //       print(val);
+                //     },
+                //     resetIcon: Icon(Icons.cabin),
+                //   ),
+                // ),
               ],
             ),
           ),
-          // Note: image cannot be taken from user
-          // TextInputField(
-          //   textController: _imageController,
-          //   hintText: "Enter your image URL",
-          //   inputLabelText: "Image URL",
-          //   textInputType: TextInputType.url,
-          // ),
           TextInputField(
             textController: controller.brandController,
             hintText: "Enter your product brand name",
@@ -127,13 +140,13 @@ class RegisterProduct extends GetView<RegisterProductController> {
               textInputType: TextInputType.text),
           TextInputField(
               textController: controller.regionController,
-              hintText: "Product Region",
-              inputLabelText: "Enter your product region",
+              hintText: "Enter your product region",
+              inputLabelText: "Product Region",
               textInputType: TextInputType.text),
           TextInputField(
               textController: controller.categoryController,
-              hintText: "Category",
-              inputLabelText: "Enter your product Category",
+              hintText: "Enter your product Category",
+              inputLabelText: "Category",
               textInputType: TextInputType.text)
         ],
       ),
