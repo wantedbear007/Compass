@@ -1,8 +1,6 @@
 import 'package:compass/models/bar_code_response_model.dart';
 import 'package:compass/utils/api_services.dart';
 import 'package:compass/widgets/dialog_box.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
@@ -19,18 +17,34 @@ class RegisterProductController extends GetxController {
   TextEditingController regionController = TextEditingController();
   TextEditingController imageController = TextEditingController();
 
+  DateTime? _selectedDate = DateTime.now();
+
+  @override
+  void onInit() {
+    expireController.text = DateTime.now().toString().split(" ")[0];
+    super.onInit();
+  }
+
 //   void delete
   Future<void> getData() async {}
 
-
   // to select date
   Future<void> selectDate(BuildContext context) async {
-    await showDatePicker(context: context,
-        initialDate: DateTime.now(),
-        initialEntryMode: DatePickerEntryMode.calendarOnly,
-        firstDate: DateTime.now(),
-        lastDate: DateTime.now().add(const Duration(days: 10 * 365)),
+    _selectedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(const Duration(days: 10 * 365)),
     );
+
+    if (_selectedDate == null) {
+      compassDialog(
+          "Date Selection", "No date selected, try again. ", "Okay", context);
+      return;
+    }
+
+    expireController.text = _selectedDate.toString().split(" ")[0];
   }
 
   // to open and get data from barcode

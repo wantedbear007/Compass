@@ -83,6 +83,7 @@ class RegisterProduct extends GetView<RegisterProductController> {
                   ),
                 ),
                 TextField(
+                  controller: controller.expireController,
                   onTap: () {
                     controller.selectDate(context);
                   },

@@ -11,6 +11,11 @@ import 'package:compass/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+
+// todo
+// 1. add an  animated dialog box
+// 2.
+
 void main() {
   runApp(const Home());
 }
