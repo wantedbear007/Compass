@@ -56,7 +56,7 @@ class RegisteredProducts extends StatelessWidget {
                     // final products = pro?[index];
                     // return Text("helloooo");
                     return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      padding: const EdgeInsets.symmetric(horizontal: 0),
                       child: ProductContainer(
                         productData: products!,
                       ),
