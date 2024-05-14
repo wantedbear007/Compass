@@ -184,21 +184,52 @@ Future<List<ProductModel>> getRegisteredProducts(String token) async {
           'Content-Type': 'application/json'
         });
 
-
-    if (response.statusCode != 200) {
-      compassDialog("Server Error",
-          "Failed to get data from database, try again.", "Okay");
-      return [];
+    if (response.statusCode == 200) {
+      final List responseBody = jsonDecode(response.body);
+      return responseBody.map((e) => ProductModel.fromJson(e)).toList();
+      // compassDialog("Server Error",
+      //     "Failed to get data from database, try again.", "Okay");
+      // return [];
     }
 
-    final List responseBody = jsonDecode(response.body);
-    print(responseBody[0]);
-    return responseBody.map((e) => ProductModel.fromJson(e)).toList();
+    compassDialog(
+        "Server Error", "Failed to get data from database, try again.", "Okay");
+    return [];
+    //
+    // final List responseBody = jsonDecode(response.body);
+    // return responseBody.map((e) => ProductModel.fromJson(e)).toList();
   } catch (err) {
     if (kDebugMode) {
       print(err);
     }
     compassDialog("Compass", "Internal issue occurred, Try again.", "Okay");
+    return [];
+  }
+}
+
+// get filtered products
+Future<List<ProductModel>> getFiltered(String token, int months) async {
+  try {
+    String url = "${api}products/expiringIn/${months.toString()}";
+
+    final response = await http.get(Uri.parse(url), headers: <String, String>{
+      'token': token,
+      'apiKey': apiKey,
+      'Content-Type': 'application/json'
+    });
+
+    if (response.statusCode == 200) {
+      final List responseBody = jsonDecode(response.body);
+      return responseBody.map((e) => ProductModel.fromJson(e)).toList();
+    }
+
+    compassDialog(appName, "Failed to get products, try again.", "Okay");
+    return [];
+  } catch (err) {
+    if (kDebugMode) {
+      print("error occurred $err");
+    }
+    compassDialog("Compass", "Failed to get products, try again.", "Okay");
     return [];
   }
 }

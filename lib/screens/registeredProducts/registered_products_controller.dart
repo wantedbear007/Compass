@@ -12,29 +12,18 @@ class RegisteredProductsController extends GetxController {
   RxInt filterValue = 4.obs;
 
   // get all products
-  Future<List<ProductModel>> getFilteredProduct() async {
-    try {
-      const String url = "${api}products/getAll";
+  Future<List<ProductModel>> getFilteredProduct(int months) async {
+    String? token = await localStorageServices.getFromLocal("token");
 
-      var uri = Uri.parse(url);
-
-      final response =
-          await http.get(uri, headers: {"Content-Type": "application/json"});
-
-      final List body = jsonDecode(response.body);
-
-      // print(body);
-
-      return body.map((e) => ProductModel.fromJson(e)).toList();
-    } catch (err) {
-      print("Error occurred");
+    if (token == null) {
+      tokenDialog();
       return [];
     }
+    return await getFiltered(token, months);
   }
 
 // get filtered products
   Future<List<ProductModel>> getProducts() async {
-
     String? token = await localStorageServices.getFromLocal("token");
 
     if (token == null) {

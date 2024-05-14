@@ -8,8 +8,11 @@ import 'package:get/state_manager.dart';
 class RegisterProduct extends GetView<RegisterProductController> {
   const RegisterProduct({super.key});
 
+
+
   @override
   Widget build(BuildContext context) {
+    Get.put(RegisterProductController());
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
@@ -25,6 +28,7 @@ class RegisterProduct extends GetView<RegisterProductController> {
           },
           icon: const Icon(Icons.arrow_back),
         ),
+
         actions: [
           Padding(
               padding: const EdgeInsets.all(8.0),

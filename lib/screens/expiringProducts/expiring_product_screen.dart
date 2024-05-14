@@ -36,7 +36,7 @@ class _ExpiringProductScreenState extends State<ExpiringProductScreen> {
                       const Text(
                         "Select Months to Expire",
                         style: TextStyle(
-                           fontSize: 17,
+                          fontSize: 17,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -61,7 +61,7 @@ class _ExpiringProductScreenState extends State<ExpiringProductScreen> {
                           ),
                           MaterialButton(
                             onPressed: () {
-                              controller.getProducts();
+                              controller.getFilteredProduct(controller.filterValue.value);
                               // ObxState();
                               setState(() {});
 
@@ -93,12 +93,12 @@ class _ExpiringProductScreenState extends State<ExpiringProductScreen> {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         actions: [
-          IconButton(onPressed: () {
-            controller.getProducts();
-            setState(() {
-
-            });
-          }, icon: Icon(Icons.refresh)),
+          IconButton(
+              onPressed: () {
+                controller.getProducts();
+                setState(() {});
+              },
+              icon: Icon(Icons.refresh)),
           IconButton(
               onPressed: () {
                 Navigator.pop(context);
@@ -115,13 +115,13 @@ class _ExpiringProductScreenState extends State<ExpiringProductScreen> {
 
       body: Center(
         child: FutureBuilder<List<ProductModel>>(
-          future: controller.getProducts(),
+          future: controller.getFilteredProduct(controller.filterValue.value),
           builder: (context, snapshot) {
             // print(snapshot.data.toString());
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const CircularProgressIndicator();
             } else if (snapshot.hasError) {
-              return Text("error");
+              return Center(child: Text("Internal server error"));
             } else {
               final pro = snapshot.data;
               // print(pro.)

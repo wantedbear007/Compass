@@ -18,8 +18,6 @@ class ProductContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final RegisteredProductsController controller =
         Get.put(RegisteredProductsController());
-    // DateTime dateTime = DateTime.parse(productData.expireDate.toString());
-    // final String date = "${dateTime.month} / ${dateTime.year}";
     final String date = productData.expireDate.toString();
     // if (kDebugMode) {
     //   print(productData.createdDate);
@@ -27,7 +25,7 @@ class ProductContainer extends StatelessWidget {
 
     return Column(
       children: [
-        Divider(),
+        const Divider(),
         Container(
           margin: const EdgeInsets.only(top: 10),
           height: 450,
@@ -129,7 +127,8 @@ class ProductContainer extends StatelessWidget {
                   ),
                   Expanded(
                       child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 6),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 2, horizontal: 6),
                     child: Text(
                       textAlign: TextAlign.start,
                       "Description: ${productData.description} ",

@@ -34,15 +34,15 @@ class RegisterProductController extends GetxController {
 
   @override
   void onClose() {
-    barcodeController.dispose();
-    brandController.dispose();
-    categoryController.dispose();
-    descriptionController.dispose();
-    nameController.dispose();
-    nameController.dispose();
-    expireController.dispose();
-    regionController.dispose();
-    imageController.dispose();
+    // barcodeController.dispose();
+    // brandController.dispose();
+    // categoryController.dispose();
+    // descriptionController.dispose();
+    // nameController.dispose();
+    // nameController.dispose();
+    // expireController.dispose();
+    // regionController.dispose();
+    // imageController.dispose();
     super.onClose();
   }
 
