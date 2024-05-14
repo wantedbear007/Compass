@@ -9,57 +9,54 @@ ProductModel productModelFromJson(String str) => ProductModel.fromJson(json.deco
 String productModelToJson(ProductModel data) => json.encode(data.toJson());
 
 class ProductModel {
-  final int id;
-  final DateTime expireDate;
-  final String barCodeId;
-  final String name;
-  final String description;
-  final String region;
-  final String imageUrl;
-  final String brand;
-  final String category;
-  final DateTime createdDate;
-  final int authorId;
+  final int? id;
+  final String? barCodeId;
+  final String? expireDate;
+  final String? name;
+  final String? description;
+  final String? region;
+  final String? imageUrl;
+  final String? brand;
+  final String? category;
+  final String? createdDate;
 
   ProductModel({
-    required this.id,
-    required this.expireDate,
-    required this.barCodeId,
-    required this.name,
-    required this.description,
-    required this.region,
-    required this.imageUrl,
-    required this.brand,
-    required this.category,
-    required this.createdDate,
-    required this.authorId,
+    this.id,
+    this.barCodeId,
+    this.expireDate,
+    this.name,
+    this.description,
+    this.region,
+    this.imageUrl,
+    this.brand,
+    this.category,
+    this.createdDate,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
     id: json["id"],
-    expireDate: DateTime.parse(json["expireDate"]),
     barCodeId: json["barCodeID"],
+    expireDate: json["expireDate"],
     name: json["name"],
     description: json["description"],
     region: json["region"],
     imageUrl: json["imageUrl"],
     brand: json["brand"],
     category: json["category"],
-    createdDate: DateTime.parse(json["createdDate"]),
-    authorId: json["authorId"],
+    createdDate: json["createdDate"],
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "expireDate": "${expireDate.year.toString().padLeft(4, '0')}-${expireDate.month.toString().padLeft(2, '0')}-${expireDate.day.toString().padLeft(2, '0')}",
     "barCodeID": barCodeId,
+
+    "expireDate": expireDate,
     "name": name,
     "description": description,
     "region": region,
     "imageUrl": imageUrl,
     "brand": brand,
     "category": category,
-    "createdDate": createdDate.toIso8601String(),
-    "authorId": authorId,
+    "createdDate": createdDate,
   };
 }

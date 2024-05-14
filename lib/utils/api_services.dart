@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:compass/models/bar_code_response_model.dart';
+import 'package:compass/models/product_model.dart';
 import 'package:compass/models/user_model.dart';
 import 'package:compass/screens/login/login_screen.dart';
 import 'package:compass/utils/constants.dart';
@@ -152,8 +153,6 @@ Future<void> registerNewProduct(
 
     http.StreamedResponse response = await request.send();
 
-    print(response.statusCode);
-
     if (response.statusCode == 201) {
       if (kDebugMode) {
         print(await response.stream.bytesToString());
@@ -170,5 +169,36 @@ Future<void> registerNewProduct(
     if (kDebugMode) {
       print("error occurreddddd $err");
     }
+  }
+}
+
+// get registered products
+Future<List<ProductModel>> getRegisteredProducts(String token) async {
+  String apiUrl = "${api}products/getProducts";
+
+  try {
+    final response = await http.get(Uri.parse(apiUrl),
+        headers: <String, String>{
+          'token': token,
+          'apiKey': apiKey,
+          'Content-Type': 'application/json'
+        });
+
+
+    if (response.statusCode != 200) {
+      compassDialog("Server Error",
+          "Failed to get data from database, try again.", "Okay");
+      return [];
+    }
+
+    final List responseBody = jsonDecode(response.body);
+    print(responseBody[0]);
+    return responseBody.map((e) => ProductModel.fromJson(e)).toList();
+  } catch (err) {
+    if (kDebugMode) {
+      print(err);
+    }
+    compassDialog("Compass", "Internal issue occurred, Try again.", "Okay");
+    return [];
   }
 }

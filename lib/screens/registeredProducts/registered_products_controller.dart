@@ -1,6 +1,8 @@
 import 'package:compass/models/product_model.dart';
 import 'package:compass/models/products_model_old.dart';
+import 'package:compass/utils/api_services.dart';
 import 'package:compass/utils/constants.dart';
+import 'package:compass/utils/token_verification.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -10,7 +12,7 @@ class RegisteredProductsController extends GetxController {
   RxInt filterValue = 4.obs;
 
   // get all products
-  Future<List<ProductModel>> getProducts() async {
+  Future<List<ProductModel>> getFilteredProduct() async {
     try {
       const String url = "${api}products/getAll";
 
@@ -31,28 +33,38 @@ class RegisteredProductsController extends GetxController {
   }
 
 // get filtered products
-  Future<List<ProductModel>> getFilteredProducts() async {
-    try {
-      String url = "${api}products/expiringIn/${filterValue.value.toString()}";
-      print(url);
-      final response = await http
-          .get(Uri.parse(url), headers: {"Content-Type": "application/json"});
+  Future<List<ProductModel>> getProducts() async {
 
-      print(response.toString());
+    String? token = await localStorageServices.getFromLocal("token");
 
-
-      if (response.statusCode != 200) {
-        print("Server error");
-        // print(response.body.toString());
-      }
-
-      final List responseBody = jsonDecode(response.body);
-      Obx() {}
-      return responseBody.map((e) => ProductModel.fromJson(e)).toList();
-    } catch (err) {
-      print("Error occurred");
+    if (token == null) {
+      tokenDialog();
       return [];
     }
+
+    return await getRegisteredProducts(token);
+    // try {
+    //   String url = "${api}products/expiringIn/${filterValue.value.toString()}";
+    //
+    //   // final request = http.Request("GET", Uri.parse(url));
+    //   // request.headers.addAll()
+    //
+    //   final response = await http
+    //       .get(Uri.parse(url), headers: {"Content-Type": "application/json"});
+    //
+    //
+    //   if (response.statusCode != 200) {
+    //     print("Server error");
+    //     // print(response.body.toString());
+    //   }
+    //
+    //   final List responseBody = jsonDecode(response.body);
+    //   // Obx() {}
+    //   return responseBody.map((e) => ProductModel.fromJson(e)).toList();
+    // } catch (err) {
+    //   print("Error occurred");
+    //   return [];
+    // }
   }
 
 //  delete product
@@ -60,14 +72,14 @@ class RegisteredProductsController extends GetxController {
     try {
       String url = "${api}products/deleteBeta/${id}";
       final res = await http.get(Uri.parse(url));
-      if (res.statusCode != 200 ) {
+      if (res.statusCode != 200) {
         print("error");
       }
 
       print(res.body.toString());
-
     } catch (err) {
+      print(err);
       print("Error occurred");
     }
   }
- }
+}

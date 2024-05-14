@@ -16,8 +16,9 @@ class ProductContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final RegisteredProductsController controller =
     Get.put(RegisteredProductsController());
-    DateTime dateTime = DateTime.parse(productData.expireDate.toString());
-    final String date = "${dateTime.month} / ${dateTime.year}";
+    // DateTime dateTime = DateTime.parse(productData.expireDate.toString());
+    // final String date = "${dateTime.month} / ${dateTime.year}";
+    final String date = "lol";
     // if (kDebugMode) {
     //   print(productData.createdDate);
     // }
@@ -54,7 +55,7 @@ class ProductContainer extends StatelessWidget {
                   child: CachedNetworkImage(
                       fit: BoxFit.cover,
                       // placeholder: (Context, url) => CircularProgressIndicator(),
-                      imageUrl: productData.imageUrl,
+                      imageUrl: productData.imageUrl ?? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRybZIzgdp2Mrd97EXBjZToWdKB01KSQR9waE4TMD7img&s",
 
                       width: constraints.maxWidth,
                       height: constraints.maxHeight / 2,

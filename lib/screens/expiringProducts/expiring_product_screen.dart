@@ -61,7 +61,7 @@ class _ExpiringProductScreenState extends State<ExpiringProductScreen> {
                           ),
                           MaterialButton(
                             onPressed: () {
-                              controller.getFilteredProducts();
+                              controller.getProducts();
                               // ObxState();
                               setState(() {});
 
@@ -94,7 +94,7 @@ class _ExpiringProductScreenState extends State<ExpiringProductScreen> {
         ),
         actions: [
           IconButton(onPressed: () {
-            controller.getFilteredProducts();
+            controller.getProducts();
             setState(() {
 
             });
@@ -115,7 +115,7 @@ class _ExpiringProductScreenState extends State<ExpiringProductScreen> {
 
       body: Center(
         child: FutureBuilder<List<ProductModel>>(
-          future: controller.getFilteredProducts(),
+          future: controller.getProducts(),
           builder: (context, snapshot) {
             // print(snapshot.data.toString());
             if (snapshot.connectionState == ConnectionState.waiting) {
