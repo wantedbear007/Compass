@@ -42,6 +42,9 @@ class RegisterProduct extends GetView<RegisterProductController> {
       ),
       body: ListView(
         children: [
+          Obx(() => controller.uploading.value
+              ? const LinearProgressIndicator()
+              : const SizedBox()),
           TextInputField(
               textController: controller.barcodeController,
               hintText: "Enter your unique barCode",

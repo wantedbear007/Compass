@@ -6,15 +6,28 @@ class VerifyProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: MaterialButton(
-          onPressed: () {
-            print("helllo");
-            compassLoading();
-          },
-          child: Text("Search"),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("hello"),
+          // bottom: ,
+          flexibleSpace: Text("hell"),
+
         ),
+        body:LinearProgressIndicator()
+
+        // Expanded(
+        //   child: Center(
+        //
+        //     child: MaterialButton(
+        //       onPressed: () {
+        //         print("helllo");
+        //         compassLoading();
+        //       },
+        //       child: Text("Search"),
+        //     ),
+        //   ),
+        // ),
       ),
     );
   }

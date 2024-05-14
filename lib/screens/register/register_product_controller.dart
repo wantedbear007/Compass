@@ -1,16 +1,19 @@
 import 'package:compass/models/bar_code_response_model.dart';
 import 'package:compass/models/product_model.dart';
 import 'package:compass/utils/api_services.dart';
+import 'package:compass/utils/constants.dart';
 import 'package:compass/utils/token_verification.dart';
 import 'package:compass/utils/utils.dart';
 import 'package:compass/widgets/dialog_box.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_rx/get_rx.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 
 class RegisterProductController extends GetxController {
   RxBool loading = true.obs;
+  RxBool uploading = false.obs;
 
   TextEditingController barcodeController = TextEditingController();
   TextEditingController brandController = TextEditingController();
@@ -63,6 +66,11 @@ class RegisterProductController extends GetxController {
 
   // to open and get data from barcode
   void scanBarCode(BuildContext context) async {
+    if (uploading.value == true) {
+      compassDialog(appName, "Product registration in progress, wait.", "Okay");
+    }
+
+    uploading.value = true;
     String barCode = await Navigator.push(
         context,
         MaterialPageRoute(
@@ -80,7 +88,7 @@ class RegisterProductController extends GetxController {
               child: const Text("Understood"),
             )
           ]);
-
+      uploading.value = false;
       return;
     }
 
@@ -93,6 +101,8 @@ class RegisterProductController extends GetxController {
         "Understood",
       );
 
+      uploading.value = false;
+
       return;
     }
 
@@ -104,10 +114,13 @@ class RegisterProductController extends GetxController {
     imageController.text = barCodeProduct.imageUrl ??
         "https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvam9iNjgxLTAxNjYtdi1sMWxnZmRxYy5qcGc.jpg";
     categoryController.text = barCodeProduct.category ?? "NA";
+    uploading.value = false;
   }
 
 //   to register product
   Future<void> registerProduct() async {
+    uploading.value = true;
+
     if (nameController.text.isEmpty ||
         barcodeController.text.isEmpty ||
         brandController.text.isEmpty ||
@@ -117,17 +130,20 @@ class RegisterProductController extends GetxController {
         categoryController.text.isEmpty ||
         expireController.text.isEmpty) {
       compassDialog("Compass", "All fields required", "Okay");
+      uploading.value = false;
+
       return;
     }
     String? token = await LocalStorageServices().getFromLocal("token");
 
     if (token == null) {
       tokenDialog();
+      uploading.value = false;
       return;
     }
 
     try {
-      registerNewProduct(
+      await registerNewProduct(
           nameController.text,
           barcodeController.text,
           brandController.text,
@@ -137,7 +153,19 @@ class RegisterProductController extends GetxController {
           categoryController.text,
           expireController.text,
           token);
+
+      nameController.clear();
+      barcodeController.clear();
+      brandController.clear();
+      descriptionController.clear();
+      regionController.clear();
+      imageController.clear();
+      categoryController.clear();
+      expireController.clear();
+      uploading.value = false;
     } catch (err) {
+      uploading.value = false;
+
       if (kDebugMode) {
         print("error occurred in register product $err");
       }

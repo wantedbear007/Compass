@@ -17,5 +17,6 @@ Future compassLoading() async {
     middleText: "subTitle",
 
 
+
   );
 }
