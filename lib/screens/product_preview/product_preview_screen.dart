@@ -29,7 +29,7 @@ class ProductPreviewScreen extends StatelessWidget {
           blendMode: BlendMode.srcIn,
           shaderCallback: (Rect bounds) {
             return LinearGradient(
-              colors: [Colors.red, Theme.of(context).primaryColor],
+              colors: [Colors.red, Colors.white],
             ).createShader(bounds);
           },
           child: Text(
@@ -45,25 +45,25 @@ class ProductPreviewScreen extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(30),
-            child: CachedNetworkImage(
-                // fit: BoxFit.cover,
-                height: 200,
-                width: 200,
-                // placeholder: (Context, url) => CircularProgressIndicator(),
-                imageUrl:
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRybZIzgdp2Mrd97EXBjZToWdKB01KSQR9waE4TMD7img&s",
-                errorWidget: (context, url, error) => const Icon(Icons.error),
-                progressIndicatorBuilder: (context, url, progress) => Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      child: LinearProgressIndicator(
-                        value: progress.progress,
-                      ),
-                    )
-                // progressIndicatorBuilder: ,
-                ),
-          ),
+          CachedNetworkImage(
+            fit: BoxFit.cover,
+
+              // fit: BoxFit.cover,
+              height: 200,
+              // width: 200,
+              // placeholder: (Context, url) => CircularProgressIndicator(),
+              imageUrl:
+                  barCodeProduct.imageUrl ?? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRybZIzgdp2Mrd97EXBjZToWdKB01KSQR9waE4TMD7img&s",
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+              progressIndicatorBuilder: (context, url, progress) => Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: LinearProgressIndicator(
+                      value: progress.progress,
+                    ),
+                  )
+              // progressIndicatorBuilder: ,
+              ),
+          SizedBox(height: 40,),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 8),
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
