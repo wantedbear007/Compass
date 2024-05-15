@@ -1,8 +1,8 @@
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:compass/models/product_model.dart';
-import 'package:compass/models/products_model_old.dart';
 import 'package:compass/screens/registeredProducts/registered_products_controller.dart';
-import 'package:compass/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -28,14 +28,14 @@ class ProductContainer extends StatelessWidget {
         const Divider(),
         Container(
           margin: const EdgeInsets.only(top: 10),
-          height: 450,
+          height: 550,
           child: LayoutBuilder(
             builder: (BuildContext ctx, BoxConstraints constraints) {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 0, right: 6, left: 6),
+                    padding: const EdgeInsets.only(top: 0, right: 10, left: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -47,6 +47,7 @@ class ProductContainer extends StatelessWidget {
                                 "${productData.name}",
                                 style: const TextStyle(
                                   fontSize: 18,
+                                  fontWeight: FontWeight.bold
                                 ),
                                 overflow: TextOverflow.visible,
 
@@ -78,7 +79,7 @@ class ProductContainer extends StatelessWidget {
                       // progressIndicatorBuilder: ,
                       ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 5, right: 6, left: 6),
+                    padding: const EdgeInsets.only(top: 5, right: 10, left: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -92,7 +93,7 @@ class ProductContainer extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 5, right: 6, left: 6),
+                    padding: const EdgeInsets.only(top: 5, right: 10, left: 10),
                     child: Row(
                       children: [
                         Expanded(
@@ -117,7 +118,7 @@ class ProductContainer extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 5, right: 6, left: 6),
+                    padding: const EdgeInsets.only(top: 5, right: 10, left: 10),
                     child: Text(
                       "Expiring Date: ${date}",
                       overflow: TextOverflow.ellipsis,
@@ -128,7 +129,7 @@ class ProductContainer extends StatelessWidget {
                   Expanded(
                       child: Padding(
                     padding:
-                        const EdgeInsets.symmetric(vertical: 2, horizontal: 6),
+                        const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
                     child: Text(
                       textAlign: TextAlign.start,
                       "Description: ${productData.description} ",
@@ -145,6 +146,9 @@ class ProductContainer extends StatelessWidget {
                     //     borderRadius: BorderRadius.circular(appBorderRadius)),
                     onPressed: () async {
                       print("started");
+
+
+
                       await controller.deleteProduct(productData.id.toString());
                       print("deleted");
                     },

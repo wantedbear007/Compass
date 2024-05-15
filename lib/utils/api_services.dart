@@ -233,3 +233,31 @@ Future<List<ProductModel>> getFiltered(String token, int months) async {
     return [];
   }
 }
+
+
+// get filtered products
+Future<List<ProductModel>> getExpired(String token) async {
+  try {
+    String url = "${api}products/expiredProducts";
+
+    final response = await http.get(Uri.parse(url), headers: <String, String>{
+      'token': token,
+      'apiKey': apiKey,
+      'Content-Type': 'application/json'
+    });
+
+    if (response.statusCode == 200) {
+      final List responseBody = jsonDecode(response.body);
+      return responseBody.map((e) => ProductModel.fromJson(e)).toList();
+    }
+
+    compassDialog(appName, "Failed to get products, try again.", "Okay");
+    return [];
+  } catch (err) {
+    if (kDebugMode) {
+      print("error occurred $err");
+    }
+    compassDialog("Compass", "Failed to get products, try again.", "Okay");
+    return [];
+  }
+}

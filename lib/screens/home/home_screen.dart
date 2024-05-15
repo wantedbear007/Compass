@@ -203,13 +203,13 @@ class HomeScreen extends GetView<HomeScreenController> {
                         SizedBox(
                           height: 10,
                         ),
-                        HomeScreenCard(
-                          tapAction: () {},
-                          buttonText: "Add Products",
-                          caption: "Add new products, something something",
-                          image: "assets/addnew.svg",
-                          icon: Icons.account_circle_sharp,
-                        )
+                        // HomeScreenCard(
+                        //   tapAction: () {},
+                        //   buttonText: "Add Products",
+                        //   caption: "Add new products, something something",
+                        //   image: "assets/addnew.svg",
+                        //   icon: Icons.account_circle_sharp,
+                        // )
                         // ButtonCard(),
                         // ButtonCard(),
 

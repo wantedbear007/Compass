@@ -1,7 +1,9 @@
+import 'package:compass/screens/expired/expired_screen.dart';
 import 'package:compass/screens/expiringProducts/expiring_product_screen.dart';
 import 'package:compass/screens/home/home_screen.dart';
 import 'package:compass/screens/landing/landing_screen_controller.dart';
 import 'package:compass/screens/notifications/notification_screen.dart';
+import 'package:compass/screens/search/search_screen.dart';
 import 'package:compass/screens/settings/settings_screen.dart';
 import 'package:compass/screens/verify/verify_product_screen.dart';
 import 'package:flutter/material.dart';
@@ -27,10 +29,12 @@ class LandingScreen extends GetView<LandingController> {
                         builder: (_) => const HomeScreen());
                   },
                 ),
-                const ExpiringProductScreen(),
+
+                const ExpiredProductScreen(),
+                const SearchScreen(),
+
                 const VerifyProductScreen(),
                 const NotificationScreen(),
-                const SettingsScreen()
               ],
             ),
             bottomNavigationBar: NavigationBar(
@@ -40,13 +44,15 @@ class LandingScreen extends GetView<LandingController> {
                 NavigationDestination(
                     icon: Icon(Icons.home_filled), label: "Home"),
                 NavigationDestination(
-                    icon: Icon(Icons.medical_services_rounded), label: "Expiring"),
+                    icon: Icon(Icons.medical_services_rounded),
+                    label: "Expired"),
+                NavigationDestination(
+                    icon: Icon(Icons.search), label: "Search"),
                 NavigationDestination(
                     icon: Icon(Icons.verified), label: "Verify"),
                 NavigationDestination(
                     icon: Icon(Icons.notifications), label: "Notifications"),
-                NavigationDestination(
-                    icon: Icon(Icons.settings), label: "Settings"),
+
               ],
             ),
           );

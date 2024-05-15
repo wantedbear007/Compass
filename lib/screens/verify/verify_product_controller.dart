@@ -49,9 +49,14 @@ class VerifyProductController extends GetxController {
               builder: (context) =>
                   ProductPreviewScreen(barCodeProduct: barCodeProduct)));
     } catch (err) {
+      compassDialog(
+        "BarCode Error",
+        "Barcode details not found, try again or enter manually.",
+        "Understood",
+      );
       print("error $err");
     }
 
-    print("helllo wordl");
+   // print("helllo wordl");
   }
 }

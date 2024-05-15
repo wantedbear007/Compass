@@ -12,10 +12,10 @@ class NotificationScreen extends StatelessWidget {
           "Notifications",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        leading: IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.arrow_back),
-        ),
+        // leading: IconButton(
+        //   onPressed: () {},
+        //   icon: Icon(Icons.arrow_back),
+        // ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
