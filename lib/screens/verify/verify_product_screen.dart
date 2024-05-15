@@ -1,10 +1,11 @@
+import 'package:compass/screens/register/register_product_controller.dart';
+import 'package:compass/screens/verify/verify_product_controller.dart';
 import 'package:compass/utils/constants.dart';
-import 'package:compass/widgets/loading_dialog.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
-class VerifyProductScreen extends StatelessWidget {
+class VerifyProductScreen extends GetView<VerifyProductController> {
   const VerifyProductScreen({super.key});
 
   @override
@@ -12,18 +13,15 @@ class VerifyProductScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
           floatingActionButton: FloatingActionButton.extended(
-            onPressed: () {},
+            heroTag: "01",
+            onPressed: () {
+              controller.scanBarCode(context);
+            },
             icon: Icon(Icons.search),
             label: Text("SCAN BARCODE"),
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
-          // appBar: AppBar(
-          //   title: Text("hello"),
-          //   // bottom: ,
-          //   flexibleSpace: Text("hell"),
-          //
-          // ),
           body: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Center(
@@ -32,11 +30,11 @@ class VerifyProductScreen extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      Image(
-                        image: const AssetImage("assets/logo.png"),
+                      const Image(
+                        image: AssetImage("assets/logo.png"),
                         width: 110,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       ShaderMask(
@@ -50,7 +48,7 @@ class VerifyProductScreen extends StatelessWidget {
                           ).createShader(bounds);
                         },
                         child: Text(
-                          "${appName} Attest ".toUpperCase(),
+                          "$appName Attest ".toUpperCase(),
                           style: TextStyle(
                             fontSize: 25,
                             fontWeight: FontWeight.bold,

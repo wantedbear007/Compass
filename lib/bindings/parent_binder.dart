@@ -4,6 +4,7 @@ import 'package:compass/screens/landing/landing_screen_controller.dart';
 import 'package:compass/screens/login/login_screen_controller.dart';
 import 'package:compass/screens/register/register_product_controller.dart';
 import 'package:compass/screens/registeredProducts/registered_products_controller.dart';
+import 'package:compass/screens/verify/verify_product_controller.dart';
 import 'package:get/get.dart';
 
 class ParentBinding extends Bindings {
@@ -18,5 +19,6 @@ class ParentBinding extends Bindings {
     Get.lazyPut<ExpiringController>(() => ExpiringController());
     Get.lazyPut<RegisterProductController>(() => RegisterProductController());
     Get.lazyPut<HomeScreenController>(() => HomeScreenController());
+    Get.lazyPut<VerifyProductController>(() => VerifyProductController());
   }
 }
