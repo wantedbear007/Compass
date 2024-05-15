@@ -234,7 +234,6 @@ Future<List<ProductModel>> getFiltered(String token, int months) async {
   }
 }
 
-
 // get filtered products
 Future<List<ProductModel>> getExpired(String token) async {
   try {
@@ -258,6 +257,34 @@ Future<List<ProductModel>> getExpired(String token) async {
       print("error occurred $err");
     }
     compassDialog("Compass", "Failed to get products, try again.", "Okay");
+    return [];
+  }
+}
+
+// search products
+Future<List<ProductModel>> searchProduct(String token, String query) async {
+  try {
+    String url = "${api}products/search?q=$query";
+
+    final response = await http.get(Uri.parse(url), headers: <String, String>{
+      'token': token,
+      'apiKey': apiKey,
+      'Content-Type': 'application/json'
+    });
+
+    if (response.statusCode == 200) {
+      final List responseBody = jsonDecode(response.body);
+      return responseBody.map((e) => ProductModel.fromJson(e)).toList();
+    }
+    compassDialog("Compass", "Failed to get products. Try again.", "Okay");
+    return [];
+
+  } catch (err) {
+    if (kDebugMode) {
+      print("Error while searching item $err");
+      compassDialog(
+          appName, "Failed to fetch data, Error: $err . Try again", "Okay");
+    }
     return [];
   }
 }
