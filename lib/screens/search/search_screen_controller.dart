@@ -13,12 +13,14 @@ class SearchScreenController extends GetxController {
   TextEditingController barCodeController = TextEditingController();
 
 
+  @override
+  void dispose() {
+    barCodeController.dispose();
+    super.dispose();
+  }
+
 //   to search items
   Future<List<ProductModel>> searchProducts() async {
-
-    // if (barCodeController.text.isEmpty && query != "8") {
-    //   compassDialog(appName, "Search field cannot be empty.", "Okay");
-    // }
 
 
     String token = await localStorageServices.getFromLocal("token");

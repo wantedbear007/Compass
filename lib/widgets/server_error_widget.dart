@@ -14,9 +14,9 @@ class CustomErrorWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SvgPicture.asset("assets/$assetName", width: 200,),
+          SvgPicture.asset("assets/$assetName", width: 100,),
           SizedBox(height: 20,),
-          Text(subtitle, style: const TextStyle(fontWeight: FontWeight.w300),)
+          Text(subtitle, style: const TextStyle(fontWeight: FontWeight.w400),)
         ],
       ),
     );

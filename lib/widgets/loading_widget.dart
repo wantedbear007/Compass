@@ -9,11 +9,13 @@ class LoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SvgPicture.asset("assets/loading.svg", width: 100,),
+        SizedBox(height: 20,),
         LoadingAnimationWidget.staggeredDotsWave(
-            color: Theme.of(context).primaryColor, size: 30),
-        Text("Loading")
+            color: Theme.of(context).focusColor, size: 50),
+        Text("Loading",)
       ],
     );
   }
