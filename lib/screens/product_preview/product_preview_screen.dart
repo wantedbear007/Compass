@@ -2,10 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:compass/models/bar_code_response_model.dart';
 import 'package:compass/utils/constants.dart';
 import 'package:compass/widgets/product_detail.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
 
 class ProductPreviewScreen extends StatelessWidget {
   final BarCodeProduct barCodeProduct;
