@@ -33,11 +33,11 @@ class _RegisteredProductsState extends State<RegisteredProducts> {
                 });
               },
               icon: Icon(Icons.refresh)),
-          IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(Icons.search))
+          // IconButton(
+          //     onPressed: () {
+          //       Navigator.pop(context);
+          //     },
+          //     icon: const Icon(Icons.search))
         ],
         leading: IconButton(
           onPressed: () {

@@ -99,11 +99,11 @@ class _ExpiringProductScreenState extends State<ExpiringProductScreen> {
                 setState(() {});
               },
               icon: Icon(Icons.refresh)),
-          IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(Icons.search))
+          // IconButton(
+          //     onPressed: () {
+          //       Navigator.pop(context);
+          //     },
+          //     icon: Icon(Icons.search))
         ],
         leading: IconButton(
           onPressed: () {

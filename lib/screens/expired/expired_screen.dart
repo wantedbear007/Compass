@@ -31,11 +31,11 @@ class _ExpiredProductScreenState extends State<ExpiredProductScreen> {
                 setState(() {});
               },
               icon: Icon(Icons.refresh)),
-          IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(Icons.search))
+          // IconButton(
+          //     onPressed: () {
+          //       Navigator.pop(context);
+          //     },
+          //     icon: Icon(Icons.search))
         ],
       ),
 

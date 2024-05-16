@@ -278,7 +278,6 @@ Future<List<ProductModel>> searchProduct(String token, String query) async {
     }
     compassDialog("Compass", "Failed to get products. Try again.", "Okay");
     return [];
-
   } catch (err) {
     if (kDebugMode) {
       print("Error while searching item $err");
@@ -286,5 +285,27 @@ Future<List<ProductModel>> searchProduct(String token, String query) async {
           appName, "Failed to fetch data, Error: $err . Try again", "Okay");
     }
     return [];
+  }
+}
+
+// delete product
+Future<bool> deleteProduct(String token, int productId) async {
+  try {
+    final String url = "${api}products/delete?product=$productId";
+
+    final response = await http.delete(Uri.parse(url),
+        headers: <String, String>{
+          'token': token,
+          'apiKey': apiKey,
+          'Content-Type': 'application/json'
+        });
+
+
+    return response.statusCode == 202 ? true : false;
+  } catch (err) {
+    if (kDebugMode) {
+      print("Error while deleting product ${err}");
+    }
+    return false;
   }
 }
