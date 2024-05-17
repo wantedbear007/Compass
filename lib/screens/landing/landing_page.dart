@@ -32,7 +32,6 @@ class LandingScreen extends GetView<LandingController> {
 
                 const ExpiredProductScreen(),
                 const SearchScreen(),
-
                 const VerifyProductScreen(),
                 const NotificationScreen(),
               ],

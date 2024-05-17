@@ -1,11 +1,13 @@
 import 'dart:convert';
 
+import 'package:compass/models/activities_model.dart';
 import 'package:compass/models/bar_code_response_model.dart';
 import 'package:compass/models/product_model.dart';
 import 'package:compass/models/user_model.dart';
 import 'package:compass/screens/login/login_screen.dart';
 import 'package:compass/utils/constants.dart';
 import 'package:compass/utils/utils.dart';
+import 'package:compass/widgets/custom_snackbar.dart';
 import 'package:compass/widgets/dialog_box.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -300,12 +302,49 @@ Future<bool> deleteProduct(String token, int productId) async {
           'Content-Type': 'application/json'
         });
 
-
     return response.statusCode == 202 ? true : false;
   } catch (err) {
     if (kDebugMode) {
       print("Error while deleting product ${err}");
     }
     return false;
+  }
+}
+
+// get activities
+Future<List<ActivitiesModel>> getActivities(String token) async {
+  try {
+    const String url = "${api}auth/getActivities";
+
+    final response = await http.get(Uri.parse(url), headers: <String, String>{
+      'token': token,
+      'apiKey': apiKey,
+      'Content-Type': 'application/json'
+    });
+
+    print(url);
+
+    if (response.statusCode == 200) {
+      final List responseBody = jsonDecode(response.body);
+      print(response.body);
+      return responseBody.map((e) => ActivitiesModel.fromJson(e)).toList();
+    }
+
+    print(response.body);
+
+    compassSnackBar("Compass", "Failed to get activities. Try again.");
+    return [];
+  } catch (err) {
+
+    if (kDebugMode) {
+      print(
+        "failed to fetch activities: ${err.toString()}",
+      );
+    }
+
+    compassSnackBar(
+
+        appName, "Seems like there is some problem with Internet. Try again.");
+    return [];
   }
 }

@@ -110,14 +110,16 @@ class _SearchScreenState extends State<SearchScreen> {
               background: Container(
                 child: SvgPicture.asset("assets/search2.svg"),
                 decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
                       Theme.of(context).primaryColor.withAlpha(50),
                       Theme.of(context).cardColor
                       // Theme.of(context).primaryColor,
-                    ])),
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
@@ -141,10 +143,9 @@ class _SearchScreenState extends State<SearchScreen> {
                       subtitle: "No match found, Check BarCode."),
                 ); // Handle empty data
               } else {
-
                 return SliverList(
                   delegate: SliverChildBuilderDelegate(
-                        (BuildContext context, int index) {
+                    (BuildContext context, int index) {
                       final product = snapshot.data![index];
                       return SmallProductCard(
                         imageUrl: product.imageUrl!,

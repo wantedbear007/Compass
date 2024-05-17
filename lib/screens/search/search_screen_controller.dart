@@ -19,7 +19,7 @@ class SearchScreenController extends GetxController {
 
   @override
   void dispose() {
-    barCodeController.dispose();
+    // barCodeController.dispose();
     // _productController.close();
 
     super.dispose();
