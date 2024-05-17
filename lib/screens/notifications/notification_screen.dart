@@ -4,6 +4,7 @@ import 'package:compass/widgets/loading_widget.dart';
 import 'package:compass/widgets/notification_widget.dart';
 import 'package:compass/widgets/server_error_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({super.key});
@@ -14,39 +15,37 @@ class NotificationScreen extends StatelessWidget {
         NotificationScreenController();
 
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text(
-      //     "Notifications",
-      //     style: TextStyle(fontWeight: FontWeight.bold),
-      //   ),
-      //   // leading: IconButton(
-      //   //   onPressed: () {},
-      //   //   icon: Icon(Icons.arrow_back),
-      //   // ),
-      // ),
-      // body: Padding(
-      //   padding: const EdgeInsets.all(8.0),
-      //   child: Column(
-      //     children: [
-      //       NotificationCard(),
-      //       NotificationCard(),
-      //       NotificationCard(),
-      //     ],
-      //   ),
-      // ),
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
             pinned: true,
             expandedHeight: 300.0,
             collapsedHeight: 110,
-            title: Text("hello"),
             flexibleSpace: FlexibleSpaceBar(
-              title: Text("hello"),
-              background: Container(
-                color: Colors.red,
-              ),
-            ),
+                title: const Text(
+                  "Notifications",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                background: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Theme.of(context).primaryColor.withAlpha(50),
+                        Theme.of(context).cardColor
+                        // Theme.of(context).primaryColor,
+                      ],
+                    ),
+                  ),
+                  child: SvgPicture.asset(
+                    "assets/background.svg",
+                    fit: BoxFit.cover,
+                    // color: Theme.of(context).hintColor,
+                    colorFilter: ColorFilter.mode(
+                        Theme.of(context).hintColor, BlendMode.srcIn),
+                  ),
+                )),
           ),
           FutureBuilder<List<ActivitiesModel>>(
               future: notificationScreenController.notificationHandler(),
@@ -62,24 +61,26 @@ class NotificationScreen extends StatelessWidget {
                         subtitle:
                             "Oops, seems like server is busy, Try again."),
                   );
-                } else if ( snapshot.data!.isEmpty) {
+                } else if (snapshot.data!.isEmpty) {
                   return const SliverFillRemaining(
                     child: CustomErrorWidget(
                         assetName: "notification.svg",
                         subtitle: "No new Notifications."),
                   );
                 } else {
-
                   return SliverList(
-                    delegate:  SliverChildBuilderDelegate(
-                        (BuildContext context , int index)   {
-                          final notification = snapshot.data![index];
-                          return NotificationCard(activitiesModel: notification,);
-                        },
+                    delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) {
+                        final notification = snapshot.data![index];
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 2),
+                          child: NotificationCard(
+                            activitiesModel: notification,
+                          ),
+                        );
+                      },
                       childCount: snapshot.data?.length,
-
-                        ),
-
+                    ),
                   );
                 }
               })
