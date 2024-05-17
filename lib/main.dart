@@ -17,7 +17,20 @@ import 'package:get/get.dart';
 // 1. add an  animated dialog box
 // 2. Remove unused dependencies
 // 3. save number of registered products in local storage
+// 4. Fix all data loaded at ones (from bottom nav) fix: remove bindings.
+// 5. Fix delete product delay
+// 6. Bottom white space fix
+// 7. Add error handling in invalid url
+// 8. Fix search heading color
+// 9. Fix Implement pull to refresh in expired
+// 10. Refresh data in background for total registered products
+// 11. Change error dialog box to SnackBar
 
+
+// Additions
+// 1. Create a products page
+// 2. Create a user details page.
+//
 void main() {
   runApp(const Home());
 }

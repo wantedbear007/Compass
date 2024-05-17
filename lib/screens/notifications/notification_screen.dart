@@ -6,85 +6,97 @@ import 'package:compass/widgets/server_error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class NotificationScreen extends StatelessWidget {
+class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final NotificationScreenController notificationScreenController =
-        NotificationScreenController();
+  State<NotificationScreen> createState() => _NotificationScreenState();
+}
 
+class _NotificationScreenState extends State<NotificationScreen> {
+  final NotificationScreenController _notificationScreenController =
+      NotificationScreenController();
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar(
-            pinned: true,
-            expandedHeight: 300.0,
-            collapsedHeight: 110,
-            flexibleSpace: FlexibleSpaceBar(
-                title: const Text(
-                  "Notifications",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                background: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Theme.of(context).primaryColor.withAlpha(50),
-                        Theme.of(context).cardColor
-                        // Theme.of(context).primaryColor,
-                      ],
-                    ),
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await _notificationScreenController.notificationHandler();
+          setState(() {});
+        },
+        child: CustomScrollView(
+          slivers: <Widget>[
+            SliverAppBar(
+              pinned: true,
+              expandedHeight: 300.0,
+              collapsedHeight: 110,
+              flexibleSpace: FlexibleSpaceBar(
+                  title:  Text(
+                    "Notifications",
+                    style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor),
                   ),
-                  child: SvgPicture.asset(
-                    "assets/background.svg",
-                    fit: BoxFit.cover,
-                    // color: Theme.of(context).hintColor,
-                    colorFilter: ColorFilter.mode(
-                        Theme.of(context).hintColor, BlendMode.srcIn),
-                  ),
-                )),
-          ),
-          FutureBuilder<List<ActivitiesModel>>(
-              future: notificationScreenController.notificationHandler(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const SliverFillRemaining(
-                    child: LoadingWidget(),
-                  );
-                } else if (snapshot.hasError) {
-                  return const SliverFillRemaining(
-                    child: CustomErrorWidget(
-                        assetName: "server.svg",
-                        subtitle:
-                            "Oops, seems like server is busy, Try again."),
-                  );
-                } else if (snapshot.data!.isEmpty) {
-                  return const SliverFillRemaining(
-                    child: CustomErrorWidget(
-                        assetName: "notification.svg",
-                        subtitle: "No new Notifications."),
-                  );
-                } else {
-                  return SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) {
-                        final notification = snapshot.data![index];
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 2),
-                          child: NotificationCard(
-                            activitiesModel: notification,
-                          ),
-                        );
-                      },
-                      childCount: snapshot.data?.length,
+                  background: Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Theme.of(context).primaryColor.withAlpha(50),
+                          Theme.of(context).cardColor
+                          // Theme.of(context).primaryColor,
+                        ],
+                      ),
                     ),
-                  );
-                }
-              })
-        ],
+                    child: SvgPicture.asset(
+                      "assets/background.svg",
+                      fit: BoxFit.cover,
+                      // color: Theme.of(context).hintColor,
+                      colorFilter: ColorFilter.mode(
+                          Theme.of(context).hintColor, BlendMode.srcIn),
+                    ),
+                  )),
+            ),
+            FutureBuilder<List<ActivitiesModel>>(
+                future: _notificationScreenController.notificationHandler(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const SliverFillRemaining(
+                      child: LoadingWidget(),
+                    );
+                  } else if (snapshot.hasError) {
+                    return const SliverFillRemaining(
+                      child: CustomErrorWidget(
+                          assetName: "server.svg",
+                          subtitle:
+                              "Oops, seems like server is busy, Try again."),
+                    );
+                  } else if (snapshot.data!.isEmpty) {
+                    return const SliverFillRemaining(
+                      child: CustomErrorWidget(
+                          assetName: "notification.svg",
+                          subtitle: "No new Notifications."),
+                    );
+                  } else {
+                    return SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (BuildContext context, int index) {
+                          final notification = snapshot.data![index];
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 5, vertical: 2),
+                            child: NotificationCard(
+                              activitiesModel: notification,
+                            ),
+                          );
+                        },
+                        childCount: snapshot.data?.length,
+                      ),
+                    );
+                  }
+                })
+          ],
+        ),
       ),
     );
   }
