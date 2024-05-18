@@ -1,16 +1,15 @@
 import 'package:compass/models/user_model.dart';
 import 'package:compass/utils/api_services.dart';
+import 'package:compass/utils/constants.dart';
 import 'package:compass/utils/utils.dart';
+import 'package:compass/widgets/custom_snackbar.dart';
 import 'package:get/get.dart';
 
 class HomeScreenController extends GetxController {
   var userModel = UserModel().obs;
-  RxBool loading = true.obs;
+  final RxBool loading = true.obs;
 
   final LocalStorageServices localStorageServices = LocalStorageServices();
-
-
-
 
   // @override
   // void onClose() {
@@ -32,16 +31,16 @@ class HomeScreenController extends GetxController {
       String? token = await localStorageServices.getFromLocal<String>("token");
 
       if (token == null) {
-        Get.snackbar("Authentication error", "Something went wrong");
+        compassSnackBar(appName, "Authentication error.");
+        return;
       }
 
-      userModel.value = await _getDetails(token!);
+      userModel.value = await _getDetails(token);
     } catch (err) {
-      Get.snackbar("Internal Error", "Something went wrong.");
+      compassSnackBar(appName, "Oops something wrong with. Try again later.");
       loading.value = false;
     }
     loading.value = false;
-
   }
 
   Future<UserModel> _getDetails(String token) async {

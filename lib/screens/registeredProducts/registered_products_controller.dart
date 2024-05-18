@@ -9,7 +9,7 @@ import 'dart:convert';
 
 class RegisteredProductsController extends GetxController {
   // RxInt filterMonths = 4.obs;
-  RxInt filterValue = 4.obs;
+  final RxInt filterValue = 4.obs;
 
   // get all products
   Future<List<ProductModel>> getFilteredProduct(int months) async {
@@ -56,19 +56,12 @@ class RegisteredProductsController extends GetxController {
     // }
   }
 
-//  delete product
+// //  delete product
   Future<void> deleteProduct(String id) async {
     try {
       String url = "${api}products/deleteBeta/${id}";
       final res = await http.get(Uri.parse(url));
-      if (res.statusCode != 200) {
-        print("error");
-      }
-
-      print(res.body.toString());
-    } catch (err) {
-      print(err);
-      print("Error occurred");
-    }
+      if (res.statusCode != 200) {}
+    } catch (err) {}
   }
 }

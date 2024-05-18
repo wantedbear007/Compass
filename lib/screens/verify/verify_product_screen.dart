@@ -43,14 +43,16 @@ class VerifyProductScreen extends GetView<VerifyProductController> {
                           return LinearGradient(
                             colors: [
                               Colors.red,
-                              Theme.of(context).primaryColor
+                              Theme.of(context).colorScheme.primary
                             ],
                           ).createShader(bounds);
                         },
                         child: Text(
                           "$appName Attest ".toUpperCase(),
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 25,
+
                             fontWeight: FontWeight.bold,
                             letterSpacing: 1,
                             // color: Theme.of(context).primaryColor,

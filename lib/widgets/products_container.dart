@@ -131,7 +131,7 @@ class ProductContainer extends StatelessWidget {
                     padding:
                         const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
                     child: Text(
-                      textAlign: TextAlign.start,
+                      textAlign: TextAlign.justify,
                       "Description: ${productData.description} ",
                       overflow: TextOverflow.ellipsis,
                       softWrap: true,

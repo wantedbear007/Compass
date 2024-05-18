@@ -39,9 +39,6 @@ class SignUpScreenController extends GetxController {
     super.onClose();
   }
 
-
-
-
 //   create account handler
   Future<void> createAccount() async {
     loading.value = true;
@@ -76,7 +73,7 @@ class SignUpScreenController extends GetxController {
 
     final bool loginNow = await loginUser(username, password);
     if (loginNow == true) {
-      Get.offAll(LandingScreen());
+      Get.offAll(const LandingScreen());
       return;
     }
 

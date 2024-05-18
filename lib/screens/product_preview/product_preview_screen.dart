@@ -17,40 +17,28 @@ class ProductPreviewScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back_ios),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        title: ShaderMask(
-          blendMode: BlendMode.srcIn,
-          shaderCallback: (Rect bounds) {
-            return LinearGradient(
-              colors: [Colors.red, Colors.white],
-            ).createShader(bounds);
-          },
-          child: Text(
-            "$appName Attest ".toUpperCase(),
-            style: TextStyle(
-              // fontSize: 25,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 1,
-              // color: Theme.of(context).primaryColor,
-            ),
+        title: const Text(
+          "$appName Attest ",
+          style: TextStyle(
+            // fontSize: 25,
+            fontWeight: FontWeight.bold,
+            // letterSpacing: 1,
+            // color: Theme.of(context).primaryColor,
           ),
         ),
       ),
       body: ListView(
         children: [
           CachedNetworkImage(
-            fit: BoxFit.cover,
-
-              // fit: BoxFit.cover,
+              fit: BoxFit.cover,
               height: 200,
-              // width: 200,
-              // placeholder: (Context, url) => CircularProgressIndicator(),
-              imageUrl:
-                  barCodeProduct.imageUrl ?? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRybZIzgdp2Mrd97EXBjZToWdKB01KSQR9waE4TMD7img&s",
+              imageUrl: barCodeProduct.imageUrl ??
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRybZIzgdp2Mrd97EXBjZToWdKB01KSQR9waE4TMD7img&s",
               errorWidget: (context, url, error) => const Icon(Icons.error),
               progressIndicatorBuilder: (context, url, progress) => Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
@@ -60,62 +48,52 @@ class ProductPreviewScreen extends StatelessWidget {
                   )
               // progressIndicatorBuilder: ,
               ),
-          SizedBox(height: 40,),
+          SizedBox(
+            height: 20,
+          ),
+          Center(
+            child: Text(
+              "Product Details",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ),
+          SizedBox(height: 10),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 8),
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             decoration: BoxDecoration(
               color: Theme.of(context).disabledColor.withAlpha(40),
-              borderRadius: const BorderRadius.all(Radius.circular(30)),
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
             ),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  productDetail("Product name: ", barCodeProduct.name ?? 'NA'),
-                  productDetail("Product BarCode: ", barCodeProduct.ean.toString()),
-                  productDetail("Product Description: ", barCodeProduct.description ?? 'NA'),
-                  productDetail("Product Region: ", barCodeProduct.region ?? 'NA'),
-                  productDetail("Product Brand: ", barCodeProduct.brand ?? 'NA'),
-                  productDetail("Product Category: ", barCodeProduct.category ?? 'NA'),
-                  //
-                  // Text("Product name: ${barCodeProduct.name ?? 'NA'}"),
-                  // Text("Unique BarCode ID: ${barCodeProduct.ean.toString() ?? 'NA'}"),
-                  // Text("Product description: ${barCodeProduct.description ?? 'NA'}"),
-                  // Text("Product Region: ${barCodeProduct.region ?? 'NA'}"),
-                  // Text("Product brand: ${barCodeProduct.brand ?? 'NA'}"),
-                  // Text("Product category: ${barCodeProduct.category ?? 'NA'}"),
+                  ProductDetailCard(
+                      title: "Product name: ",
+                      subTitle: barCodeProduct.name ?? 'NA'),
+                  ProductDetailCard(
+                      title: "Product BarCode: ",
+                      subTitle: barCodeProduct.ean.toString()),
+                  ProductDetailCard(
+                      title: "Product Description: ",
+                      subTitle: barCodeProduct.description ?? 'NA'),
+                  ProductDetailCard(
+                      title: "Product Region: ",
+                      subTitle: barCodeProduct.region ?? 'NA'),
+                  ProductDetailCard(
+                      title: "Product Brand: ",
+                      subTitle: barCodeProduct.brand ?? 'NA'),
+                  ProductDetailCard(
+                      title: "Product Category: ",
+                      subTitle: barCodeProduct.category ?? 'NA'),
                 ],
               ),
             ),
           ),
-
-          // Padding(
-          //   padding: EdgeInsets.all(10.0),
-          //   child: Container(
-          //     padding: EdgeInsets.all(34),
-          //     height: 450,
-          //     decoration: BoxDecoration(
-          //       color: Theme.of(context).disabledColor.withAlpha(40),
-          //       borderRadius: const BorderRadius.all(Radius.circular(30)),
-          //     ),
-          //     child: Column(
-          //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //       crossAxisAlignment: CrossAxisAlignment.stretch,
-          //       children: [
-          //         Text("Product name: \n ${barCodeProduct.name} ?? 'NA'"),
-          //         Text(
-          //             "Unique BarCode ID: \n ${barCodeProduct.ean.toString()}"),
-          //         Text(
-          //             "Product description: \n ${barCodeProduct.description} ?? 'NA'"),
-          //         Text("Product Region: \n ${barCodeProduct.region} ?? 'NA'"),
-          //         Text("Product brand: \n ${barCodeProduct.brand} ?? 'NA'"),
-          //         Text(
-          //             "Product category: \n ${barCodeProduct.category} ?? 'NA'"),
-          //       ],
-          //     ),
-          //   ),
-          // )
+          SizedBox(
+            height: 20,
+          )
         ],
       ),
     );

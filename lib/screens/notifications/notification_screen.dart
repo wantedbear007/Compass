@@ -34,7 +34,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
               flexibleSpace: FlexibleSpaceBar(
                   title:  Text(
                     "Notifications",
-                    style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor),
+                    style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.primary),
                   ),
                   background: Container(
                     decoration: BoxDecoration(

@@ -55,7 +55,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 children: [
                   Text("Search",
                       style: TextStyle(
-                          color: Theme.of(context).hintColor,
+                          color: Theme.of(context).colorScheme.primary,
                           fontWeight: FontWeight.bold)),
                   SizedBox(
                     height: 10,

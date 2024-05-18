@@ -35,6 +35,7 @@ class LoginScreenController extends GetxController {
     super.onClose();
   }
 
+  // login handler
   Future<void> login() async {
     loading.value = true;
     String username = emailController.text.trim();
