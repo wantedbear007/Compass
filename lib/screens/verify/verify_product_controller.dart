@@ -35,9 +35,9 @@ class VerifyProductController extends GetxController {
 
       if (barCodeProduct == null) {
         compassDialog(
-          "BarCode Error",
-          "Barcode details not found, try again or enter manually.",
-          "Understood",
+          "Invalid BarCode",
+          "BarCode seems to be invalid. Try again or enter manually.",
+          "Okay",
         );
 
         return;
@@ -57,6 +57,6 @@ class VerifyProductController extends GetxController {
       print("error $err");
     }
 
-   // print("helllo wordl");
+    // print("helllo wordl");
   }
 }

@@ -4,13 +4,12 @@ import 'package:compass/models/activities_model.dart';
 import 'package:compass/models/bar_code_response_model.dart';
 import 'package:compass/models/product_model.dart';
 import 'package:compass/models/user_model.dart';
-import 'package:compass/screens/login/login_screen.dart';
 import 'package:compass/utils/constants.dart';
+import 'package:compass/utils/token_verification.dart';
 import 'package:compass/utils/utils.dart';
 import 'package:compass/widgets/custom_snackbar.dart';
 import 'package:compass/widgets/dialog_box.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -55,28 +54,15 @@ Future<UserModel?> getUserDetails(String token) async {
       "apiKey": apiKey
     });
 
-    if (response.statusCode != 200) {
-      if (kDebugMode) {
-        print(response.body);
-      }
-
-      Get.defaultDialog(
-        titleStyle: const TextStyle(fontWeight: FontWeight.bold),
-        title: "Compass",
-        middleText: "Internal server error.",
-        confirm: MaterialButton(
-          onPressed: () async {
-            await localStorageServices.removeFromLocal("token");
-            Get.offAll(const LoginScreen());
-          },
-          child: const Text("Login again"),
-        ),
-      );
+    if (response.statusCode == 200) {
+      Map<String, dynamic> userDetails =
+          jsonDecode(response.body) as Map<String, dynamic>;
+      return UserModel.fromJson(userDetails);
+    } else {
+      await tokenDialog();
     }
 
-    Map<String, dynamic> userDetails =
-        jsonDecode(response.body) as Map<String, dynamic>;
-    return UserModel.fromJson(userDetails);
+    return null;
   } catch (err) {
     return null;
   }
@@ -93,30 +79,23 @@ Future<BarCodeProduct?> getBarCodeData(String barcodeID) async {
           "apiKey": apiKey
         });
 
-    if (response.statusCode != 200) {
-      if (kDebugMode) {
-        print("Error in fetching ${response.body}");
-      }
+    if (response.statusCode == 200) {
+      var val = jsonDecode(response.body);
 
-      Get.defaultDialog(
-        title: "Compass",
-        middleText: "Failed to fetch data, try again or enter manually",
-      );
+      var responseData = val["data"];
+      responseData = responseData["product"];
+
+      return BarCodeProduct.fromJson(responseData);
     }
 
-    var val = jsonDecode(response.body);
-
-    var responseData = val["data"];
-    responseData = responseData["product"];
-
-    return BarCodeProduct.fromJson(responseData);
+    compassDialog("Invalid BarCode",
+        "BarCode seems to be invalid. Try again or enter manually.", "Okay");
   } catch (err) {
     if (kDebugMode) {
       print("error in $err");
-
-      return null;
     }
-    Get.defaultDialog(title: "Internal Error", middleText: err.toString());
+
+    return null;
   }
   return null;
 }
@@ -159,17 +138,17 @@ Future<void> registerNewProduct(
       if (kDebugMode) {
         print(await response.stream.bytesToString());
       }
-      compassDialog("Registration Success",
-          "Your product is successfully registered.", "Great");
+      compassSnackBar(
+          "Registration Success", "Your product is successfully registered.");
     } else {
       compassDialog("Registration failed",
           "Server connectivity failed. Try again.", "Okay");
     }
   } catch (err) {
-    compassDialog("Internal Error",
-        "Something went wrong from our side. Try again.", "Okay");
+    compassDialog(
+        appName, "Oops, Something went wrong on our side. Try again.", "Okay");
     if (kDebugMode) {
-      print("error occurreddddd $err");
+      print("error occurred in product registration $err");
     }
   }
 }
@@ -189,22 +168,18 @@ Future<List<ProductModel>> getRegisteredProducts(String token) async {
     if (response.statusCode == 200) {
       final List responseBody = jsonDecode(response.body);
       return responseBody.map((e) => ProductModel.fromJson(e)).toList();
-      // compassDialog("Server Error",
-      //     "Failed to get data from database, try again.", "Okay");
-      // return [];
     }
 
-    compassDialog(
-        "Server Error", "Failed to get data from database, try again.", "Okay");
+    compassSnackBar(
+      appName,
+      "Server busy, Try to refresh.",
+    );
     return [];
-    //
-    // final List responseBody = jsonDecode(response.body);
-    // return responseBody.map((e) => ProductModel.fromJson(e)).toList();
   } catch (err) {
     if (kDebugMode) {
       print(err);
     }
-    compassDialog("Compass", "Internal issue occurred, Try again.", "Okay");
+    compassSnackBar(appName, "Server connectivity failed, Try again.");
     return [];
   }
 }
@@ -225,13 +200,13 @@ Future<List<ProductModel>> getFiltered(String token, int months) async {
       return responseBody.map((e) => ProductModel.fromJson(e)).toList();
     }
 
-    compassDialog(appName, "Failed to get products, try again.", "Okay");
+    compassSnackBar(appName, "Server busy, try again.");
     return [];
   } catch (err) {
     if (kDebugMode) {
       print("error occurred $err");
     }
-    compassDialog("Compass", "Failed to get products, try again.", "Okay");
+    compassSnackBar(appName, "Server connectivity failed, Try again.");
     return [];
   }
 }
@@ -251,14 +226,15 @@ Future<List<ProductModel>> getExpired(String token) async {
       final List responseBody = jsonDecode(response.body);
       return responseBody.map((e) => ProductModel.fromJson(e)).toList();
     }
+    compassSnackBar(appName, "Server busy, try again.");
 
-    compassDialog(appName, "Failed to get products, try again.", "Okay");
     return [];
   } catch (err) {
     if (kDebugMode) {
       print("error occurred $err");
     }
-    compassDialog("Compass", "Failed to get products, try again.", "Okay");
+    compassSnackBar(appName, "Server connectivity failed, Try again.");
+
     return [];
   }
 }
@@ -278,14 +254,14 @@ Future<List<ProductModel>> searchProduct(String token, String query) async {
       final List responseBody = jsonDecode(response.body);
       return responseBody.map((e) => ProductModel.fromJson(e)).toList();
     }
-    compassDialog("Compass", "Failed to get products. Try again.", "Okay");
+    // compassSnackBar(appName, "Failed to get products. Try again.", "Okay");
     return [];
   } catch (err) {
     if (kDebugMode) {
       print("Error while searching item $err");
-      compassDialog(
-          appName, "Failed to fetch data, Error: $err . Try again", "Okay");
     }
+    compassSnackBar(appName, "Server connectivity failed, Try again.");
+
     return [];
   }
 }
@@ -327,8 +303,6 @@ Future<List<ActivitiesModel>> getActivities(String token) async {
       // print(response.body);
       return responseBody.map((e) => ActivitiesModel.fromJson(e)).toList();
     }
-
-    print(response.body);
 
     compassSnackBar("Compass", "Failed to get activities. Try again.");
     return [];
@@ -372,7 +346,7 @@ Future<bool> loginUser(String username, String password) async {
       // print(response.body);
 
       final Map<String, dynamic> details =
-      jsonDecode(response.body) as Map<String, dynamic>;
+          jsonDecode(response.body) as Map<String, dynamic>;
 
       String token = '"' + details["token"] + '"';
       // print(token);
@@ -382,11 +356,10 @@ Future<bool> loginUser(String username, String password) async {
 
       if (!isStored) {
         Get.snackbar("Permission", "Provide Compass with storage permission");
-      } else {
-      }
+      } else {}
 
       String? recToken =
-      await localStorageServices.getFromLocal<String>("token");
+          await localStorageServices.getFromLocal<String>("token");
       saveUserDetails(recToken!);
       return true;
     }

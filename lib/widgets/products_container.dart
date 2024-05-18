@@ -46,9 +46,7 @@ class ProductContainer extends StatelessWidget {
                               child: Text(
                                 "${productData.name}",
                                 style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold
-                                ),
+                                    fontSize: 18, fontWeight: FontWeight.bold),
                                 overflow: TextOverflow.visible,
 
                                 // softWrap: true,
@@ -145,12 +143,7 @@ class ProductContainer extends StatelessWidget {
                     // shape: RoundedRectangleBorder(
                     //     borderRadius: BorderRadius.circular(appBorderRadius)),
                     onPressed: () async {
-                      print("started");
-
-
-
                       await controller.deleteProduct(productData.id.toString());
-                      print("deleted");
                     },
                     child: const Text("Mark as Out of Stock"),
                   )

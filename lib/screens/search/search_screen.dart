@@ -42,7 +42,7 @@ class _SearchScreenState extends State<SearchScreen> {
         slivers: <Widget>[
           SliverAppBar(
             elevation: 10,
-            collapsedHeight: 110,
+            collapsedHeight: 130,
             pinned: true,
             floating: true,
             expandedHeight: 300.0,
@@ -52,11 +52,15 @@ class _SearchScreenState extends State<SearchScreen> {
               expandedTitleScale: 1.3,
               title: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Search",
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                          fontWeight: FontWeight.bold)),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 30),
+                    child: Text("Search",
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontWeight: FontWeight.bold)),
+                  ),
                   SizedBox(
                     height: 10,
                   ),

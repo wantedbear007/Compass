@@ -12,6 +12,7 @@ import 'package:compass/utils/color_scheme.dart';
 import 'package:compass/utils/theme_material.dart';
 import 'package:compass/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 // todo
@@ -26,7 +27,6 @@ import 'package:get/get.dart';
 // 9. Fix Implement pull to refresh in expired
 // 10. Refresh data in background for total registered products
 // 11. Change error dialog box to SnackBar
-
 
 // Additions
 // 1. Create a products page
@@ -82,6 +82,7 @@ class _HomeState extends State<Home> {
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.green,
           brightness: Brightness.light,
+          tertiary: Colors.green
         ),
       ),
 
@@ -90,11 +91,18 @@ class _HomeState extends State<Home> {
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.green,
           brightness: Brightness.dark,
+            tertiary: Colors.green
+
         ),
       ),
 
       initialBinding: ParentBinding(),
-      home: isLoggedIn ? const LandingScreen() : const LoginScreen(),
+      home: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle(
+            systemNavigationBarColor: Theme.of(context).colorScheme.onBackground.withGreen(44)),
+        child: isLoggedIn ? const LandingScreen() : const LoginScreen(),
+      ),
+      // home: isLoggedIn ? const LandingScreen() : const LoginScreen(),
       // home: const SignUpScreen(),
     );
   }
