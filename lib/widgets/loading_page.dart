@@ -14,7 +14,7 @@ class LoadingPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             LoadingAnimationWidget.staggeredDotsWave(
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).colorScheme.primary,
               size: 40,
             ),
             Text(tagline)

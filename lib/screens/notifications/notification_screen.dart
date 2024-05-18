@@ -1,5 +1,6 @@
 import 'package:compass/models/activities_model.dart';
 import 'package:compass/screens/notifications/notification_screen_controller.dart';
+import 'package:compass/widgets/compass_sliver_appbar.dart';
 import 'package:compass/widgets/loading_widget.dart';
 import 'package:compass/widgets/notification_widget.dart';
 import 'package:compass/widgets/server_error_widget.dart';
@@ -27,36 +28,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
         },
         child: CustomScrollView(
           slivers: <Widget>[
-            SliverAppBar(
-              pinned: true,
-              expandedHeight: 300.0,
-              collapsedHeight: 110,
-              flexibleSpace: FlexibleSpaceBar(
-                  title:  Text(
-                    "Notifications",
-                    style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.primary),
-                  ),
-                  background: Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Theme.of(context).primaryColor.withAlpha(50),
-                          Theme.of(context).cardColor
-                          // Theme.of(context).primaryColor,
-                        ],
-                      ),
-                    ),
-                    child: SvgPicture.asset(
-                      "assets/background.svg",
-                      fit: BoxFit.cover,
-                      // color: Theme.of(context).hintColor,
-                      colorFilter: ColorFilter.mode(
-                          Theme.of(context).hintColor, BlendMode.srcIn),
-                    ),
-                  )),
-            ),
+            const CompassSliverAppBar(
+                title: "Notifications", assetName: "background.svg"),
             FutureBuilder<List<ActivitiesModel>>(
                 future: _notificationScreenController.notificationHandler(),
                 builder: (context, snapshot) {

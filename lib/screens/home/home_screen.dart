@@ -5,7 +5,7 @@ import 'package:compass/screens/login/login_screen.dart';
 import 'package:compass/utils/constants.dart';
 import 'package:compass/utils/utils.dart';
 import 'package:compass/widgets/button_card.dart';
-import 'package:compass/widgets/loading_page.dart';
+import 'package:compass/widgets/loading_home.dart';
 import 'package:compass/widgets/material_button.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -16,14 +16,13 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final HomeScreenController controller = Get.put(HomeScreenController());
 
     return Obx(() {
       UserModel userData = controller.userModel.value;
 
       return controller.loading.value
-          ? const LoadingPage(tagline: "Wait, greater things take time.")
+          ? const HomeLoading()
           : Scaffold(
               body: ListView(
                 children: [
@@ -75,9 +74,7 @@ class HomeScreen extends StatelessWidget {
                               buttonAction: () async {
                                 await controller.localStorageServices
                                     .removeFromLocal("token");
-                                if (kDebugMode) {
-                                  print("deleted token");
-                                }
+
                                 // controller.dispose();
                                 Get.offAll(const LoginScreen(),
                                     transition: Transition.fade);
@@ -164,9 +161,12 @@ class HomeScreen extends StatelessWidget {
                         ),
 
                         const SizedBox(
-                          height: 10,
+                          height:10,
                         ),
-                        const Divider(),
+                        const Divider(
+
+                        ),
+                        const SizedBox(height: 20,),
                         HomeScreenCard(
                           tapAction: () {
                             Get.toNamed("/register");

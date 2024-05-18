@@ -14,19 +14,22 @@ class HomeScreenCard extends StatelessWidget {
       required this.tapAction,
       required this.buttonText,
       required this.caption,
-      required this.image, required this.icon});
+      required this.image,
+      required this.icon});
 
   @override
   Widget build(BuildContext context) {
     return Material(
       // color: Theme.of(context).brightness != Brightness.dark ? Theme.of(context).primaryColor.withAlpha(10) : Theme.of(context).colorScheme.primary,
-      // color: Theme.of(context).primaryColor.withAlpha(20),
+      // color: Theme.of(context).colorScheme.primary.withOpacity(0.000000000000001),
       borderRadius: BorderRadius.circular(10),
       elevation: 0.7,
-      shadowColor: Theme.of(context).colorScheme.primary,
+      borderOnForeground: true,
+      surfaceTintColor: Theme.of(context).colorScheme.primary,
+      shadowColor: Theme.of(context).disabledColor.withOpacity(0.1),
       child: InkWell(
-        borderRadius: BorderRadius.circular(10),
-        onTap: () {},
+        borderRadius: BorderRadius.circular(40),
+        onTap: tapAction,
         // enableFeedback: false,
         // Note: Add double tap to open preview
         child: SizedBox(

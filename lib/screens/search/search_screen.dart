@@ -30,7 +30,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   void initState() {
     super.initState();
-    _searchScreenController.searchProducts();
+    // _searchScreenController.searchProducts();
   }
 
   @override
