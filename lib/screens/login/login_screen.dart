@@ -1,4 +1,5 @@
 import 'package:compass/screens/login/login_screen_controller.dart';
+import 'package:compass/screens/signup/signup_screen.dart';
 import 'package:compass/utils/constants.dart';
 import 'package:compass/widgets/text_input.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,7 +13,6 @@ class LoginScreen extends GetView<LoginScreenController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           // mainAxisAlignment: MainAxisAlignment.center,
@@ -139,6 +139,7 @@ class LoginScreen extends GetView<LoginScreenController> {
                               ),
                               TextButton(
                                   onPressed: () {
+                                    Get.to(const SignUpScreen());
                                     // Get.offAll(Sign)
                                   },
                                   child: const Text("Create now"))

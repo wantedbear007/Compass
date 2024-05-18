@@ -11,15 +11,16 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeScreen extends GetView<HomeScreenController> {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    final HomeScreenController controller = Get.put(HomeScreenController());
+
     return Obx(() {
       UserModel userData = controller.userModel.value;
-
-      print(userData.username);
 
       return controller.loading.value
           ? const LoadingPage(tagline: "Wait, greater things take time.")
@@ -77,6 +78,7 @@ class HomeScreen extends GetView<HomeScreenController> {
                                 if (kDebugMode) {
                                   print("deleted token");
                                 }
+                                // controller.dispose();
                                 Get.offAll(const LoginScreen(),
                                     transition: Transition.fade);
                                 Get.snackbar(

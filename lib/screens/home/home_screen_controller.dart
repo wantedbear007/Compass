@@ -10,6 +10,14 @@ class HomeScreenController extends GetxController {
   final LocalStorageServices localStorageServices = LocalStorageServices();
 
 
+
+
+  // @override
+  // void onClose() {
+  //
+  //   super.onClose();
+  // }
+
   @override
   void onInit() {
     super.onInit();

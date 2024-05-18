@@ -13,6 +13,7 @@ class ParentBinding extends Bindings {
   @override
   void dependencies() {
     // TODO: implement dependencies
+    Get.put(LandingController());
     Get.lazyPut<LoginScreenController>(() => LoginScreenController());
 
     Get.lazyPut<LandingController>(() => LandingController());
@@ -20,7 +21,7 @@ class ParentBinding extends Bindings {
         () => RegisteredProductsController());
     Get.lazyPut<ExpiringController>(() => ExpiringController());
     Get.lazyPut<RegisterProductController>(() => RegisterProductController());
-    Get.lazyPut<HomeScreenController>(() => HomeScreenController());
+    // Get.lazyPut<HomeScreenController>(() => HomeScreenController());
     Get.lazyPut<VerifyProductController>(() => VerifyProductController());
     Get.lazyPut<ExpiredProductsController>(() => ExpiredProductsController());
     Get.lazyPut<SearchScreenController>(() => SearchScreenController());

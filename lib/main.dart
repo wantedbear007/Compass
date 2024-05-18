@@ -94,8 +94,8 @@ class _HomeState extends State<Home> {
       ),
 
       initialBinding: ParentBinding(),
-      // home: isLoggedIn ? const LandingScreen() : const LoginScreen(),
-      home: const SignUpScreen(),
+      home: isLoggedIn ? const LandingScreen() : const LoginScreen(),
+      // home: const SignUpScreen(),
     );
   }
 }

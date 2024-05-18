@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:compass/screens/landing/landing_page.dart';
 import 'package:compass/utils/api_services.dart';
 import 'package:compass/utils/constants.dart';
 import 'package:compass/widgets/custom_snackbar.dart';
@@ -16,6 +19,17 @@ class SignUpScreenController extends GetxController {
   final TextEditingController confirmController = TextEditingController();
 
   @override
+  void onInit() {
+    var ran = Random();
+    companyNameController.text = "Adyut and sons";
+    usernameController.text = ran.nextInt(100).toString();
+    emailController.text = "random${ran.nextInt(100)}@gmail.com";
+    passwordController.text = "1234567";
+    confirmController.text = "1234567";
+    super.onInit();
+  }
+
+  @override
   void onClose() {
     companyNameController.dispose();
     usernameController.dispose();
@@ -25,13 +39,17 @@ class SignUpScreenController extends GetxController {
     super.onClose();
   }
 
+
+
+
 //   create account handler
   Future<void> createAccount() async {
-    String companyName = companyNameController.text.trim();
-    String username = usernameController.text.trim();
-    String email = emailController.text.trim();
-    String password = passwordController.text.trim();
-    String confirmPassword = passwordController.text.trim();
+    loading.value = true;
+    final String companyName = companyNameController.text.trim();
+    final String username = usernameController.text.trim();
+    final String email = emailController.text.trim();
+    final String password = passwordController.text.trim();
+    final String confirmPassword = confirmController.text.trim();
 
     if (companyName.isEmpty ||
         username.isEmpty ||
@@ -44,16 +62,26 @@ class SignUpScreenController extends GetxController {
 
     if (password != confirmPassword) {
       compassDialog(
-          appName, "Passwords did not match, re-enter password", "Okay");
+          appName, "Passwords did not match, Please re-enter password", "Okay");
       return;
     }
 
-    await registerUser(companyName, username, email, password);
+    bool isRegistered =
+        await registerUser(companyName, username, email, password);
 
+    if (isRegistered == false) {
+      loading.value = false;
+      return;
+    }
 
+    final bool loginNow = await loginUser(username, password);
+    if (loginNow == true) {
+      Get.offAll(LandingScreen());
+      return;
+    }
 
+    loading.value = false;
 
-
-
+    // if ()
   }
 }

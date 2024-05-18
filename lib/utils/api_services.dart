@@ -322,7 +322,6 @@ Future<List<ActivitiesModel>> getActivities(String token) async {
       'Content-Type': 'application/json'
     });
 
-
     if (response.statusCode == 200) {
       final List responseBody = jsonDecode(response.body);
       // print(response.body);
@@ -334,7 +333,6 @@ Future<List<ActivitiesModel>> getActivities(String token) async {
     compassSnackBar("Compass", "Failed to get activities. Try again.");
     return [];
   } catch (err) {
-
     if (kDebugMode) {
       print(
         "failed to fetch activities: ${err.toString()}",
@@ -342,22 +340,70 @@ Future<List<ActivitiesModel>> getActivities(String token) async {
     }
 
     compassSnackBar(
-
         appName, "Seems like there is some problem with Internet. Try again.");
     return [];
   }
 }
 
+// login account
+Future<bool> loginUser(String username, String password) async {
+  // loading.value = true;
+
+  const String url = "${api}auth/login";
+
+  try {
+    final response = await http.post(Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          "apiKey": apiKey
+        },
+        body: jsonEncode(
+            <String, dynamic>{"username": username, "password": password}));
+
+    // loading.value = false;
+
+    if (response.statusCode != 200) {
+      if (kDebugMode) {
+        print(response.body.toString());
+      }
+      return false;
+    } else {
+      // saving token in local storage
+      // print(response.body);
+
+      final Map<String, dynamic> details =
+      jsonDecode(response.body) as Map<String, dynamic>;
+
+      String token = '"' + details["token"] + '"';
+      // print(token);
+
+      // saving token to local storage
+      bool isStored = await localStorageServices.saveToLocal("token", token);
+
+      if (!isStored) {
+        Get.snackbar("Permission", "Provide Compass with storage permission");
+      } else {
+      }
+
+      String? recToken =
+      await localStorageServices.getFromLocal<String>("token");
+      saveUserDetails(recToken!);
+      return true;
+    }
+  } catch (err) {
+    // print("error occurred");
+    // print(err.toString());
+    return false;
+  }
+}
 
 // create account
-Future<void> registerUser(String company, String username, String email, String password) async {
+Future<bool> registerUser(
+    String company, String username, String email, String password) async {
   try {
     const String url = "${api}auth/createAccount";
 
-    final headers = {
-      "apiKey": apiKey
-    };
-
+    final headers = {"apiKey": apiKey, 'Content-Type': 'application/json'};
 
     final request = http.Request("POST", Uri.parse(url));
 
@@ -366,24 +412,26 @@ Future<void> registerUser(String company, String username, String email, String 
     request.body = jsonEncode({
       "username": username,
       "password": password,
-      "email" : email,
+      "email": email,
       "name": company,
     });
 
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 201) {
-      print(await response.stream.bytesToString());
-    } else {
-      print("error occureed");
-      print(await response.stream.toStringStream());
+      compassSnackBar(appName, "Account created Successfully");
+      return true;
+    } else if (response.statusCode == 403) {
+      compassDialog(
+          appName,
+          "Email or Username is already taken, Try with a different Username or Email",
+          "Okay");
+      return false;
     }
-
-
   } catch (err) {
-
-    print("error $err");
-
+    if (kDebugMode) {
+      print("error occurred in create account $err");
+    }
   }
-
+  return false;
 }

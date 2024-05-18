@@ -158,26 +158,23 @@ class SignUpScreen extends GetView<SignUpScreenController> {
                             }),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Already registered with\n$appName ?",
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Theme.of(context).disabledColor),
-                              ),
-                              TextButton(
-                                  onPressed: () {
-                                    // Get.offAll(Sign)
-                                  },
-                                  child: const Text("Login now"))
-                            ],
-                          ),
-                        )
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          "Already registered with $appName ?",
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).disabledColor),
+                        ),
+                        TextButton(
+                            onPressed: () {
+                              // Get.offAll(Sign)
+                              Get.back();
+                            },
+                            child: const Text("Login now")),
+
                       ],
                     ),
                   ),
