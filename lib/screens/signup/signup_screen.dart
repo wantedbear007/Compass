@@ -3,32 +3,71 @@ import 'package:compass/utils/constants.dart';
 import 'package:compass/widgets/text_input.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
-class LoginScreen extends GetView<LoginScreenController> {
-  const LoginScreen({super.key});
+class SignUpScreen extends GetView<LoginScreenController> {
+  const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(
-              height: 60,
+              height: 30,
             ),
-            Center(
-              child: Image(
-                width: MediaQuery.of(context).size.width / 4,
-                image: const AssetImage("assets/logo.png"),
-              ),
+            Row(
+              children: [
+                Center(
+                  child: Image(
+                    width: MediaQuery.of(context).size.width / 7,
+                    image: const AssetImage("assets/logo.png"),
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text.rich(
+                      TextSpan(
+                          text: "Welcome to ",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onSecondaryContainer,
+                          ),
+                          children: <InlineSpan>[
+                            TextSpan(
+                                text: appName,
+                                style: TextStyle(
+                                    overflow: TextOverflow.ellipsis,
+                                    color:
+                                        Theme.of(context).colorScheme.primary)),
+                            // Text("hello"),
+                          ]),
+                    ),
+                    Text(
+                      subTitle,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).disabledColor,
+                      ),
+                    ),
+                  ],
+                )
+              ],
             ),
 
             const SizedBox(
-              height: 50,
+              height: 10,
             ),
 
             SizedBox(
@@ -38,56 +77,46 @@ class LoginScreen extends GetView<LoginScreenController> {
                 // mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Text.rich(
-                      TextSpan(
-                          text: "Welcome back to ",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            overflow: TextOverflow.clip,
-                            fontSize: 24,
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onSecondaryContainer,
-                          ),
-                          children: <InlineSpan>[
-                            TextSpan(
-                                text: appName,
-                                style: TextStyle(
-                                    color:
-                                        Theme.of(context).colorScheme.primary)),
-                            // Text("hello"),
-                          ]),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Text(
-                      subTitle,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).disabledColor,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  // const SizedBox(
+                  //   height: 20,
+                  // ),
                   Form(
                     child: Column(
                       children: [
                         TextInputField(
-                          inputLabelText: "Username",
+                          inputLabelText: "Company Name",
                           textController: controller.emailController,
-                          hintText: "Enter your username",
+                          hintText: "Enter your company name",
                           textInputType: TextInputType.text,
+                          // icon: Icons.account_circle_sharp,
+                        ),
+                        TextInputField(
+                          inputLabelText: "Username",
+                          textController: controller.passwordController,
+                          hintText: "Enter your username",
+                          // isPassword: true,
+                          textInputType: TextInputType.visiblePassword,
+                          // icon: Icons.account_circle_sharp,
+                        ),
+                        TextInputField(
+                          inputLabelText: "Company Email",
+                          textController: controller.passwordController,
+                          hintText: "Enter your Company Email",
+                          textInputType: TextInputType.visiblePassword,
                           // icon: Icons.account_circle_sharp,
                         ),
                         TextInputField(
                           inputLabelText: "Password",
                           textController: controller.passwordController,
                           hintText: "Enter your Password",
+                          isPassword: true,
+                          textInputType: TextInputType.visiblePassword,
+                          // icon: Icons.account_circle_sharp,
+                        ),
+                        TextInputField(
+                          inputLabelText: "Confirm Password",
+                          textController: controller.passwordController,
+                          hintText: "Re-enter your password",
                           isPassword: true,
                           textInputType: TextInputType.visiblePassword,
                           // icon: Icons.account_circle_sharp,
@@ -113,7 +142,7 @@ class LoginScreen extends GetView<LoginScreenController> {
                             child: Obx(() {
                               if (!controller.loading.value) {
                                 return const Text(
-                                  "Login",
+                                  "Sign Up",
                                   style: TextStyle(color: Colors.white),
                                 );
                               }
@@ -132,16 +161,18 @@ class LoginScreen extends GetView<LoginScreenController> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "Don't have an account?",
+                                "Already registered with\n$appName ?",
+                                overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Theme.of(context).disabledColor),
                               ),
                               TextButton(
+
                                   onPressed: () {
                                     // Get.offAll(Sign)
                                   },
-                                  child: const Text("Create now"))
+                                  child: const Text("Login now"))
                             ],
                           ),
                         )

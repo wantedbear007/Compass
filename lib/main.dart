@@ -6,6 +6,7 @@ import 'package:compass/screens/login/login_screen.dart';
 import 'package:compass/screens/product_preview/product_preview_screen.dart';
 import 'package:compass/screens/register/register_screen.dart';
 import 'package:compass/screens/registeredProducts/registered_products_screen.dart';
+import 'package:compass/screens/signup/signup_screen.dart';
 import 'package:compass/screens/verify/verify_product_screen.dart';
 import 'package:compass/utils/color_scheme.dart';
 import 'package:compass/utils/theme_material.dart';
@@ -93,8 +94,8 @@ class _HomeState extends State<Home> {
       ),
 
       initialBinding: ParentBinding(),
-      home: isLoggedIn ? const LandingScreen() : const LoginScreen(),
-      // home: const ProductPreviewScreen(),
+      // home: isLoggedIn ? const LandingScreen() : const LoginScreen(),
+      home: const SignUpScreen(),
     );
   }
 }

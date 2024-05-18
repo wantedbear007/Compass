@@ -5,6 +5,8 @@ class TextInputField extends StatelessWidget {
   final String hintText;
   final String inputLabelText;
   final TextInputType textInputType;
+  final bool isPassword;
+  final IconData icon;
 
   // final IconData icon;
 
@@ -14,7 +16,8 @@ class TextInputField extends StatelessWidget {
     required this.hintText,
     required this.inputLabelText,
     required this.textInputType,
-    // required this.icon,
+    this.icon = Icons.clear,
+    this.isPassword = false,
   });
 
   @override
@@ -28,29 +31,36 @@ class TextInputField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             child: Text(
               inputLabelText,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.w500,
-                // color: Theme.of(context).colorScheme.secondary,
               ),
             ),
           ),
           TextField(
+            scrollPadding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom  *4),
+            obscureText: isPassword,
             controller: textController,
             decoration: InputDecoration(
               hintText: hintText,
               filled: true,
 
               border: const OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  )),
+                borderSide: BorderSide.none,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
               // border: InputBorder.none,
-              suffixIcon: Icon(Icons.read_more),
-              // fillColor: Theme.of(context).colorScheme.secondaryContainer,
+              suffixIcon: IconButton(
+                onPressed: () {
+                  textController.clear();
+                },
+                icon: Icon(icon),
+              ),
               hintStyle: const TextStyle(fontSize: 13),
             ),
           ),
