@@ -1,4 +1,5 @@
 import 'package:compass/screens/login/login_screen_controller.dart';
+import 'package:compass/screens/signup/signup_screen_controller.dart';
 import 'package:compass/utils/constants.dart';
 import 'package:compass/widgets/text_input.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,11 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
-class SignUpScreen extends GetView<LoginScreenController> {
+class SignUpScreen extends GetView<SignUpScreenController> {
   const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    SignUpScreenController controller = Get.put(SignUpScreenController());
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -85,24 +88,24 @@ class SignUpScreen extends GetView<LoginScreenController> {
                       children: [
                         TextInputField(
                           inputLabelText: "Company Name",
-                          textController: controller.emailController,
+                          textController: controller.companyNameController,
                           hintText: "Enter your company name",
                           textInputType: TextInputType.text,
                           // icon: Icons.account_circle_sharp,
                         ),
                         TextInputField(
                           inputLabelText: "Username",
-                          textController: controller.passwordController,
+                          textController: controller.usernameController,
                           hintText: "Enter your username",
                           // isPassword: true,
-                          textInputType: TextInputType.visiblePassword,
+                          textInputType: TextInputType.text,
                           // icon: Icons.account_circle_sharp,
                         ),
                         TextInputField(
                           inputLabelText: "Company Email",
-                          textController: controller.passwordController,
+                          textController: controller.emailController,
                           hintText: "Enter your Company Email",
-                          textInputType: TextInputType.visiblePassword,
+                          textInputType: TextInputType.emailAddress,
                           // icon: Icons.account_circle_sharp,
                         ),
                         TextInputField(
@@ -115,7 +118,7 @@ class SignUpScreen extends GetView<LoginScreenController> {
                         ),
                         TextInputField(
                           inputLabelText: "Confirm Password",
-                          textController: controller.passwordController,
+                          textController: controller.confirmController,
                           hintText: "Re-enter your password",
                           isPassword: true,
                           textInputType: TextInputType.visiblePassword,
@@ -132,7 +135,7 @@ class SignUpScreen extends GetView<LoginScreenController> {
                                 borderRadius:
                                     BorderRadius.circular(appBorderRadius)),
                             minWidth: MediaQuery.of(context).size.width,
-                            onPressed: controller.login,
+                            onPressed: controller.createAccount,
                             // child: Text(
                             //   "Login",
                             //   style: TextStyle(color: Colors.white),
@@ -168,7 +171,6 @@ class SignUpScreen extends GetView<LoginScreenController> {
                                     color: Theme.of(context).disabledColor),
                               ),
                               TextButton(
-
                                   onPressed: () {
                                     // Get.offAll(Sign)
                                   },

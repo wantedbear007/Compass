@@ -305,7 +305,7 @@ Future<bool> deleteProduct(String token, int productId) async {
     return response.statusCode == 202 ? true : false;
   } catch (err) {
     if (kDebugMode) {
-      print("Error while deleting product ${err}");
+      print("Error while deleting product $err");
     }
     return false;
   }
@@ -322,11 +322,10 @@ Future<List<ActivitiesModel>> getActivities(String token) async {
       'Content-Type': 'application/json'
     });
 
-    print(url);
 
     if (response.statusCode == 200) {
       final List responseBody = jsonDecode(response.body);
-      print(response.body);
+      // print(response.body);
       return responseBody.map((e) => ActivitiesModel.fromJson(e)).toList();
     }
 
@@ -347,4 +346,44 @@ Future<List<ActivitiesModel>> getActivities(String token) async {
         appName, "Seems like there is some problem with Internet. Try again.");
     return [];
   }
+}
+
+
+// create account
+Future<void> registerUser(String company, String username, String email, String password) async {
+  try {
+    const String url = "${api}auth/createAccount";
+
+    final headers = {
+      "apiKey": apiKey
+    };
+
+
+    final request = http.Request("POST", Uri.parse(url));
+
+    request.headers.addAll(headers);
+
+    request.body = jsonEncode({
+      "username": username,
+      "password": password,
+      "email" : email,
+      "name": company,
+    });
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 201) {
+      print(await response.stream.bytesToString());
+    } else {
+      print("error occureed");
+      print(await response.stream.toStringStream());
+    }
+
+
+  } catch (err) {
+
+    print("error $err");
+
+  }
+
 }

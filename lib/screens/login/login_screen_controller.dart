@@ -123,3 +123,56 @@ class LoginScreenController extends GetxController {
     }
   }
 }
+
+
+// Future<void> registerNewProduct(
+//     String name,
+//     String barCode,
+//     String brand,
+//     String description,
+//     String region,
+//     String imageUrl,
+//     String category,
+//     String expire,
+//     String token) async {
+//   String apiUrl = "${api}products/register";
+//   try {
+//     var headers = {
+//       'token': token,
+//       'apiKey': apiKey,
+//       'Content-Type': 'application/json'
+//     };
+//
+//     final request = http.Request("POST", Uri.parse(apiUrl));
+//     request.headers.addAll(headers);
+//     request.body = jsonEncode({
+//       "expireDate": expire,
+//       "barCodeId": barCode,
+//       "name": name,
+//       "description": description,
+//       "region": region,
+//       "imageUrl": imageUrl,
+//       "brand": brand,
+//       "category": category
+//     });
+//
+//     http.StreamedResponse response = await request.send();
+//
+//     if (response.statusCode == 201) {
+//       if (kDebugMode) {
+//         print(await response.stream.bytesToString());
+//       }
+//       compassDialog("Registration Success",
+//           "Your product is successfully registered.", "Great");
+//     } else {
+//       compassDialog("Registration failed",
+//           "Server connectivity failed. Try again.", "Okay");
+//     }
+//   } catch (err) {
+//     compassDialog("Internal Error",
+//         "Something went wrong from our side. Try again.", "Okay");
+//     if (kDebugMode) {
+//       print("error occurreddddd $err");
+//     }
+//   }
+// }
