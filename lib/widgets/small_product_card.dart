@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:compass/screens/search/search_screen_controller.dart';
 import 'package:compass/utils/central_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,16 +18,16 @@ class SmallProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CentralController _centralController = Get.put(CentralController());
+    final CentralController centralController = Get.put(CentralController());
     // SearchScreenController _searchScreenController =
     //     Get.put(SearchScreenController());
 
     return Card(
       child: ListTile(
         trailing: IconButton(
-          icon: Icon(Icons.delete),
+          icon: const Icon(Icons.delete),
           onPressed: () {
-            _centralController.deleteDialog(productId, productName);
+            centralController.deleteDialog(productId, productName);
             // _searchScreenController.deleteProductFromList(productId);
             // _searchScreenController.searchProducts();
           },
@@ -38,6 +37,9 @@ class SmallProductCard extends StatelessWidget {
             child: CachedNetworkImage(
               imageUrl: imageUrl,
               width: 50,
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+              progressIndicatorBuilder: (context, url, progress) =>
+                  const CircularProgressIndicator(),
             )),
         title: Text(
           productName,

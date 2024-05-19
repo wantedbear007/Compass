@@ -23,8 +23,8 @@ class LoginScreenController extends GetxController {
 
   @override
   void onInit() {
-    // emailController.text = "prataptechnologies";
-    // passwordController.text = "9907224577";
+    emailController.text = "prataptechnologies";
+    passwordController.text = "9907224577";
     super.onInit();
   }
 
@@ -51,9 +51,9 @@ class LoginScreenController extends GetxController {
         // Get.snackbar("Compass", "Login Successful");
         // Get.put(LandingController());
         // // Get.put(HomeScreenController());
-        HomeScreenController homeScreenController =
-            Get.put(HomeScreenController());
-        await homeScreenController.loadUserData();
+        // HomeScreenController homeScreenController =
+        //     Get.put(HomeScreenController());
+        // await homeScreenController.loadUserData();
         // homeScreenController.dispose();
         // emailController.dispose();
         passwordController.clear();

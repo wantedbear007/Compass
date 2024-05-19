@@ -64,6 +64,7 @@ class _HomeState extends State<Home> {
     return GetMaterialApp(
       // routes: routes,
       initialRoute: "/",
+
       getPages: [
         GetPage(name: "/", page: () => const LandingScreen()),
         GetPage(name: "/register", page: () => const RegisterProduct()),

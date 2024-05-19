@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:compass/models/user_model.dart';
 import 'package:compass/screens/home/home_screen_controller.dart';
+import 'package:compass/screens/landing/landing_page.dart';
 import 'package:compass/screens/login/login_screen.dart';
 import 'package:compass/utils/constants.dart';
 import 'package:compass/widgets/button_card.dart';
@@ -10,12 +11,30 @@ import 'package:compass/widgets/material_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final HomeScreenController controller = Get.put(HomeScreenController());
+
+  @override
+  void initState() {
+    // setState(() {});
+    super.initState();
+  }
+
+  // @override
+  // void dispose() {
+  //   controller.dispose();
+  //   super.dispose();
+  // }
+
+  @override
   Widget build(BuildContext context) {
-    final HomeScreenController controller = Get.put(HomeScreenController());
     // controller.loadUserData();
 
     return Obx(() {
@@ -72,27 +91,35 @@ class HomeScreen extends StatelessWidget {
 
                             UserMaterialButton(
                               buttonAction: () async {
-                                await controller.localStorageServices
-                                    .removeFromLocal("token");
-
-                                Get.defaultDialog(
-                                    title: "yesrdsf",
-                                    middleText: subTitle,
-                                    confirm: MaterialButton(
+                                await Get.defaultDialog(
+                                    title: "Are you sure want to Logout ?",
+                                    middleText: "",
+                                    // cancel: ,
+                                    cancel: MaterialButton(
                                       onPressed: () {
-                                        controller.dispose();
                                         Get.back();
                                       },
-                                      child: Text("fdggdfgdfg"),
+                                      child: Text("Cancel"),
+                                    ),
+                                    confirm: MaterialButton(
+                                      onPressed: () async {
+                                        await controller.localStorageServices
+                                            .removeFromLocal("token");
+                                        compassSnackBar(
+                                            appName, "Logged out Successfully");
+                                        // controller.dispose();
+
+                                        Get.offAll(() => const LoginScreen());
+                                      },
+                                      child: const Text("Logout"),
                                     ));
                                 // await compassDialog("Logout", "logouit", "yees");
                                 // controller.dispose();
 
-                                Get.offAll(() => const LoginScreen(),
-
-                                    transition: Transition.fade,);
-                                compassSnackBar(
-                                    appName, "Logged out Successfully");
+                                // Get.offAll(
+                                //   () => const LoginScreen(),
+                                //   transition: Transition.fade,
+                                // );
                               },
                               buttonText: "Logout",
                             )

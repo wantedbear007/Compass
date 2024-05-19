@@ -4,6 +4,7 @@ import 'package:compass/utils/constants.dart';
 import 'package:compass/widgets/compass_sliver_appbar.dart';
 import 'package:compass/widgets/loading_home.dart';
 import 'package:compass/widgets/loading_widget.dart';
+import 'package:compass/widgets/product_card.dart';
 import 'package:compass/widgets/products_container.dart';
 import 'package:compass/widgets/server_error_widget.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +64,7 @@ class _ExpiredProductScreenState extends State<ExpiredProductScreen> {
                     delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
                     final product = snapshot.data![index];
-                    return ProductContainer(productData: product);
+                    return ProductCard(productModel: product);
                   },
                   childCount: snapshot.data?.length,
                 ));

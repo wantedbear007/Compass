@@ -20,6 +20,8 @@ class _ExpiringProductScreenState extends State<ExpiringProductScreen> {
   final RegisteredProductsController controller =
       Get.put(RegisteredProductsController());
 
+
+
   @override
   void dispose() {
     controller.dispose();
@@ -121,7 +123,6 @@ class _ExpiringProductScreenState extends State<ExpiringProductScreen> {
           icon: const Icon(Icons.arrow_back),
         ),
       ),
-
       body: RefreshIndicator(
         onRefresh: () async {
           await controller.getFilteredProduct(controller.filterValue.value);
@@ -168,21 +169,6 @@ class _ExpiringProductScreenState extends State<ExpiringProductScreen> {
           },
         ),
       ),
-      // body: Padding(
-      //   padding: const EdgeInsets.symmetric(horizontal: 15),
-      //
-      //   child: Column(
-      //
-      //     children: [
-      //       // RegisteredProducts(),
-      //       // RegisteredProducts(),
-      //       ProductContainer(),
-      //       ProductContainer(),
-      //       ProductContainer(),
-      //
-      //     ],
-      //   ),
-      // ),
     );
   }
 }

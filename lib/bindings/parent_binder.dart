@@ -17,9 +17,9 @@ class ParentBinding extends Bindings {
     Get.lazyPut<LoginScreenController>(() => LoginScreenController());
     //
     // Get.lazyPut<LandingController>(() => LandingController());
-    Get.lazyPut<RegisteredProductsController>(
-        () => RegisteredProductsController());
-    Get.lazyPut<ExpiringController>(() => ExpiringController());
+    // Get.lazyPut<RegisteredProductsController>(
+    //     () => RegisteredProductsController());
+    // Get.lazyPut<ExpiringController>(() => ExpiringController());
     // Get.lazyPut<RegisterProductController>(() => RegisterProductController());
     // // Get.lazyPut<HomeScreenController>(() => HomeScreenController());
     // Get.lazyPut<VerifyProductController>(() => VerifyProductController());

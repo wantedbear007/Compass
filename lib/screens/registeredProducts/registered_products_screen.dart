@@ -3,7 +3,6 @@ import 'package:compass/screens/registeredProducts/registered_products_controlle
 import 'package:compass/utils/constants.dart';
 import 'package:compass/widgets/loading_widget.dart';
 import 'package:compass/widgets/product_card.dart';
-import 'package:compass/widgets/products_container.dart';
 import 'package:compass/widgets/server_error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,10 +16,13 @@ class RegisteredProducts extends StatefulWidget {
 }
 
 class _RegisteredProductsState extends State<RegisteredProducts> {
+
+  final RegisteredProductsController controller =
+  Get.put(RegisteredProductsController());
+
+
   @override
   Widget build(BuildContext context) {
-    final RegisteredProductsController controller =
-        Get.put(RegisteredProductsController());
 
     return Scaffold(
       appBar: AppBar(
@@ -34,7 +36,7 @@ class _RegisteredProductsState extends State<RegisteredProducts> {
                 controller.getProducts();
                 setState(() {});
               },
-              icon: Icon(Icons.refresh)),
+              icon: const Icon(Icons.refresh)),
           // IconButton(
           //     onPressed: () {
           //       Navigator.pop(context);
@@ -48,7 +50,6 @@ class _RegisteredProductsState extends State<RegisteredProducts> {
           icon: const Icon(Icons.arrow_back),
         ),
       ),
-
       body: RefreshIndicator(
         onRefresh: () async {
           await controller.getProducts();
@@ -69,7 +70,7 @@ class _RegisteredProductsState extends State<RegisteredProducts> {
               return const Center(
                 child: CustomErrorWidget(
                     assetName: noItemsSvg,
-                    subtitle: "No Expiring products in your Inventory"),
+                    subtitle: "No Registered products in your Inventory"),
               );
             } else {
               final pro = snapshot.data;
@@ -93,21 +94,6 @@ class _RegisteredProductsState extends State<RegisteredProducts> {
           },
         ),
       ),
-      // body: Padding(
-      //   padding: const EdgeInsets.symmetric(horizontal: 15),
-      //
-      //   child: Column(
-      //
-      //     children: [
-      //       // RegisteredProducts(),
-      //       // RegisteredProducts(),
-      //       ProductContainer(),
-      //       ProductContainer(),
-      //       ProductContainer(),
-      //
-      //     ],
-      //   ),
-      // ),
     );
   }
 }
