@@ -81,26 +81,26 @@ class _HomeState extends State<Home> {
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.green,
+          seedColor: Colors.blue,
           brightness: Brightness.light,
-          tertiary: Colors.green
+          // tertiary: Colors.green
         ),
       ),
 
       darkTheme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.green,
+          seedColor: Colors.blue,
           brightness: Brightness.dark,
-            tertiary: Colors.green
-
         ),
       ),
 
       initialBinding: ParentBinding(),
       home: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle(
-            systemNavigationBarColor: Theme.of(context).colorScheme.onBackground.withGreen(44)),
+            // systemNavigationBarColor:
+            // Theme.of(context).colorScheme.onBackground.withGreen(44),
+            ),
         child: isLoggedIn ? const LandingScreen() : const LoginScreen(),
       ),
       // home: isLoggedIn ? const LandingScreen() : const LoginScreen(),

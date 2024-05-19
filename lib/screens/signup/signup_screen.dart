@@ -135,7 +135,11 @@ class SignUpScreen extends GetView<SignUpScreenController> {
                                 borderRadius:
                                     BorderRadius.circular(appBorderRadius)),
                             minWidth: MediaQuery.of(context).size.width,
-                            onPressed: controller.createAccount,
+                            // onPressed: controller.createAccount,
+                            onPressed: () async {
+                              FocusManager.instance.primaryFocus?.unfocus();
+                              await controller.createAccount();
+                            },
                             // child: Text(
                             //   "Login",
                             //   style: TextStyle(color: Colors.white),

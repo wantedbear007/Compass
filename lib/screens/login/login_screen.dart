@@ -103,7 +103,11 @@ class LoginScreen extends GetView<LoginScreenController> {
                                 borderRadius:
                                     BorderRadius.circular(appBorderRadius)),
                             minWidth: MediaQuery.of(context).size.width,
-                            onPressed: controller.login,
+                            // onPressed: controller.login,
+                            onPressed: () async {
+                              FocusManager.instance.primaryFocus?.unfocus();
+                              await controller.login();
+                            },
                             // child: Text(
                             //   "Login",
                             //   style: TextStyle(color: Colors.white),

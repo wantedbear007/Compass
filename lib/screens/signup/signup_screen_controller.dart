@@ -54,6 +54,7 @@ class SignUpScreenController extends GetxController {
         password.isEmpty ||
         confirmPassword.isEmpty) {
       compassSnackBar(appName, "All fields required.");
+      loading.value = false;
       return;
     }
 
