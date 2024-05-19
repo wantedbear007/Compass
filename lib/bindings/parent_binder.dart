@@ -15,16 +15,16 @@ class ParentBinding extends Bindings {
     // TODO: implement dependencies
     Get.put(LandingController());
     Get.lazyPut<LoginScreenController>(() => LoginScreenController());
-
-    Get.lazyPut<LandingController>(() => LandingController());
+    //
+    // Get.lazyPut<LandingController>(() => LandingController());
     Get.lazyPut<RegisteredProductsController>(
         () => RegisteredProductsController());
     Get.lazyPut<ExpiringController>(() => ExpiringController());
-    Get.lazyPut<RegisterProductController>(() => RegisterProductController());
-    // Get.lazyPut<HomeScreenController>(() => HomeScreenController());
-    Get.lazyPut<VerifyProductController>(() => VerifyProductController());
-    Get.lazyPut<ExpiredProductsController>(() => ExpiredProductsController());
-    Get.lazyPut<SearchScreenController>(() => SearchScreenController());
+    // Get.lazyPut<RegisterProductController>(() => RegisterProductController());
+    // // Get.lazyPut<HomeScreenController>(() => HomeScreenController());
+    // Get.lazyPut<VerifyProductController>(() => VerifyProductController());
+    // Get.lazyPut<ExpiredProductsController>(() => ExpiredProductsController());
+    // Get.lazyPut<SearchScreenController>(() => SearchScreenController());
 
   }
 }

@@ -10,9 +10,11 @@ class UserMaterialButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+
       borderRadius: const BorderRadius.all(Radius.circular(20)),
       color: Theme.of(context).colorScheme.primary,
       child: InkWell(
+
         onTap: buttonAction,
         borderRadius: const BorderRadius.all(Radius.circular(20)),
         splashColor: Colors.black38,

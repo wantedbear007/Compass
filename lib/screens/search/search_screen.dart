@@ -165,46 +165,7 @@ class _SearchScreenState extends State<SearchScreen> {
               }
             },
           ),
-          // StreamBuilder<List<ProductModel>>(
-          //   stream: _searchScreenController.productStream,
-          //   builder: (context, snapshot) {
-          //     if (snapshot.connectionState == ConnectionState.waiting) {
-          //       return const SliverFillRemaining(
-          //         child: LoadingWidget(),
-          //       ); // Centered progress indicator
-          //     } else if (snapshot.hasError) {
-          //       return SliverFillRemaining(
-          //         child: CustomErrorWidget(
-          //           assetName: "server.svg",
-          //           subtitle: "Oops, seems like server is busy, Try again.",
-          //         ),
-          //       ); // Handle errors
-          //     } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          //       return SliverFillRemaining(
-          //         child: CustomErrorWidget(
-          //           assetName: "notFound.svg",
-          //           subtitle: "No match found, Check BarCode.",
-          //         ),
-          //       ); // Handle empty data
-          //     } else {
-          //       return SliverList(
-          //         delegate: SliverChildBuilderDelegate(
-          //           (BuildContext context, int index) {
-          //             final product = snapshot.data![index];
-          //             return SmallProductCard(
-          //               imageUrl: product.imageUrl!,
-          //               productName: product.name!,
-          //               barCode: product.barCodeId!,
-          //               productId: product.id!,
-          //             );
-          //           },
-          //           childCount: snapshot.data!
-          //               .length, // Dynamic child count based on data length
-          //         ),
-          //       );
-          //     }
-          //   },
-          // ),
+
         ],
       ),
     );

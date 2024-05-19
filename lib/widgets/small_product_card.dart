@@ -19,9 +19,9 @@ class SmallProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CentralController _centralController = Get.put(CentralController());
-    SearchScreenController _searchScreenController =
-        Get.put(SearchScreenController());
+    final CentralController _centralController = Get.put(CentralController());
+    // SearchScreenController _searchScreenController =
+    //     Get.put(SearchScreenController());
 
     return Card(
       child: ListTile(

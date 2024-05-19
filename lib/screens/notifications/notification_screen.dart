@@ -5,7 +5,6 @@ import 'package:compass/widgets/loading_widget.dart';
 import 'package:compass/widgets/notification_widget.dart';
 import 'package:compass/widgets/server_error_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});

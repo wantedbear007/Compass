@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:compass/models/product_model.dart';
 import 'package:compass/screens/registeredProducts/registered_products_controller.dart';
+import 'package:compass/utils/central_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -16,8 +17,11 @@ class ProductContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final RegisteredProductsController controller =
-        Get.put(RegisteredProductsController());
+    // final RegisteredProductsController controller =
+    //     Get.put(RegisteredProductsController());
+
+    final CentralController centralController = Get.put(CentralController());
+
     final String date = productData.expireDate.toString();
     // if (kDebugMode) {
     //   print(productData.createdDate);
@@ -27,8 +31,8 @@ class ProductContainer extends StatelessWidget {
       children: [
         const Divider(),
         Container(
-          margin: const EdgeInsets.only(top: 10),
-          height: 550,
+          margin: const EdgeInsets.only(top: 0),
+          height: 350,
           child: LayoutBuilder(
             builder: (BuildContext ctx, BoxConstraints constraints) {
               return Column(
@@ -64,7 +68,7 @@ class ProductContainer extends StatelessWidget {
                       imageUrl: productData.imageUrl ??
                           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRybZIzgdp2Mrd97EXBjZToWdKB01KSQR9waE4TMD7img&s",
                       width: constraints.maxWidth,
-                      height: constraints.maxHeight / 2,
+                      height: constraints.maxHeight / 3,
                       errorWidget: (context, url, error) =>
                           const Icon(Icons.error),
                       progressIndicatorBuilder: (context, url, progress) =>
@@ -137,13 +141,15 @@ class ProductContainer extends StatelessWidget {
                     ),
                   )),
                   MaterialButton(
+
                     height: 50,
                     minWidth: constraints.maxWidth,
                     color: Theme.of(context).colorScheme.inversePrimary,
                     // shape: RoundedRectangleBorder(
                     //     borderRadius: BorderRadius.circular(appBorderRadius)),
                     onPressed: () async {
-                      await controller.deleteProduct(productData.id.toString());
+                      await centralController.deleteDialog(
+                          productData.id!, productData.name!);
                     },
                     child: const Text("Mark as Out of Stock"),
                   )

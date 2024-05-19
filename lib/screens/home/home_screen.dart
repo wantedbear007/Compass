@@ -3,11 +3,10 @@ import 'package:compass/models/user_model.dart';
 import 'package:compass/screens/home/home_screen_controller.dart';
 import 'package:compass/screens/login/login_screen.dart';
 import 'package:compass/utils/constants.dart';
-import 'package:compass/utils/utils.dart';
 import 'package:compass/widgets/button_card.dart';
+import 'package:compass/widgets/custom_snackbar.dart';
 import 'package:compass/widgets/loading_home.dart';
 import 'package:compass/widgets/material_button.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,6 +16,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final HomeScreenController controller = Get.put(HomeScreenController());
+    // controller.loadUserData();
 
     return Obx(() {
       UserModel userData = controller.userModel.value;
@@ -75,13 +75,24 @@ class HomeScreen extends StatelessWidget {
                                 await controller.localStorageServices
                                     .removeFromLocal("token");
 
+                                Get.defaultDialog(
+                                    title: "yesrdsf",
+                                    middleText: subTitle,
+                                    confirm: MaterialButton(
+                                      onPressed: () {
+                                        controller.dispose();
+                                        Get.back();
+                                      },
+                                      child: Text("fdggdfgdfg"),
+                                    ));
+                                // await compassDialog("Logout", "logouit", "yees");
                                 // controller.dispose();
-                                Get.offAll(const LoginScreen(),
-                                    transition: Transition.fade);
-                                Get.snackbar(
-                                    "Compass", "Logged out Successfully",
-                                    animationDuration:
-                                        const Duration(milliseconds: 10));
+
+                                Get.offAll(() => const LoginScreen(),
+
+                                    transition: Transition.fade,);
+                                compassSnackBar(
+                                    appName, "Logged out Successfully");
                               },
                               buttonText: "Logout",
                             )
@@ -161,12 +172,12 @@ class HomeScreen extends StatelessWidget {
                         ),
 
                         const SizedBox(
-                          height:10,
+                          height: 10,
                         ),
-                        const Divider(
-
+                        const Divider(),
+                        const SizedBox(
+                          height: 20,
                         ),
-                        const SizedBox(height: 20,),
                         HomeScreenCard(
                           tapAction: () {
                             Get.toNamed("/register");

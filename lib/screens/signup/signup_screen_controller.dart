@@ -22,8 +22,8 @@ class SignUpScreenController extends GetxController {
   void onInit() {
     var ran = Random();
     companyNameController.text = "Adyut and sons";
-    usernameController.text = ran.nextInt(100).toString();
-    emailController.text = "random${ran.nextInt(100)}@gmail.com";
+    usernameController.text = ran.nextInt(100000).toString();
+    emailController.text = "random${ran.nextInt(10000)}@gmail.com";
     passwordController.text = "1234567";
     confirmController.text = "1234567";
     super.onInit();
@@ -73,7 +73,7 @@ class SignUpScreenController extends GetxController {
 
     final bool loginNow = await loginUser(username, password);
     if (loginNow == true) {
-      Get.offAll(const LandingScreen());
+      Get.offAll(() => const LandingScreen());
       return;
     }
 

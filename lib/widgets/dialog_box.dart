@@ -5,6 +5,7 @@ Future compassDialog(
   String title,
   String subTitle,
   String buttonText,
+
   // BuildContext ctx,
 ) {
   return Get.defaultDialog(

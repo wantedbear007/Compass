@@ -1,6 +1,10 @@
 import 'package:compass/models/product_model.dart';
 import 'package:compass/screens/registeredProducts/registered_products_controller.dart';
+import 'package:compass/utils/constants.dart';
+import 'package:compass/widgets/loading_widget.dart';
+import 'package:compass/widgets/product_card.dart';
 import 'package:compass/widgets/products_container.dart';
+import 'package:compass/widgets/server_error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:numberpicker/numberpicker.dart';
@@ -13,13 +17,17 @@ class ExpiringProductScreen extends StatefulWidget {
 }
 
 class _ExpiringProductScreenState extends State<ExpiringProductScreen> {
-  void floatingPress() {}
+  final RegisteredProductsController controller =
+      Get.put(RegisteredProductsController());
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final RegisteredProductsController controller =
-        Get.put(RegisteredProductsController());
-
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
@@ -61,19 +69,20 @@ class _ExpiringProductScreenState extends State<ExpiringProductScreen> {
                           ),
                           MaterialButton(
                             onPressed: () {
-                              controller.getFilteredProduct(controller.filterValue.value);
+                              controller.getFilteredProduct(
+                                  controller.filterValue.value);
                               // ObxState();
                               setState(() {});
 
                               Navigator.pop(context);
                             },
-                            child: Text(
-                              "Select",
-                              style: TextStyle(color: Colors.white),
-                            ),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30)),
                             color: Theme.of(context).colorScheme.primary,
+                            child: const Text(
+                              "Select",
+                              style: TextStyle(color: Colors.white),
+                            ),
                           )
                         ],
                       ),
@@ -84,12 +93,12 @@ class _ExpiringProductScreenState extends State<ExpiringProductScreen> {
             },
           );
         },
-        label: Text("Filter"),
-        icon: Icon(Icons.filter_list_alt),
+        label: const Text("Filter"),
+        icon: const Icon(Icons.filter_list_alt),
       ),
       appBar: AppBar(
         title: const Text(
-          "Expiring Medicines",
+          "Expiring Products",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         actions: [
@@ -98,7 +107,7 @@ class _ExpiringProductScreenState extends State<ExpiringProductScreen> {
                 controller.getProducts();
                 setState(() {});
               },
-              icon: Icon(Icons.refresh)),
+              icon: const Icon(Icons.refresh)),
           // IconButton(
           //     onPressed: () {
           //       Navigator.pop(context);
@@ -109,19 +118,33 @@ class _ExpiringProductScreenState extends State<ExpiringProductScreen> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
         ),
       ),
 
-      body: Center(
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await controller.getFilteredProduct(controller.filterValue.value);
+          setState(() {});
+        },
         child: FutureBuilder<List<ProductModel>>(
           future: controller.getFilteredProduct(controller.filterValue.value),
           builder: (context, snapshot) {
             // print(snapshot.data.toString());
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator();
+              return const Center(child: LoadingWidget());
+              // return const CircularProgressIndicator();
             } else if (snapshot.hasError) {
-              return Center(child: Text("Internal server error"));
+              return const Center(
+                  child: CustomErrorWidget(
+                      assetName: serverErrorSvg,
+                      subtitle: 'Oops, seems like server is busy, Try again.'));
+            } else if (snapshot.data!.isEmpty) {
+              return const Center(
+                child: CustomErrorWidget(
+                    assetName: noItemsSvg,
+                    subtitle: "No Expiring products in your Inventory"),
+              );
             } else {
               final pro = snapshot.data;
               // print(pro.)
@@ -129,15 +152,16 @@ class _ExpiringProductScreenState extends State<ExpiringProductScreen> {
                   itemCount: pro?.length,
                   itemBuilder: (context, index) {
                     // print(pro?[index]);
-                    final products = pro?[index];
+                    final product = pro?[index];
                     // print(products?.expireDate.toLocal().toString());
                     // final products = pro?[index];
                     // return Text("helloooo");
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 0),
-                      child: ProductContainer(
-                        productData: products!,
-                      ),
+                      child: ProductCard(productModel: product!),
+                      // child: ProductContainer(
+                      //   productData: products!,
+                      // ),
                     );
                   });
             }

@@ -20,12 +20,19 @@ class HomeScreenController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+
     loadUserData();
+  }
+
+  @override
+  void onClose() {
+    super.dispose();
+    super.onClose();
   }
 
   // delete conntroller
 
-  void loadUserData() async {
+  Future<void> loadUserData() async {
     loading.value = true;
     try {
       String? token = await localStorageServices.getFromLocal<String>("token");

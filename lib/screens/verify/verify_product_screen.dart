@@ -1,4 +1,3 @@
-import 'package:compass/screens/register/register_product_controller.dart';
 import 'package:compass/screens/verify/verify_product_controller.dart';
 import 'package:compass/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -15,10 +14,11 @@ class VerifyProductScreen extends GetView<VerifyProductController> {
           floatingActionButton: FloatingActionButton.extended(
             heroTag: "01",
             onPressed: () {
+              Get.put(VerifyProductController());
               controller.scanBarCode(context);
             },
-            icon: Icon(Icons.search),
-            label: Text("SCAN BARCODE"),
+            icon: const Icon(Icons.search),
+            label: const Text("SCAN BARCODE"),
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
@@ -50,7 +50,7 @@ class VerifyProductScreen extends GetView<VerifyProductController> {
                         child: Text(
                           "$appName Attest ".toUpperCase(),
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 25,
 
                             fontWeight: FontWeight.bold,
@@ -59,8 +59,8 @@ class VerifyProductScreen extends GetView<VerifyProductController> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 20),
-                      Text(
+                      const SizedBox(height: 20),
+                      const Text(
                         "Authenticate Product BarCodes",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 15),
@@ -79,10 +79,10 @@ class VerifyProductScreen extends GetView<VerifyProductController> {
                         "assets/verify.svg",
                         width: 150,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 50,
                       )
                     ],
@@ -90,21 +90,7 @@ class VerifyProductScreen extends GetView<VerifyProductController> {
                 ],
               ),
             ),
-          )
-
-          // Expanded(
-          //   child: Center(
-          //
-          //     child: MaterialButton(
-          //       onPressed: () {search
-          //         print("helllo");
-          //         compassLoading();
-          //       },
-          //       child: Text("Search"),
-          //     ),
-          //   ),
-          // ),
-          ),
+          )),
     );
   }
 }

@@ -351,6 +351,7 @@ Future<bool> loginUser(String username, String password) async {
       String token = '"' + details["token"] + '"';
       // print(token);
 
+
       // saving token to local storage
       bool isStored = await localStorageServices.saveToLocal("token", token);
 
