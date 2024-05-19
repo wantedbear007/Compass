@@ -10,6 +10,7 @@ Future compassDialog(
 ) {
   return Get.defaultDialog(
       title: title,
+      titleStyle: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
       middleText: subTitle,
       confirm: MaterialButton(
         onPressed: () {

@@ -20,12 +20,12 @@ class SignUpScreenController extends GetxController {
 
   @override
   void onInit() {
-    var ran = Random();
-    companyNameController.text = "Adyut and sons";
-    usernameController.text = ran.nextInt(100000).toString();
-    emailController.text = "random${ran.nextInt(10000)}@gmail.com";
-    passwordController.text = "1234567";
-    confirmController.text = "1234567";
+    // var ran = Random();
+    // companyNameController.text = "Adyut and sons";
+    // usernameController.text = ran.nextInt(100000).toString();
+    // emailController.text = "random${ran.nextInt(10000)}@gmail.com";
+    // passwordController.text = "1234567";
+    // confirmController.text = "1234567";
     super.onInit();
   }
 
@@ -57,9 +57,23 @@ class SignUpScreenController extends GetxController {
       return;
     }
 
+    if (!email.isEmail) {
+      compassDialog(appName, "Enter valid email address", "Okay");
+      loading.value = false;
+      return;
+
+    }
+
+    if (password.length < 8) {
+      compassDialog(appName, "Password length should be 8 or more.", "Okay");
+      loading.value = false;
+      return;
+    }
+
     if (password != confirmPassword) {
       compassDialog(
           appName, "Passwords did not match, Please re-enter password", "Okay");
+      loading.value = false;
       return;
     }
 
@@ -78,6 +92,7 @@ class SignUpScreenController extends GetxController {
     }
 
     loading.value = false;
+    return;
 
     // if ()
   }

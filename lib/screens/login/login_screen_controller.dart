@@ -23,8 +23,8 @@ class LoginScreenController extends GetxController {
 
   @override
   void onInit() {
-    emailController.text = "prataptechnologies";
-    passwordController.text = "9907224577";
+    // emailController.text = "prataptechnologies";
+    // passwordController.text = "9907224577";
     super.onInit();
   }
 

@@ -41,7 +41,7 @@ class TextInputField extends StatelessWidget {
           ),
           TextField(
             scrollPadding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom  *4),
+                bottom: MediaQuery.of(context).viewInsets.bottom * 4),
             obscureText: isPassword,
             controller: textController,
             decoration: InputDecoration(

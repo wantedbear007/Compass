@@ -10,7 +10,7 @@ class CentralController extends GetxController {
   Future<void> deleteDialog(int productId, String name) async {
     Get.defaultDialog(
         title: "Product Delete Request",
-        titleStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        titleStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
         middleText: "Are you sure want to delete $name ?",
         confirm: MaterialButton(
           onPressed: () async {

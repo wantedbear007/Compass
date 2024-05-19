@@ -139,7 +139,7 @@ class LoginScreen extends GetView<LoginScreenController> {
                               ),
                               TextButton(
                                   onPressed: () {
-                                    Get.to(const SignUpScreen());
+                                    Get.to(() => const SignUpScreen());
                                     // Get.offAll(Sign)
                                   },
                                   child: const Text("Create now"))

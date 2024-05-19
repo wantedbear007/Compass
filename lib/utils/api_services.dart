@@ -169,17 +169,17 @@ Future<List<ProductModel>> getRegisteredProducts(String token) async {
       final List responseBody = jsonDecode(response.body);
       return responseBody.map((e) => ProductModel.fromJson(e)).toList();
     }
-
-    compassSnackBar(
-      appName,
-      "Server busy, Try to refresh.",
-    );
+    //
+    // compassSnackBar(
+    //   appName,
+    //   "Server busy, Try to refresh.",
+    // );
     return [];
   } catch (err) {
     if (kDebugMode) {
       print(err);
     }
-    compassSnackBar(appName, "Server connectivity failed, Try again.");
+    // compassSnackBar(appName, "Server connectivity failed, Try again.");
     return [];
   }
 }
@@ -200,13 +200,13 @@ Future<List<ProductModel>> getFiltered(String token, int months) async {
       return responseBody.map((e) => ProductModel.fromJson(e)).toList();
     }
 
-    compassSnackBar(appName, "Server busy, try again.");
+    // compassSnackBar(appName, "Server busy, try again.");
     return [];
   } catch (err) {
     if (kDebugMode) {
       print("error occurred $err");
     }
-    compassSnackBar(appName, "Server connectivity failed, Try again.");
+    // compassSnackBar(appName, "Server connectivity failed, Try again.");
     return [];
   }
 }
@@ -226,14 +226,14 @@ Future<List<ProductModel>> getExpired(String token) async {
       final List responseBody = jsonDecode(response.body);
       return responseBody.map((e) => ProductModel.fromJson(e)).toList();
     }
-    compassSnackBar(appName, "Server busy, try again.");
+    // compassSnackBar(appName, "Server busy, try again.");
 
     return [];
   } catch (err) {
     if (kDebugMode) {
       print("error occurred $err");
     }
-    compassSnackBar(appName, "Server connectivity failed, Try again.");
+    // compassSnackBar(appName, "Server connectivity failed, Try again.");
 
     return [];
   }
@@ -260,7 +260,7 @@ Future<List<ProductModel>> searchProduct(String token, String query) async {
     if (kDebugMode) {
       print("Error while searching item $err");
     }
-    compassSnackBar(appName, "Server connectivity failed, Try again.");
+    // compassSnackBar(appName, "Server connectivity failed, Try again.");
 
     return [];
   }
@@ -304,7 +304,7 @@ Future<List<ActivitiesModel>> getActivities(String token) async {
       return responseBody.map((e) => ActivitiesModel.fromJson(e)).toList();
     }
 
-    compassSnackBar("Compass", "Failed to get activities. Try again.");
+    // compassSnackBar("Compass", "Failed to get activities. Try again.");
     return [];
   } catch (err) {
     if (kDebugMode) {
@@ -313,8 +313,8 @@ Future<List<ActivitiesModel>> getActivities(String token) async {
       );
     }
 
-    compassSnackBar(
-        appName, "Seems like there is some problem with Internet. Try again.");
+    // compassSnackBar(
+    //     appName, "Seems like there is some problem with Internet. Try again.");
     return [];
   }
 }
@@ -350,7 +350,6 @@ Future<bool> loginUser(String username, String password) async {
 
       String token = '"' + details["token"] + '"';
       // print(token);
-
 
       // saving token to local storage
       bool isStored = await localStorageServices.saveToLocal("token", token);
