@@ -1,16 +1,10 @@
-import 'dart:convert';
 
-import 'package:compass/screens/home/home_screen_controller.dart';
 import 'package:compass/screens/landing/landing_page.dart';
-import 'package:compass/screens/landing/landing_screen_controller.dart';
 import 'package:compass/utils/api_services.dart';
-import 'package:compass/utils/constants.dart';
 import 'package:compass/utils/utils.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:http/http.dart' as http;
 
 class LoginScreenController extends GetxController {
   RxBool isAble = false.obs;

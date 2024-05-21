@@ -2,7 +2,6 @@ import 'package:compass/screens/login/login_screen_controller.dart';
 import 'package:compass/screens/signup/signup_screen.dart';
 import 'package:compass/utils/constants.dart';
 import 'package:compass/widgets/text_input.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

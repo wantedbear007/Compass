@@ -1,5 +1,4 @@
 import 'package:compass/models/product_model.dart';
-import 'package:compass/models/products_model_old.dart';
 import 'package:compass/utils/api_services.dart';
 import 'package:compass/utils/constants.dart';
 import 'package:compass/utils/token_verification.dart';

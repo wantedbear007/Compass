@@ -17,7 +17,7 @@ class ProductPreviewScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -48,19 +48,19 @@ class ProductPreviewScreen extends StatelessWidget {
                   )
               // progressIndicatorBuilder: ,
               ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Center(
+          const Center(
             child: Text(
               "Product Details",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 8),
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            margin: const EdgeInsets.symmetric(horizontal: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             decoration: BoxDecoration(
               color: Theme.of(context).disabledColor.withAlpha(40),
               borderRadius: const BorderRadius.all(Radius.circular(20)),
@@ -91,7 +91,7 @@ class ProductPreviewScreen extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           )
         ],

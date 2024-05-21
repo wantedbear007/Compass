@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:compass/models/user_model.dart';
 import 'package:compass/screens/home/home_screen_controller.dart';
-import 'package:compass/screens/landing/landing_page.dart';
 import 'package:compass/screens/login/login_screen.dart';
 import 'package:compass/utils/constants.dart';
 import 'package:compass/widgets/button_card.dart';
@@ -99,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       onPressed: () {
                                         Get.back();
                                       },
-                                      child: Text("Cancel"),
+                                      child: const Text("Cancel"),
                                     ),
                                     confirm: MaterialButton(
                                       onPressed: () async {
@@ -214,7 +213,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           image: "assets/addnew.svg",
                           icon: Icons.add,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         HomeScreenCard(
@@ -227,7 +226,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           image: "assets/addnew.svg",
                           icon: Icons.list,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         HomeScreenCard(
@@ -240,7 +239,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           image: "assets/addnew.svg",
                           icon: Icons.date_range,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         // HomeScreenCard(

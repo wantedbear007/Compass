@@ -23,11 +23,11 @@ class ProductDetailCard extends StatelessWidget {
           Text(
             subTitle,
             textAlign: TextAlign.justify,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 13,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 13,
           )
         ]);

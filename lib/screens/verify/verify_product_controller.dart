@@ -1,7 +1,6 @@
 import 'package:compass/models/bar_code_response_model.dart';
 import 'package:compass/screens/product_preview/product_preview_screen.dart';
 import 'package:compass/utils/api_services.dart';
-import 'package:compass/utils/constants.dart';
 import 'package:compass/widgets/dialog_box.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +53,6 @@ class VerifyProductController extends GetxController {
         "Barcode details not found, try again or enter manually.",
         "Understood",
       );
-      print("error $err");
     }
 
     // print("helllo wordl");

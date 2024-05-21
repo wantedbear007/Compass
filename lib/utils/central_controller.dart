@@ -1,7 +1,6 @@
 import 'package:compass/utils/api_services.dart';
 import 'package:compass/utils/constants.dart';
 import 'package:compass/utils/token_verification.dart';
-import 'package:compass/widgets/dialog_box.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,7 +23,7 @@ class CentralController extends GetxController {
           onPressed: () {
             Get.back();
           },
-          child: Text("Cancel"),
+          child: const Text("Cancel"),
         ));
   }
 
@@ -41,7 +40,6 @@ class CentralController extends GetxController {
 
     if (isDeleted == true) {
       Get.back();
-      // compassDialog(appName, "Product deleted successfully.", "Okay");
       Get.snackbar(appName, "Delete product requested.");
       // Get.back();
       return true;

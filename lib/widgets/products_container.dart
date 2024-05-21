@@ -1,12 +1,8 @@
-import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:compass/models/product_model.dart';
-import 'package:compass/screens/registeredProducts/registered_products_controller.dart';
 import 'package:compass/utils/central_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
 
@@ -122,7 +118,7 @@ class ProductContainer extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 5, right: 10, left: 10),
                     child: Text(
-                      "Expiring Date: ${date}",
+                      "Expiring Date: $date",
                       overflow: TextOverflow.ellipsis,
                       // softWrap: true,
                       style: const TextStyle(color: Colors.red),

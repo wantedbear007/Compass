@@ -3,7 +3,6 @@ import 'package:compass/screens/registeredProducts/registered_products_controlle
 import 'package:compass/utils/constants.dart';
 import 'package:compass/widgets/loading_widget.dart';
 import 'package:compass/widgets/product_card.dart';
-import 'package:compass/widgets/products_container.dart';
 import 'package:compass/widgets/server_error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

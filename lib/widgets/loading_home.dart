@@ -9,7 +9,7 @@ class HomeLoading extends StatelessWidget {
     return Scaffold(
       body: ListView(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Padding(
@@ -28,7 +28,7 @@ class HomeLoading extends StatelessWidget {
                         Container(
                           decoration: BoxDecoration(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
+                                  const BorderRadius.all(Radius.circular(10)),
                               color: Theme.of(context).disabledColor),
                           width: MediaQuery.of(context).size.width * 0.12,
                           height: MediaQuery.of(context).size.width * 0.12,
@@ -41,16 +41,16 @@ class HomeLoading extends StatelessWidget {
                               Container(
                                 decoration: BoxDecoration(
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
+                                        const BorderRadius.all(Radius.circular(10)),
                                     color: Theme.of(context).disabledColor),
                                 width: 100,
                                 height: 20,
                               ),
-                              SizedBox(height: 5),
+                              const SizedBox(height: 5),
                               Container(
                                 decoration: BoxDecoration(
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
+                                        const BorderRadius.all(Radius.circular(10)),
                                     color: Theme.of(context).disabledColor),
                                 width: 150,
                                 height: 15,
@@ -62,7 +62,7 @@ class HomeLoading extends StatelessWidget {
                     ),
                     Container(
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          borderRadius: const BorderRadius.all(Radius.circular(10)),
                           color: Theme.of(context).disabledColor),
                       width: 100,
                       height: 40,
@@ -80,16 +80,16 @@ class HomeLoading extends StatelessWidget {
                         Container(
                           decoration: BoxDecoration(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
+                                  const BorderRadius.all(Radius.circular(10)),
                               color: Theme.of(context).disabledColor),
                           width: 200,
                           height: 30,
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Container(
                           decoration: BoxDecoration(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
+                                  const BorderRadius.all(Radius.circular(10)),
                               color: Theme.of(context).disabledColor),
                           width: 100,
                           height: 30,
@@ -101,7 +101,7 @@ class HomeLoading extends StatelessWidget {
                       borderRadius: BorderRadius.circular(100),
                       child: Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderRadius: const BorderRadius.all(Radius.circular(10)),
                             color: Theme.of(context).disabledColor),
                         width: 60,
                         height: 60,
@@ -111,7 +111,7 @@ class HomeLoading extends StatelessWidget {
                 ),
                 Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
                       color: Theme.of(context).disabledColor),
                   width: 250,
                   height: 20,
@@ -119,7 +119,7 @@ class HomeLoading extends StatelessWidget {
                 ),
                 Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
                       color: Theme.of(context).disabledColor),
                   width: 300,
                   height: 20,
@@ -127,7 +127,7 @@ class HomeLoading extends StatelessWidget {
                 ),
                 Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
                       color: Theme.of(context).disabledColor),
                   width: 200,
                   height: 20,
@@ -137,7 +137,7 @@ class HomeLoading extends StatelessWidget {
                 const Divider(),
                 Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
                       color: Theme.of(context).disabledColor),
                   width: double.infinity,
                   height: 100,
@@ -146,20 +146,20 @@ class HomeLoading extends StatelessWidget {
                 const SizedBox(height: 10),
                 Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(40)),
+                      borderRadius: const BorderRadius.all(Radius.circular(40)),
                       color: Theme.of(context).disabledColor),
                   width: double.infinity,
                   height: 100,
-                  child: LoadingPage(
+                  margin: const EdgeInsets.only(top: 10),
+                  child: const LoadingPage(
                     tagline:
                         "Patience pays off, precise data loading in progress...",
                   ),
-                  margin: const EdgeInsets.only(top: 10),
                 ),
                 const SizedBox(height: 10),
                 Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
                       color: Theme.of(context).disabledColor),
                   width: double.infinity,
                   height: 100,

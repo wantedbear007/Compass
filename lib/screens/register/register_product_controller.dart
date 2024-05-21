@@ -1,5 +1,4 @@
 import 'package:compass/models/bar_code_response_model.dart';
-import 'package:compass/models/product_model.dart';
 import 'package:compass/utils/api_services.dart';
 import 'package:compass/utils/constants.dart';
 import 'package:compass/utils/token_verification.dart';
@@ -8,7 +7,6 @@ import 'package:compass/widgets/dialog_box.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_rx/get_rx.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 
 class RegisterProductController extends GetxController {

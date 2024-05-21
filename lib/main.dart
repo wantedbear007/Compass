@@ -3,13 +3,8 @@ import 'package:compass/screens/RegisterProduct/register_product.dart';
 import 'package:compass/screens/expiringProducts/expiring_product_screen.dart';
 import 'package:compass/screens/landing/landing_page.dart';
 import 'package:compass/screens/login/login_screen.dart';
-import 'package:compass/screens/product_preview/product_preview_screen.dart';
-import 'package:compass/screens/register/register_screen.dart';
 import 'package:compass/screens/registeredProducts/registered_products_screen.dart';
-import 'package:compass/screens/signup/signup_screen.dart';
 import 'package:compass/screens/verify/verify_product_screen.dart';
-import 'package:compass/utils/color_scheme.dart';
-import 'package:compass/utils/theme_material.dart';
 import 'package:compass/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -97,7 +92,7 @@ class _HomeState extends State<Home> {
 
       initialBinding: ParentBinding(),
       home: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle(
+        value: const SystemUiOverlayStyle(
             // systemNavigationBarColor:
             // Theme.of(context).colorScheme.onBackground.withGreen(44),
             ),

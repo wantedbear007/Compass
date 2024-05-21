@@ -1,11 +1,8 @@
 import 'package:compass/models/product_model.dart';
 import 'package:compass/screens/search/search_screen_controller.dart';
-import 'package:compass/utils/central_controller.dart';
 import 'package:compass/widgets/loading_widget.dart';
 import 'package:compass/widgets/server_error_widget.dart';
 import 'package:compass/widgets/small_product_card.dart';
-import 'package:compass/widgets/text_input.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -61,7 +58,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             color: Theme.of(context).colorScheme.primary,
                             fontWeight: FontWeight.bold)),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   PhysicalModel(
@@ -88,7 +85,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           color: Theme.of(context).primaryColor,
                         ),
                         contentPadding:
-                            EdgeInsets.symmetric(horizontal: 30, vertical: 3),
+                            const EdgeInsets.symmetric(horizontal: 30, vertical: 3),
                         hintText: "Enter Product barCode...",
                         filled: true,
                         border: const OutlineInputBorder(
@@ -112,7 +109,6 @@ class _SearchScreenState extends State<SearchScreen> {
                 ],
               ),
               background: Container(
-                child: SvgPicture.asset("assets/search2.svg"),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
@@ -124,6 +120,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     ],
                   ),
                 ),
+                child: SvgPicture.asset("assets/search2.svg"),
               ),
             ),
           ),
@@ -135,13 +132,13 @@ class _SearchScreenState extends State<SearchScreen> {
                   child: LoadingWidget(),
                 ); // Centered progress indicator
               } else if (snapshot.hasError) {
-                return SliverFillRemaining(
+                return const SliverFillRemaining(
                   child: CustomErrorWidget(
                       assetName: "server.svg",
                       subtitle: "Oops, seems like server is busy, Try again."),
                 ); // Handle errors
               } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                return SliverFillRemaining(
+                return const SliverFillRemaining(
                   child: CustomErrorWidget(
                       assetName: "notFound.svg",
                       subtitle: "No match found, Check BarCode."),

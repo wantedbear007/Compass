@@ -1,10 +1,8 @@
 import 'package:compass/screens/expired/expired_screen.dart';
-import 'package:compass/screens/expiringProducts/expiring_product_screen.dart';
 import 'package:compass/screens/home/home_screen.dart';
 import 'package:compass/screens/landing/landing_screen_controller.dart';
 import 'package:compass/screens/notifications/notification_screen.dart';
 import 'package:compass/screens/search/search_screen.dart';
-import 'package:compass/screens/settings/settings_screen.dart';
 import 'package:compass/screens/verify/verify_product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

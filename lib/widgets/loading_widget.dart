@@ -12,10 +12,10 @@ class LoadingWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SvgPicture.asset("assets/loading.svg", width: 100,),
-        SizedBox(height: 20,),
+        const SizedBox(height: 20,),
         LoadingAnimationWidget.staggeredDotsWave(
             color: Theme.of(context).focusColor, size: 50),
-        Text("Loading",)
+        const Text("Loading",)
       ],
     );
   }
