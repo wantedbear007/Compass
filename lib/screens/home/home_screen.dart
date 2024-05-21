@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:compass/models/user_model.dart';
+import 'package:compass/screens/about/about_screen.dart';
 import 'package:compass/screens/home/home_screen_controller.dart';
 import 'package:compass/screens/login/login_screen.dart';
 import 'package:compass/utils/constants.dart';
@@ -42,6 +43,80 @@ class _HomeScreenState extends State<HomeScreen> {
       return controller.loading.value
           ? const HomeLoading()
           : Scaffold(
+              appBar: AppBar(
+                // backgroundColor: Colors.white,
+                title: Row(
+                  children: [
+                    Image(
+                      image: const AssetImage("assets/logo.png"),
+                      width: MediaQuery.of(context).size.width * 0.11,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            appName,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            subTitle,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Theme.of(context).colorScheme.outline,
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                actions: [
+                  IconButton(
+                    onPressed: () {
+                      Get.to(const AboutScreen());
+                    },
+                    icon: const Icon(Icons.segment_outlined),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: UserMaterialButton(
+                      buttonAction: () async {
+                        await Get.defaultDialog(
+                            title: "Are you sure want to Logout ?",
+                            middleText: "Active User: ${userData.name}",
+                            // cancel: ,
+                            cancel: MaterialButton(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              child: const Text("Cancel"),
+                            ),
+                            confirm: MaterialButton(
+                              onPressed: () async {
+                                await controller.localStorageServices
+                                    .removeFromLocal("token");
+                                compassSnackBar(
+                                    appName, "Logged out Successfully");
+                                // controller.dispose();
+
+                                Get.offAll(() => const LoginScreen());
+                              },
+                              child: const Text(
+                                "Logout",
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            ));
+                      },
+                      buttonText: "Logout",
+                    ),
+                  ),
+                ],
+              ),
               body: ListView(
                 children: [
                   Padding(
@@ -52,83 +127,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Image(
-                                  image: const AssetImage("assets/logo.png"),
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.12,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 5),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const Text(
-                                        appName,
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        subTitle,
-                                        style: TextStyle(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .outline,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-
-                            UserMaterialButton(
-                              buttonAction: () async {
-                                await Get.defaultDialog(
-                                    title: "Are you sure want to Logout ?",
-                                    middleText: "",
-                                    // cancel: ,
-                                    cancel: MaterialButton(
-                                      onPressed: () {
-                                        Get.back();
-                                      },
-                                      child: const Text("Cancel"),
-                                    ),
-                                    confirm: MaterialButton(
-                                      onPressed: () async {
-                                        await controller.localStorageServices
-                                            .removeFromLocal("token");
-                                        compassSnackBar(
-                                            appName, "Logged out Successfully");
-                                        // controller.dispose();
-
-                                        Get.offAll(() => const LoginScreen());
-                                      },
-                                      child: const Text("Logout"),
-                                    ));
-                                // await compassDialog("Logout", "logouit", "yees");
-                                // controller.dispose();
-
-                                // Get.offAll(
-                                //   () => const LoginScreen(),
-                                //   transition: Transition.fade,
-                                // );
-                              },
-                              buttonText: "Logout",
-                            )
-                            // add options
-                          ],
-                        ),
-
-                        const SizedBox(
-                          height: 20,
-                        ),
+                        // const SizedBox(
+                        //   height: 20,
+                        // ),
 
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -209,7 +210,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Get.toNamed("/register");
                           },
                           buttonText: "Add Products",
-                          caption: "Add new products, something something",
+                          caption: "Register new product to the inventory.",
                           image: "assets/addnew.svg",
                           icon: Icons.add,
                         ),
@@ -222,7 +223,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                           buttonText: "Registered Products",
                           caption:
-                              "See the list of the registered products, there details.",
+                              "List the products that are registered in the inventory",
                           image: "assets/addnew.svg",
                           icon: Icons.list,
                         ),
@@ -234,8 +235,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Get.toNamed("expiringProducts");
                           },
                           buttonText: "Expiring Products",
-                          caption:
-                              "Lists out the product that are expiring in a month or two.",
+                          caption: "Lists out the product that are expiring.",
                           image: "assets/addnew.svg",
                           icon: Icons.date_range,
                         ),

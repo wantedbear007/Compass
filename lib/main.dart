@@ -1,5 +1,6 @@
 import 'package:compass/bindings/parent_binder.dart';
 import 'package:compass/screens/RegisterProduct/register_product.dart';
+import 'package:compass/screens/about/about_screen.dart';
 import 'package:compass/screens/expiringProducts/expiring_product_screen.dart';
 import 'package:compass/screens/landing/landing_page.dart';
 import 'package:compass/screens/login/login_screen.dart';
@@ -11,22 +12,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 // todo
-// 1. add an  animated dialog box
-// 2. Remove unused dependencies
-// 3. save number of registered products in local storage
-// 4. Fix all data loaded at ones (from bottom nav) fix: remove bindings.
-// 5. Fix delete product delay
-// 6. Bottom white space fix
-// 7. Add error handling in invalid url
-// 8. Fix search heading color
-// 9. Fix Implement pull to refresh in expired
-// 10. Refresh data in background for total registered products
-// 11. Change error dialog box to SnackBar
-
-// Additions
-// 1. Create a products page
-// 2. Create a user details page.
-//
 void main() {
   runApp(const Home());
 }
@@ -76,8 +61,9 @@ class _HomeState extends State<Home> {
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.blue,
+          seedColor: Colors.green,
           brightness: Brightness.light,
+
           // tertiary: Colors.green
         ),
       ),
@@ -85,7 +71,7 @@ class _HomeState extends State<Home> {
       darkTheme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.blue,
+          seedColor: Colors.green,
           brightness: Brightness.dark,
         ),
       ),
@@ -93,10 +79,14 @@ class _HomeState extends State<Home> {
       initialBinding: ParentBinding(),
       home: AnnotatedRegion<SystemUiOverlayStyle>(
         value: const SystemUiOverlayStyle(
-            // systemNavigationBarColor:
-            // Theme.of(context).colorScheme.onBackground.withGreen(44),
-            ),
+          systemStatusBarContrastEnforced: false,
+          // systemNavigationBarDividerColor: Theme.of(context).colorScheme.primary,
+          // systemNavigationBarColor: Theme.of(context).colorScheme.primary.withAlpha(50)
+          // systemNavigationBarColor:
+          // Theme.of(context).colorScheme.onBackground.withGreen(44),
+        ),
         child: isLoggedIn ? const LandingScreen() : const LoginScreen(),
+        // child: AboutScreen(),
       ),
       // home: isLoggedIn ? const LandingScreen() : const LoginScreen(),
       // home: const SignUpScreen(),
